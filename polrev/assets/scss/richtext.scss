@@ -1,0 +1,24 @@
+.richtext-image {
+  height:auto;
+  width:auto;
+
+  //max-height:300px;
+  max-width:300px;  
+
+  &.left {
+    float: left;
+    margin: 1em;
+  }
+  &.right {
+    float: right;
+    margin: 1em;
+  }
+  &.full-width {
+    //max-height:600px;
+    max-width:600px; 
+    width: 100%; 
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+}

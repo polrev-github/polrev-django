@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% load i18n static crispy_forms_tags socialaccount %}
+
+{% block content %}
+<h2>Log in</h2>
+{% crispy form form.helper %}
+<p><a href="{% provider_login_url 'google' %}">Log In with Gmail</a></p>
+{% endblock %}

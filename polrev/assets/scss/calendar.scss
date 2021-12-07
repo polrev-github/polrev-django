@@ -1,0 +1,12 @@
+//@import "~@fullcalendar/core/main.css";
+//@import "~@fullcalendar/daygrid/main.css";
+
+.fc-holiday {
+  color: white !important;
+  background-color: teal;
+  border-color: teal;
+}
+
+.fc-holiday:hover {
+  color: white !important;
+}

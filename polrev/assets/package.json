@@ -1,0 +1,53 @@
+{
+  "name": "polrev-site",
+  "version": "1.0.0",
+  "description": "Political Revolution Site",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "develop": "webpack --watch --mode development",
+    "createsuper": "python manage.py createsuperuser",
+    "makemigrations": "python manage.py makemigrations",
+    "migrate": "python manage.py migrate",
+    "dump": "python manage.py dumpdata --indent 2 > dump.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "git push dokku master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blogsley/blogsley-django.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kfields/blogsley-django/issues"
+  },
+  "homepage": "https://github.com/kfields/blogsley-django#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fullcalendar/core": "^5.10.1",
+    "@fullcalendar/daygrid": "^5.10.1",
+    "@fullcalendar/rrule": "^5.10.1",
+    "@popperjs/core": "^2.10.2",
+    "autoprefixer": "^10.4.0",
+    "bootstrap": "^5.1.3",
+    "css-loader": "^6.5.1",
+    "exports-loader": "^3.1.0",
+    "file-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.4.4",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.2.0",
+    "progressive-image.js": "^1.6.1",
+    "rrule": "^2.6.8",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "tar": "^6.1.11",
+    "webpack": "^5.64.1",
+    "webpack-cli": "^4.9.1"
+  }
+}

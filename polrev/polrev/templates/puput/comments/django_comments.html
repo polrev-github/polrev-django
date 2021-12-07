@@ -1,0 +1,8 @@
+{% load comments %}
+{% load comments_xtd %}
+
+<div>
+    <h3>Comments:</h3>
+    {% render_comment_form for entry %}
+    {% render_xtdcomment_tree for entry%}
+</div>

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load i18n static %}
+
+{% block head %}
+{{ block.super }}
+<link href="{% static 'dist/calendar.css' %}" rel="stylesheet" type="text/css">
+<!-- <link href="{% static 'css/calendar.css' %}" rel="stylesheet" type="text/css"> -->
+{% endblock %}
+
+{% block content %}
+<div id="calendar"></div>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'dist/calendar.js' %}"></script>
+{% endblock %}

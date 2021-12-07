@@ -1,0 +1,24 @@
+# polrev-django
+
+## Django Setup
+
+```bash
+cd polrev
+
+python manage.py migrate
+python manage.py collectstatic
+python manage.py createsuperuser
+
+python manage.py wp2puput polrev.xml --site=https://political-revolution.com
+
+python manage.py runserver
+
+```
+
+## Wagtail Setup
+
+Login to the Wagtail admin:  [http://localhost:8000/admin/](http://localhost:8000/admin/)
+
+Edit the Blog page under Pages.  Change the title to 'Political Revolution'
+
+Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Change the root page to 'Political Revolution' as well.

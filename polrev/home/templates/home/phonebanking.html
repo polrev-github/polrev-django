@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% load i18n static %}
+
+{% block head %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Phonebanking
+{% endblock title %}
+
+{% block content %}
+<div class="row flex-lg-row-reverse align-items-center g-5">
+  <div class="col-10 col-sm-8 col-lg-6">
+    <a href="http://grassrootspb.com"><img src="{% static 'img/phonebanking.png '%}" class="d-block mx-lg-auto img-fluid"
+      alt="Level Up Phonebanking" width="700" height="500" loading="lazy"></a>
+  </div>
+  <div class="col-lg-6">
+    <h1 class="display-5 fw-bold lh-1 mb-3">Phonebanking</h1>
+    <p>The Political Revolution knows that the truest and tried way of reaching voters is by phonebanking! If we are
+      going
+      to win elections, everyone must chip in.</p>
+    <p>Read our instructions below to learn how to not only get involved, but submit your call score for points for
+      prizes!</p>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <a class="btn btn-outline-secondary btn-lg px-4" href="https://grassrootspb.com" target=blank
+        role="button">Level Up Phonebanking</a>
+    </div>
+    <br />
+    <h2>Reach voters, Win prizes!</h2>
+
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item"> Create an account on <a href="http://grassrootspb.com">http://grassrootspb.com</a> and
+        install the browser extension.</li>
+      <li class="list-group-item"> Make Calls!</li>
+      <li class="list-group-item"> <a href="https://airtable.com/shrz6Zq4g5vmbqDWN">Take a screenshot of your call score and
+        submit it with this form!</a></li>
+        <li class="list-group-item"> <a href="https://imgur.com/a/R1bFO">Win prizes &#8211; your first 50 calls earn a $5 gift
+          card!</a></li>
+    </ol>
+  
+  </div>
+</div>
+
+<section class="text-wrapper">
+  <br />
+  <h3>Prize List</h3>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <td><span style="font-weight: 400;">Amount of Calls</span></td>
+        <td><span style="font-weight: 400;">Prize</span></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span style="font-weight: 400;">50</span></td>
+        <td><span style="font-weight: 400;">TPR Button Pack</span><span style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">$5 Gift Card</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">100</span></td>
+        <td><span style="font-weight: 400;">Choice of:</span><span style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">$27 Gift card of your choice</span><span
+            style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">$27 Pizza Coupon or equivalent</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">200</span></td>
+        <td><span style="font-weight: 400;">Choice of:</span><span style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">$50 Gift card of your choice</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">300</span></td>
+        <td><span style="font-weight: 400;">Choice of:</span><span style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">$75 Gift card of your choice</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">500</span></td>
+        <td><span style="font-weight: 400;">Samsung Galaxy Tab ($99)</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">1000</span></td>
+        <td><span style="font-weight: 400;">Choice of:</span><span style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">Google Home</span><span style="font-weight: 400;"><br />
+          </span><span style="font-weight: 400;">$100 Gift card of choice</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">1500</span></td>
+        <td><span style="font-weight: 400;">Chromebook ($299 MSRP)</span></td>
+      </tr>
+      <tr>
+        <td><span style="font-weight: 400;">2000</span></td>
+        <td><span style="font-weight: 400;">Samsung Pro ($499 MSRP)</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}

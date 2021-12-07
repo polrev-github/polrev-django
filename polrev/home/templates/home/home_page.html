@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% comment %}
+{% block content %}
+    <div class="postcards">
+        {% for post in posts %}
+            {% include 'blog/_postcard.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+{% endcomment %}

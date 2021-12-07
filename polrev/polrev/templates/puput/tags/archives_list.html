@@ -1,0 +1,58 @@
+{% load i18n wagtailroutablepage_tags %}
+
+<nav>
+    <!--<ul>
+        {% regroup archives by year as year_list %}
+        {% for year in year_list %}
+            <li class="parent">
+                <a href="{% routablepageurl blog_page "entries_by_date" year.grouper %}">
+                    <span class="open-sub"></span> {{ year.grouper }}
+                </a>
+                <ul class="sub">
+                    {% regroup year.list by month as month_list %}
+                    {% for month in month_list reversed %}
+                        <li>
+                            <a href="{% routablepageurl blog_page "entries_by_date" year.grouper month.list.0|date:"m" %}">
+                               {{ month.list.0|date:"F" }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            {% empty %}
+            {% trans 'No entry archives yet' %}
+        {% endfor %}
+    </ul>-->
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+        {% regroup archives by year as year_list %}
+        {% for year in year_list %}
+
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <!-- <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{year.grouper}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                <a href="{% routablepageurl blog_page "entries_by_date" year.grouper %}">
+                    {{ year.grouper }}
+                </a>
+            </button> -->
+            
+            <a href="{% routablepageurl blog_page "entries_by_date" year.grouper %}" class="accordion-button collapsed" role="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{year.grouper}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{ year.grouper }}
+            </a>
+
+          </h2>
+          {% regroup year.list by month as month_list %}
+          {% for month in month_list reversed %}
+          <div id="flush-collapse{{year.grouper}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <a href="{% routablepageurl blog_page "entries_by_date" year.grouper month.list.0|date:"m" %}">
+                    {{ month.list.0|date:"F" }}
+                 </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</nav>
+
+

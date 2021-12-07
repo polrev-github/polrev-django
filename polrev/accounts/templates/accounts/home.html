@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load avatar_tags %}
+
+{% block content %}
+<div class="row postcard-header">
+    <div class="col-12 col-md-8">
+        <div>
+            {% avatar user 65 %}
+            <div class="postcard-intro">
+                <h1>{{ user.get_full_name }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-4">
+        {% if profile == user %}
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-secondary" href="/profiles/{{user.username}}/edit">{{ _('Edit your profile') }}</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<a href="social/connections">Social Connections</a>
+{% endblock %}

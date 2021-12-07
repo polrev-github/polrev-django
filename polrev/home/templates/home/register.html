@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load i18n static %}
+
+{% block head %}
+{{ block.super }}
+{% endblock %}
+
+{% block title %}
+Register to Vote
+{% endblock title %}
+
+{% block content %}
+<h1>Register to Vote</h1>
+<section class="text-wrapper">
+    <p><iframe loading="lazy" src="https://register2.rockthevote.com/registrants/map/?source=iframe&amp;partner=35898" width="100%" height="800" frameborder="0" marginheight="0"></iframe></p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+{% endblock %}

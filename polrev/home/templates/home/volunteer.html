@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n static crispy_forms_tags %}
+
+{% block title %}
+Volunteer
+{% endblock title %}
+
+{% block content %}
+<h1>Volunteer for The Political Revolution!</h1>
+{% crispy form form.helper %}
+
+
+
+{% endblock %}
