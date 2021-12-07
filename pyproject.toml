@@ -17,6 +17,7 @@ crispy-bootstrap5 = "^0.6"
 django-avatar = "^5.0.0"
 django-comments-xtd = "^2.9.4"
 wagtail-markdown = "^0.7.0"
+lxml = "^4.6.4"
 
 [tool.poetry.dev-dependencies]
 pyppeteer = "^0.2.6"
