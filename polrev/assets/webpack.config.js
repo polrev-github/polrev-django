@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../polrev/static/dist')
+    path: path.resolve(__dirname, '../polrev/static/dist'),
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -34,7 +34,11 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|otf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
+        type: 'asset/resource',
+        generator: {
+            filename: './fonts/[name][ext]',
+        },
+        /*use: [
           {
             loader: 'file-loader',
             options: {
@@ -42,7 +46,7 @@ module.exports = {
               outputPath: 'fonts/'
             }
           }
-        ]
+        ]*/
       }
     ]
   }

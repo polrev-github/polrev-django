@@ -16,6 +16,16 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+from dotenv import load_dotenv
+
+if not os.environ.get("IN_DOCKER"):
+    dotenv_path = os.path.join(BASE_DIR, '../config/.dev.env')
+    load_dotenv(dotenv_path)
+    POSTGRES_HOST = "localhost"
+else:
+    POSTGRES_HOST = os.environ.get("POSTGRES_HOST", "")
+
+#POSTGRES_HOST = os.environ.get("POSTGRES_HOST", "")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -69,6 +79,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'storages',
+    'corsheaders',
+
     'home',
     'search',
     'accounts',
@@ -77,6 +90,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -113,10 +127,22 @@ WSGI_APPLICATION = 'polrev.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+'''
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": POSTGRES_HOST,
+        "NAME": os.environ.get("POSTGRES_DB", ""),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", ""),
+        "USER": os.environ.get("POSTGRES_USER", ""),
     }
 }
 
@@ -178,6 +204,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -194,6 +222,7 @@ STATICFILES_DIRS = [
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # JavaScript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
 # See https://docs.djangoproject.com/en/3.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
+'''
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -201,7 +230,45 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+'''
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+#STATIC_URL = "http://localhost:9000/"
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
+#STATICFILES_STORAGE = 'polrev.storages.ManifestS3Storage'
+AWS_S3_ENDPOINT_URL = 'http://localhost:9000'
+# AWS_S3_ENDPOINT_URL =  os.environ.get("S3_HOST", ""),
+#AWS_S3_ENDPOINT_URL = 'http://' + AWS_S3_ENDPOINT_URL[0] + '.docker:9000'
+
+#AWS_S3_ENDPOINT_URL = AWS_S3_ENDPOINT_URL[0]
+#print(AWS_S3_ENDPOINT_URL)
+#AWS_ACCESS_KEY_ID = 'minio-access-key'
+#AWS_SECRET_ACCESS_KEY = 'minio-secret-key'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+print(AWS_ACCESS_KEY_ID)
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+print(AWS_SECRET_ACCESS_KEY)
+
+AWS_STORAGE_BUCKET_NAME = 'polrev'
+AWS_QUERYSTRING_AUTH = False
+#AWS_S3_SECURE_URLS = False
+#AWS_S3_CUSTOM_DOMAIN = 'localhost:9000'
+AWS_LOCATION = 'public'
+
+AWS_S3_OBJECT_PARAMETERS = {
+    "ACL": "public-read"
+}
 
 # Wagtail settings
 

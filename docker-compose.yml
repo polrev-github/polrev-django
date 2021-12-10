@@ -1,0 +1,50 @@
+volumes:
+  db:
+  s3:
+
+services:
+  # server
+  web:
+    build:
+      context: ./polrev
+    depends_on:
+      - db
+      - s3
+    env_file: ./config/.dev.env
+    environment:
+      - IN_DOCKER=true
+    hostname: web.${POLREV_DOMAIN}
+    ports:
+      - 8000:8000
+    networks:
+      - polrev
+    restart: "no"
+    volumes:
+      - "./polrev:/app"
+
+  # Database
+  db:
+    image: postgres:14.1
+    env_file: ./config/.dev.env
+    environment:
+      - PGDATA=/pg-data
+    ports:
+      - 5432:5432
+    restart: "no"
+    volumes:
+      - db:/pg-data
+    networks:
+      - polrev
+
+  # Storage
+  s3:
+    image: bitnami/minio:latest
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - s3:/minio
+    env_file: ./config/.dev.env
+
+networks:
+  polrev:

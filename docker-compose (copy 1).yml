@@ -1,0 +1,112 @@
+# Local dev environment
+
+version: "3.8"
+
+volumes:
+  db:
+  s3:
+  dbadmin:
+  maildev:
+
+services:
+  # server
+  web:
+    build:
+      context: ./polrev
+    depends_on:
+      - db
+      - s3
+      - maildev
+    env_file: ./config/.env.dev
+    environment:
+      - IN_DOCKER=true
+    hostname: web.${POLREV_DOMAIN}
+    ports:
+      - 8000:8000
+    networks:
+      - polrev
+    restart: "no"
+    volumes:
+      - "./polrev:/app"
+
+  # Database Admin
+  dbadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    restart: "no"
+    ports:
+        - "8888:80"
+    env_file: ./config/.env.dev
+    volumes:
+        - dbadmin:/var/lib/pgadmin4/storage
+    networks:
+      - polrev
+
+  # Database
+  db:
+    image: postgres:14.1
+    env_file: ./config/.env.dev
+    environment:
+      - PGDATA=/pg-data
+    ports:
+      - 5432:5432
+    restart: "no"
+    volumes:
+      - db:/pg-data
+    networks:
+      - polrev
+
+  # Storage
+  s3:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - s3:/minio
+    env_file: ./config/.env.dev
+    command: server /minio
+
+  # Mail
+  maildev:
+    image: maildev/maildev
+    restart: "no"
+    volumes:
+      - maildev:/var/lib/maildev
+    networks:
+      - polrev
+
+  nginx:
+    image: nginx
+    ports:
+        - 8001:80
+    networks:
+      - polrev
+    hostname: media.${POLREV_DOMAIN}
+    volumes:
+        - ./nginx.conf:/etc/nginx/conf.d/default.conf
+        - s3:/usr/share/nginx/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`media.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.nginx.entrypoints=web"
+
+  traefik:
+    image: "traefik:v2.5.4"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8008:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - polrev
+
+networks:
+  polrev:

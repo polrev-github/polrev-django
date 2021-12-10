@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 from pathlib import Path
 
 import asyncio
+import pyppeteer
 from pyppeteer import launch
 from asgiref.sync import sync_to_async
 import bs4
@@ -52,6 +53,7 @@ try:
 except ImportError:
     from wagtail.wagtailimages.models import Image as WagtailImage
 
+pyppeteer.DEBUG = True
 
 class Command(LabelCommand):
     help = 'Import blog data from Wordpress'
@@ -82,7 +84,7 @@ class Command(LabelCommand):
         self.categories = self.import_categories(self.tree.findall(u'channel/{{{0:s}}}category'.format(self.WP_NS)))
 
         async def _main_routine():
-            self.browser = await launch(headless=False)
+            self.browser = await launch(headless=True)
             self.browser_page = await self.browser.newPage()
             await self.import_entries(self.tree.findall('channel/item'))
             await self.browser.close()
@@ -314,7 +316,10 @@ class Command(LabelCommand):
             image_url = f"{self.remote_site}{image_url}"
 
         u = urlparse(image_url)
-        slug = Path(u.path).name
+        path = Path(u.path)
+        if path.suffix == '.svg':
+            return None
+        slug = path.name
         image = NamedTemporaryFile(delete=True)
         #image = ImageFile(open(slug, 'wb'), name=slug)
         try:
@@ -328,7 +333,7 @@ class Command(LabelCommand):
 
         except requests.exceptions.ConnectionError:
             self.stdout.write('WARNING: Unable to connect to URL "{}". Image will be broken.'.format(image_url))
-        return
+        return None
 
     def import_header_image(self, entry, items, image_id):
         self.stdout.write('\tImport header images....')
@@ -355,9 +360,12 @@ class Command(LabelCommand):
             for img_node in root.iter('img'):
                 parent_node = img_node.getparent()
                 #if 'wp-content' in img_node.attrib['src'] or 'files' in img_node.attrib['src']:
-                image = self._import_image(img_node.attrib['src'])
+                src = img_node.attrib['src']
+                image = self._import_image(src)
                 if image:
-                    title = img_node.attrib.get('title') or img_node.attrib.get('alt') or img_node.attrib['src']
+                    title = img_node.attrib.get('title') or img_node.attrib.get('alt') or src
+                    print(title)
+                    print(src)
                     #new_image = WagtailImage(file=File(file=image), title=title)
                     new_image = WagtailImage(file=image, title=title)
                     new_image.save()

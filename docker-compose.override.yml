@@ -1,0 +1,27 @@
+volumes:
+  dbadmin:
+  maildev:
+
+services:
+  # Database Admin
+  dbadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    restart: "no"
+    ports:
+        - "8888:80"
+    env_file: ./config/.dev.env
+    volumes:
+        - dbadmin:/var/lib/pgadmin4/storage
+    networks:
+      - polrev
+
+  # Mail
+  maildev:
+    image: maildev/maildev
+    restart: "no"
+    volumes:
+      - maildev:/var/lib/maildev
+    networks:
+      - polrev
