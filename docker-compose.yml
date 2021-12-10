@@ -14,6 +14,10 @@ services:
     environment:
       - IN_DOCKER=true
     hostname: web.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.rule=Host(`web.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.web.entrypoints=web"
     ports:
       - 8000:8000
     networks:
@@ -45,6 +49,27 @@ services:
     volumes:
       - s3:/minio
     env_file: ./config/.dev.env
+    hostname: s3.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.s3.rule=Host(`s3.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.s3.entrypoints=web"
+
+  traefik:
+    image: "traefik:v2.5.4"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - polrev
 
 networks:
   polrev:
