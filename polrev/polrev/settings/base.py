@@ -248,12 +248,6 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 #STATICFILES_STORAGE = 'polrev.storages.ManifestS3Storage'
-#AWS_S3_ENDPOINT_URL = 'http://localhost:9000'
-#AWS_S3_ENDPOINT_URL =  os.environ.get("S3_HOST", "")
-#AWS_S3_ENDPOINT_URL = 'http://' + AWS_S3_ENDPOINT_URL + '.docker.localhost:9000'
-#print(AWS_S3_ENDPOINT_URL)
-#AWS_ACCESS_KEY_ID = 'minio-access-key'
-#AWS_SECRET_ACCESS_KEY = 'minio-secret-key'
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
 

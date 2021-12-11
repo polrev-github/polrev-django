@@ -1,3 +1,6 @@
+.env
+.prod.env
+
 .idea
 .vscode
 __pycache__
