@@ -68,6 +68,8 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
 # Install the application server.
 RUN pip install "gunicorn==20.0.4"
 
+RUN mkdir -p /polrev && useradd -d /polrev -u 1000 polrev && chown -R polrev /polrev
+
 COPY --chown=polrev:polrev ./poetry.lock ./pyproject.toml /tmp/
 WORKDIR /tmp
 
@@ -84,8 +86,6 @@ RUN echo "$DJANGO_ENV" && poetry version \
   && poetry run pip install -U pip \
   # Cleaning poetry installation's cache for production:
   && if [ "$DJANGO_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
-
-RUN mkdir -p /polrev && useradd -d /polrev -u 1000 polrev && chown -R polrev /polrev
 
 USER polrev
 
