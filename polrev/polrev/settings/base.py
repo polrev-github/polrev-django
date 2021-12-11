@@ -19,10 +19,11 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 from dotenv import load_dotenv
 
 if not os.environ.get("IN_DOCKER"):
-    dotenv_path = os.path.join(BASE_DIR, '../config/.dev.env')
+    dotenv_path = os.path.join(BASE_DIR, '../config/.prod.env')
     load_dotenv(dotenv_path)
     POSTGRES_HOST = "localhost"
-    AWS_S3_ENDPOINT_URL = 'http://localhost:9000'
+    #AWS_S3_ENDPOINT_URL = 'http://localhost:9000'
+    AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
 else:
     POSTGRES_HOST = os.environ.get("POSTGRES_HOST", "")
     AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")

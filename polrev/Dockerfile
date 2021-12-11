@@ -108,4 +108,4 @@ WORKDIR /app
 #   phase facilities of your hosting platform. This is used only so the
 #   Wagtail instance can be started with a simple "docker run" command.
 #CMD set -xe; python manage.py migrate --noinput; gunicorn polrev.wsgi:application
-ENTRYPOINT ["bash", "./entrypoint.dev.sh"]
+ENTRYPOINT ["bash", "./entrypoint.sh"]

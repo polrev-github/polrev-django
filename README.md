@@ -22,3 +22,17 @@ Login to the Wagtail admin:  [http://localhost:8000/admin/](http://localhost:800
 Edit the Blog page under Pages.  Change the title to 'Political Revolution'
 
 Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Change the root page to 'Political Revolution' as well.
+
+## Docker Compose
+
+### Development
+
+```bash
+docker-compose up
+```
+
+### Production
+
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
