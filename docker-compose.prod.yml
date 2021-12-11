@@ -1,0 +1,12 @@
+services:
+
+  # Django
+  web:
+    env_file: ./config/.prod.env
+
+  # Database
+  db:
+    env_file: ./config/.prod.env
+
+  traefik:
+    env_file: ./config/.prod.env
