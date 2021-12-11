@@ -1,24 +1,8 @@
+volumes:
+  dbadmin:
+  maildev:
+
 services:
-  # Django
-  web:
-    depends_on:
-      - s3
-
-  # Storage
-  s3:
-    image: bitnami/minio:latest
-    ports:
-      - 9000:9000
-      - 9001:9001
-    volumes:
-      - s3:/minio
-    env_file: ./config/.dev.env
-    hostname: s3.${POLREV_DOMAIN}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.s3.rule=Host(`s3.${POLREV_DOMAIN}`)"
-      - "traefik.http.routers.s3.entrypoints=web"
-
   # Database Admin
   dbadmin:
     image: dpage/pgadmin4
@@ -49,8 +33,3 @@ services:
     ports:
       - "8888:80"
       - "8080:8080"
-
-volumes:
-  s3:
-  dbadmin:
-  maildev:

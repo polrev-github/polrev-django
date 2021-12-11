@@ -1,19 +1,23 @@
+volumes:
+  db:
+  s3:
+
 services:
-  # Django
+  # server
   web:
     build:
       context: ./polrev
     depends_on:
       - db
+      - s3
     env_file: ./config/.dev.env
     environment:
       - IN_DOCKER=true
-    hostname: django.${POLREV_DOMAIN}
+    hostname: web.${POLREV_DOMAIN}
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`django.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.web.rule=Host(`web.${POLREV_DOMAIN}`)"
       - "traefik.http.routers.web.entrypoints=web"
-      #- "traefik.http.routers.web.tls=true"
     ports:
       - 8000:8000
     networks:
@@ -36,6 +40,21 @@ services:
     networks:
       - polrev
 
+  # Storage
+  s3:
+    image: bitnami/minio:latest
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - s3:/minio
+    env_file: ./config/.dev.env
+    hostname: s3.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.s3.rule=Host(`s3.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.s3.entrypoints=web"
+
   traefik:
     image: "traefik:v2.5.4"
     command:
@@ -44,18 +63,13 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-      - --entrypoints.web-secure.address=:443
     ports:
       - "80:80"
       - "8080:8080"
-      - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
       - polrev
-
-volumes:
-  db:
 
 networks:
   polrev:
