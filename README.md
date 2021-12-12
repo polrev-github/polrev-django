@@ -36,3 +36,19 @@ docker-compose up
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 ```
+
+## Dump Database
+
+```bash
+./manage.py dumpdata --natural-foreign --indent 2 \
+    -e contenttypes -e auth.permission  \
+    -e wagtailcore.groupcollectionpermission \
+    -e wagtailcore.grouppagepermission -e wagtailimages.rendition \
+    -e sessions > db.json
+```
+
+## Load Database
+
+```bash
+./manage.py loaddata db.json
+```

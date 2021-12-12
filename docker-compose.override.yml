@@ -3,6 +3,7 @@ services:
   web:
     depends_on:
       - s3
+    env_file: ./config/.dev.env
 
   # Storage
   s3:
@@ -40,6 +41,7 @@ services:
     ports:
       - "1080:1080"
       - "1025:1025"
+    env_file: ./config/.dev.env
     volumes:
       - maildev:/var/lib/maildev
     networks:
