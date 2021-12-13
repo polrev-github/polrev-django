@@ -13,9 +13,9 @@ a {
   padding: 10px 0;
 }
 
-a:hover {
+/*a:hover {
   color: $link-hover;
-}
+}*/
 
 h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
@@ -139,12 +139,12 @@ iframe {
 footer {
   border-top: 1px solid #cccccc;
   padding: 1em;
-  color: #888888;
+  color: #ccc;
 }
 
 .site-footer {
-  color: #ffffff;
-  background-color: $secondary;
+  //color: #ffffff;
+  background-color: $primary;
   margin-top: 1rem;
 }
 
@@ -191,10 +191,9 @@ footer {
   .navbar-collapse {
     background-color: #04243E;
   }  
-  .navbar {
+  #masthead .navbar {
     display: inline-block;
     position: absolute !important;
-    //max-width: 30px;
   }  
 }
 
@@ -222,8 +221,8 @@ footer {
     visibility: hidden;
     position: absolute;
     top: -350px;
-    left: 0px;
-    z-index: -10;
+    right: 0px;
+    //z-index: -10;
     width: 100px;
     animation: drop forwards 0.8s 1s cubic-bezier(0.165, 0.84, 0.44, 1);
   }

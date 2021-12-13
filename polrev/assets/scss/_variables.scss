@@ -18,8 +18,8 @@ $white-ter: #ecf0f1;
 $yellow-invert: #fff;
 
 // First override some or all individual color variables
-$primary: #339999;
-$secondary: #04243E;
+$primary: #04243E;
+$secondary: #339999;
 $tertiary: #BC3F41;
 $success: #3e8d63;
 $info: #13101c;
@@ -41,10 +41,4 @@ $theme-colors: (
   // add any additional color below
 );
 
-$text: #000;
-
-$link: $primary;
-$link-hover: lighten($link, 10);
-$link-focus: darken($link, 5);
-$link-active: darken($link, 5);
-$link-focus-border: $grey-light;
+$link-color: $secondary;
