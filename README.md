@@ -1,5 +1,13 @@
 # polrev-django
 
+## Development Setup
+
+### Linux
+> .bashrc
+```bash
+export DOCKER_GATEWAY_HOST="`hostname -I` |awk '{print $1}'  `"
+```
+
 ## Django Setup
 
 ```bash
@@ -34,7 +42,7 @@ docker-compose up
 ### Production
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 ## Dump Database

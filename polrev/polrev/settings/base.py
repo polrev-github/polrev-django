@@ -19,15 +19,10 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 from dotenv import load_dotenv
 
 if not os.environ.get("IN_DOCKER"):
-    dotenv_path = os.path.join(BASE_DIR, '../config/.prod.env')
+    dotenv_path = os.path.join(BASE_DIR, '../config/.dev.env')
     load_dotenv(dotenv_path)
-    POSTGRES_HOST = "localhost"
-    #AWS_S3_ENDPOINT_URL = 'http://localhost:9000'
-    AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
 else:
     POSTGRES_HOST = os.environ.get("POSTGRES_HOST", "")
-    AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
-    print(AWS_S3_ENDPOINT_URL)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -141,7 +136,7 @@ DATABASES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": POSTGRES_HOST,
+        "HOST": os.environ.get("POSTGRES_HOST", ""),
         "NAME": os.environ.get("POSTGRES_DB", ""),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", ""),
         "USER": os.environ.get("POSTGRES_USER", ""),
@@ -233,30 +228,25 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 '''
-#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATICFILES_LOCATION = 'static'
+STATIC_ROOT = os.path.join(BASE_DIR, STATICFILES_LOCATION)
+STATIC_URL = f'/{STATICFILES_LOCATION}/'
+STATICFILES_STORAGE = 'polrev.storages.StaticStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIAFILES_LOCATION = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIAFILES_LOCATION)
+MEDIA_URL = f'/{MEDIAFILES_LOCATION}/'
+DEFAULT_FILE_STORAGE = 'polrev.storages.MediaStorage'
 
-#STATIC_URL = "http://localhost:9000/"
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
-#STATICFILES_STORAGE = 'polrev.storages.ManifestS3Storage'
+AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
-
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
+
 AWS_QUERYSTRING_AUTH = False
 #AWS_S3_SECURE_URLS = False
 #AWS_S3_CUSTOM_DOMAIN = 'localhost:9000'
-AWS_LOCATION = 'public'
 
 AWS_S3_OBJECT_PARAMETERS = {
     "ACL": "public-read",

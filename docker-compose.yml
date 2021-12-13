@@ -1,4 +1,5 @@
 services:
+
   # Django
   web:
     build:
@@ -36,6 +37,7 @@ services:
     networks:
       - polrev
 
+  # Traffic
   traefik:
     image: "traefik:v2.5.4"
     command:

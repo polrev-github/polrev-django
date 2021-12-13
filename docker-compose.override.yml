@@ -1,9 +1,19 @@
 services:
+
   # Django
   web:
     depends_on:
       - s3
     env_file: ./config/.dev.env
+    environment:
+      POSTGRES_HOST: db
+      AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+
+  # Traffic
+  traefik:
+    ports:
+      - "8888:80"
+      - "8080:8080"
 
   # Storage
   s3:
@@ -12,7 +22,7 @@ services:
       - 9000:9000
       - 9001:9001
     volumes:
-      - s3:/minio
+      - s3:/data
     env_file: ./config/.dev.env
     hostname: s3.${POLREV_DOMAIN}
     labels:
@@ -46,11 +56,6 @@ services:
       - maildev:/var/lib/maildev
     networks:
       - polrev
-
-  traefik:
-    ports:
-      - "8888:80"
-      - "8080:8080"
 
 volumes:
   s3:

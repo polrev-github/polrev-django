@@ -114,9 +114,6 @@ iframe {
   background-position: 50% 50%;
 }
 
-/*.navbar {
-  background: rgba(0, 0, 0, 0.25);
-}*/
 #masthead .navbar {
   color: white;
   font-family: 'Big John', sans-serif;
@@ -193,6 +190,11 @@ footer {
 @media (max-width: 990px) {
   .navbar-collapse {
     background-color: #04243E;
+  }  
+  .navbar {
+    display: inline-block;
+    position: absolute !important;
+    //max-width: 30px;
   }  
 }
 
