@@ -71,18 +71,6 @@ blockquote {
 figcaption {
   margin-top: 1em;
 }
-/*img.progressiveMedia-image {
-  object-fit: cover;
-  display: block;
-  max-width:100%;
-}*/
-
-/*.site-header {
-  background: url(/static/img/site-header.jpg) no-repeat scroll top;
-  background-size: cover;
-  background-position: 50% 50%;
-  width: 100%;
-}*/
 
 #site-header-main {
   left: 0;
@@ -105,6 +93,7 @@ iframe {
   display: block;
   margin: 0 auto;
 }
+
 #masthead .header-image {
   display: block;
   width: inherit;
@@ -128,9 +117,9 @@ iframe {
   min-height: 400px;
   padding: 1rem;
   background-color: white;
-  /*border-radius: 5px 5px 5px 5px;*/
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.17);
 }
+
 .tagline {
   color: white;
   display: none;
@@ -175,16 +164,8 @@ footer {
   width: 12px;
 }
 
-::-webkit-scrollbar-track {
-  //-webkit-box-shadow: inset 0 0 6px rgba(200,200,200,1);
-  //border-radius: 10px;
-}
-
 ::-webkit-scrollbar-thumb {
-  //border-radius: 10px;
-  //background-color:#fff;
   background-color:#cccccc;
-  //-webkit-box-shadow: inset 0 0 6px rgba(90,90,90,0.7);
 }
 
 @media (max-width: 990px) {
@@ -204,10 +185,7 @@ footer {
   .tagline {
     display: block !important;
   }
-  /*.site-header {
-    padding-bottom: 300px;
-  }
-  .site-main {
+  /*.site-main {
     margin-top: -100px;
   }*/
   .rightbar {

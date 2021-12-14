@@ -8,7 +8,6 @@ services:
     image: dpage/pgadmin4
     depends_on:
       - db
-    restart: "no"
     ports:
         - "4444:80"
     env_file: ./config/.dev.env
@@ -20,7 +19,6 @@ services:
   # Mail
   maildev:
     image: maildev/maildev
-    restart: "no"
     ports:
       - "1080:1080"
       - "1025:1025"

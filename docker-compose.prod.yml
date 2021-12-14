@@ -3,10 +3,13 @@ services:
   # Django
   web:
     env_file: ./config/.prod.env
+    restart: unless-stopped
 
   # Database
   db:
     env_file: ./config/.prod.env
+    restart: unless-stopped
 
   traefik:
     env_file: ./config/.prod.env
+    restart: unless-stopped

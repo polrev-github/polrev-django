@@ -25,7 +25,6 @@ services:
       - 8000:8000
     networks:
       - polrev
-    restart: "no"
     volumes:
       - "./polrev:/app"
 
@@ -34,7 +33,6 @@ services:
     image: dpage/pgadmin4
     depends_on:
       - db
-    restart: "no"
     ports:
         - "8888:80"
     env_file: ./config/.env.dev
@@ -51,7 +49,6 @@ services:
       - PGDATA=/pg-data
     ports:
       - 5432:5432
-    restart: "no"
     volumes:
       - db:/pg-data
     networks:
@@ -71,7 +68,6 @@ services:
   # Mail
   maildev:
     image: maildev/maildev
-    restart: "no"
     volumes:
       - maildev:/var/lib/maildev
     networks:

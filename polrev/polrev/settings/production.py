@@ -17,3 +17,6 @@ except ImportError:
     pass
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
+
+# SECURITY WARNING: define the correct hosts in production!
+ALLOWED_HOSTS = ['*'] 
