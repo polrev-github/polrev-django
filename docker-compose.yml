@@ -46,6 +46,7 @@ services:
       - "--entrypoints.web.address=:80"
       - --entrypoints.web-secure.address=:443
     labels:
+      - "traefik.http.routers.traefik.middlewares=test-compress"
       - "traefik.http.middlewares.test-compress.compress=true"
     ports:
       - "80:80"
