@@ -32,13 +32,19 @@ services:
 
   # Database Admin
   dbadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     depends_on:
       - db
     restart: "no"
     ports:
         - "4444:80"
     env_file: ./config/.dev.env
+    hostname: dbadmin.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dbadmin.rule=Host(`dbadmin.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.dbadmin.entrypoints=web"
+
     volumes:
         - dbadmin:/var/lib/pgadmin4/storage
     networks:
@@ -46,12 +52,17 @@ services:
 
   # Mail
   maildev:
-    image: maildev/maildev
+    image: maildev/maildev:latest
     restart: "no"
     ports:
       - "1080:1080"
       - "1025:1025"
     env_file: ./config/.dev.env
+    hostname: maildev.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maildev.rule=Host(`maildev.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.maildev.entrypoints=web"
     volumes:
       - maildev:/var/lib/maildev
     networks:
