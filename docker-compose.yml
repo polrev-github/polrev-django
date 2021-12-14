@@ -15,6 +15,7 @@ services:
       - "traefik.http.routers.web.rule=Host(`django.${POLREV_DOMAIN}`)"
       - "traefik.http.routers.web.entrypoints=web"
       #- "traefik.http.routers.web.tls=true"
+      - "traefik.http.middlewares.web.compress=true"
     ports:
       - 8000:8000
     networks:

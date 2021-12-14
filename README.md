@@ -60,3 +60,6 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```bash
 ./manage.py loaddata db.json
 ```
+
+## Check Deployment
+ DJANGO_SETTINGS_MODULE=polrev.settings.production ./manage.py check --deploy
