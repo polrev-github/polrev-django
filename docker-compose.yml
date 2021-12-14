@@ -15,7 +15,6 @@ services:
       - "traefik.http.routers.web.rule=Host(`django.${POLREV_DOMAIN}`)"
       - "traefik.http.routers.web.entrypoints=web"
       #- "traefik.http.routers.web.tls=true"
-      - "traefik.http.middlewares.web.compress=true"
     ports:
       - 8000:8000
     networks:
@@ -47,8 +46,7 @@ services:
       - "--entrypoints.web.address=:80"
       - --entrypoints.web-secure.address=:443
     labels:
-      - "traefik.http.routers.traefik.middlewares=traefik-compress"
-      - "traefik.http.middlewares.traefik-compress.compress=true"
+      - "traefik.http.middlewares.test-compress.compress=true"
     ports:
       - "80:80"
       - "8080:8080"
