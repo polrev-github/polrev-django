@@ -4,6 +4,10 @@ services:
   web:
     env_file: ./config/.prod.env
     restart: always
+    labels:
+      - "traefik.http.routers.web.rule=Host(`${POLREV_DOMAIN}`)"
+      - traefik.http.routers.web.tls=true
+      - traefik.http.routers.web.tls.certresolver=le
 
   # Database
   db:
@@ -13,3 +17,18 @@ services:
   traefik:
     env_file: ./config/.prod.env
     restart: always
+    command:
+      - "--certificatesResolvers.le.acme.email=kurtis@political-revolution.com"
+      - "--certificatesResolvers.le.acme.storage=acme.json"
+      - "--certificatesResolvers.le.acme.tlsChallenge=true"
+      - "--certificatesResolvers.le.acme.httpChallenge=true"
+      - "--certificatesResolvers.le.acme.httpChallenge.entryPoint=web"
+    labels:
+      # Redirect all HTTP to HTTPS permanently
+      - traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)
+      - traefik.http.routers.http_catchall.entrypoints=web
+      - traefik.http.routers.http_catchall.middlewares=https_redirect
+      - traefik.http.middlewares.https_redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https_redirect.redirectscheme.permanent=true
+    volumes:
+      - ./acme.json:/acme.json
