@@ -12,6 +12,8 @@ services:
     hostname: django.${POLREV_DOMAIN}
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.web.entrypoints=web"
+      - "traefik.http.routers.web.entrypoints=websecure"
       - "traefik.http.routers.web.middlewares=test-compress"
       - "traefik.http.middlewares.test-compress.compress=true"
 
@@ -45,8 +47,6 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-    labels:
-      - "traefik.http.routers.web.entrypoints=web"
     ports:
       - "80:80"
       - "8080:8080"

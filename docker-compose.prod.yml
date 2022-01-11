@@ -8,7 +8,6 @@ services:
       - "traefik.http.routers.web.rule=Host(`${POLREV_DOMAIN}`)"
       - traefik.http.routers.web.tls=true
       - traefik.http.routers.web.tls.certresolver=le
-      - "traefik.http.routers.web.entrypoints=websecure"
 
   # Database
   db:
