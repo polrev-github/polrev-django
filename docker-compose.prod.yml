@@ -8,6 +8,12 @@ services:
       - "traefik.http.routers.web.rule=Host(`${POLREV_DOMAIN}`)"
       - traefik.http.routers.web.tls=true
       - traefik.http.routers.web.tls.certresolver=le
+      # Redirect all HTTP to HTTPS permanently
+      - traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)
+      - traefik.http.routers.http_catchall.entrypoints=web
+      - traefik.http.routers.http_catchall.middlewares=https_redirect
+      - traefik.http.middlewares.https_redirect.redirectscheme.scheme=https
+      - traefik.http.middlewares.https_redirect.redirectscheme.permanent=true
 
   # Database
   db:
