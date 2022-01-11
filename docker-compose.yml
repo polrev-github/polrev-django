@@ -45,6 +45,8 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+    labels:
+      - "traefik.http.routers.web.entrypoints=web"
     ports:
       - "80:80"
       - "8080:8080"
