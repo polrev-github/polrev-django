@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'storages',
     'corsheaders',
@@ -205,7 +206,6 @@ WAGTAILSEARCH_BACKENDS = {
 }
 
 WAGTAILMARKDOWN = {
-    # ...
     "autodownload_fontawesome": False,
 }
 

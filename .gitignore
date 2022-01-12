@@ -8,7 +8,7 @@ __pycache__
 env
 .eggs
 *.egg-info
-dist/
+
 build/
 _build
 

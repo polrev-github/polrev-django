@@ -15,7 +15,8 @@ import {
   faTag,
   faComments,
   faAngleLeft,
-  faAngleRight
+  faAngleRight,
+  faRssSquare
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -39,6 +40,7 @@ library.add(
   faComments,
   faAngleLeft,
   faAngleRight,
+  faRssSquare,
 
   faGithub,
   faFacebook, 

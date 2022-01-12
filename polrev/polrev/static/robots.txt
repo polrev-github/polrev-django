@@ -1,0 +1,3 @@
+User-Agent: *
+
+Sitemap: https://political-revolution.com/sitemap.xml
