@@ -1,5 +1,5 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.10.0-slim-buster
+FROM python:3.10.1-slim-bullseye
 
 # Port used by this container to serve HTTP.
 EXPOSE 8000
@@ -38,6 +38,7 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
   libjpeg62-turbo-dev \
   zlib1g-dev \
   libwebp-dev \
+  postgresql-client \
   # Installing `poetry` package manager:
   # https://github.com/python-poetry/poetry
   && curl -sSL 'https://install.python-poetry.org' | python - \

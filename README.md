@@ -61,6 +61,13 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ./manage.py loaddata db.json
 ```
 
+## Nuke Database
+```bash
+./manage.py makemigrations puput
+./manage.py makemigrations avatar
+./manage.py makemigrations
+
+
 ## Check Deployment
 ```bash
 DJANGO_SETTINGS_MODULE=polrev.settings.production ./manage.py check --deploy

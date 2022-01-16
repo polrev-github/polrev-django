@@ -26,7 +26,7 @@ services:
 
   # Database
   db:
-    image: postgres:14.1
+    image: postgres:13.5-bullseye
     env_file: ./config/.dev.env
     environment:
       - PGDATA=/pg-data
