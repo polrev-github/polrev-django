@@ -20,6 +20,10 @@ services:
     env_file: ./config/.prod.env
     restart: always
 
+  dbbackup:
+    env_file: ./config/.prod.env
+    restart: always
+
   traefik:
     env_file: ./config/.prod.env
     restart: always

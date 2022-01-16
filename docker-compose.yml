@@ -37,6 +37,25 @@ services:
     networks:
       - polrev
 
+  dbbackup:
+      image: prodrigestivill/postgres-backup-local
+      user: postgres:postgres
+      env_file: ./config/.dev.env
+      environment:
+        - SCHEDULE=@daily
+        - BACKUP_KEEP_DAYS=7
+        - BACKUP_KEEP_WEEKS=4
+        - BACKUP_KEEP_MONTHS=6
+        - HEALTHCHECK_PORT=9090
+      volumes:
+          - /var/opt/polrev/backups:/backups
+      links:
+          - db
+      depends_on:
+          - db
+      networks:
+        - polrev
+
   # Traffic
   traefik:
     image: "traefik:v2.5.4"

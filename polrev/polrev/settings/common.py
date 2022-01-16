@@ -1,8 +1,7 @@
 from .base import *
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
+if not os.environ.get("IN_DOCKER"):
+    os.environ['POSTGRES_HOST'] = 'localhost'
 
 # Application definition
 
@@ -54,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
 
     'storages',
+    'dbbackup',  # django-dbbackup
     'corsheaders',
 
     'home',
@@ -100,15 +100,6 @@ WSGI_APPLICATION = 'polrev.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
 
 DATABASES = {
     "default": {
@@ -264,7 +255,7 @@ MEDIA_URL = f'/{MEDIAFILES_LOCATION}/'
 DEFAULT_FILE_STORAGE = 'polrev.storages.MediaStorage'
 
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
-print(AWS_S3_ENDPOINT_URL)
+#print(AWS_S3_ENDPOINT_URL)
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME", "")
@@ -277,4 +268,18 @@ AWS_QUERYSTRING_AUTH = False
 AWS_S3_OBJECT_PARAMETERS = {
     "ACL": "public-read",
    'CacheControl': 'max-age=86400',
+}
+
+AWS_BACKUP_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
+AWS_BACKUP_ACCESS_KEY_ID = os.environ.get("AWS_BACKUP_ACCESS_KEY_ID", "")
+AWS_BACKUP_SECRET_ACCESS_KEY = os.environ.get("AWS_BACKUP_SECRET_ACCESS_KEY", "")
+AWS_BACKUP_STORAGE_BUCKET_NAME = os.environ.get("AWS_BACKUP_STORAGE_BUCKET_NAME", "")
+
+DBBACKUP_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DBBACKUP_STORAGE_OPTIONS = {
+    'endpoint_url': AWS_BACKUP_S3_ENDPOINT_URL,
+    'access_key': AWS_BACKUP_ACCESS_KEY_ID,
+    'secret_key': AWS_BACKUP_SECRET_ACCESS_KEY,
+    'bucket_name': AWS_BACKUP_STORAGE_BUCKET_NAME,
+    'default_acl': 'private',
 }

@@ -62,9 +62,20 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 ## Check Deployment
- DJANGO_SETTINGS_MODULE=polrev.settings.production ./manage.py check --deploy
+```bash
+DJANGO_SETTINGS_MODULE=polrev.settings.production ./manage.py check --deploy
+```
 
 ## Traefik/Let's Encrypt
 ```bash
 sudo chmod 600 acme.json
+```
+
+## Backup
+[https://github.com/prodrigestivill/docker-postgres-backup-local](https://github.com/prodrigestivill/docker-postgres-backup-local)
+
+On the host:
+
+```
+sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/backups
 ```

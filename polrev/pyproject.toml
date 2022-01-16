@@ -23,6 +23,7 @@ python-dotenv = "^0.19.2"
 django-storages = "^1.12.3"
 boto3 = "^1.20.21"
 django-cors-headers = "^3.10.1"
+django-dbbackup = "^3.3.0"
 
 [tool.poetry.dev-dependencies]
 pyppeteer = "^0.2.6"
