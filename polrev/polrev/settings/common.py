@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'search',
     'accounts',
     'events',
+    'slack_invite'
 ]
 
 MIDDLEWARE = [
@@ -288,3 +289,7 @@ DBBACKUP_STORAGE_OPTIONS = {
     'bucket_name': AWS_BACKUP_STORAGE_BUCKET_NAME,
     'default_acl': 'private',
 }
+
+SLACK_URL = os.environ.get("SLACK_URL", "")
+SLACK_TEAM = os.environ.get("SLACK_TEAM", "")
+SLACK_TOKEN = os.environ.get("SLACK_TOKEN", "")

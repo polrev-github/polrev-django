@@ -1,0 +1,60 @@
+.slack-invite {
+    background: url(../img/pattern.svg) center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    min-height: 400px;
+
+    h1 {
+        font-family: 'Amaranth', sans-serif;
+        font-size: 60px;
+        line-height:65px;
+        text-align: center;
+        color: #fff;
+    }
+
+    h2 {
+        font-family: 'Nobile', Helvetica, Arial, sans-serif;
+        font-size: 35px;
+        line-height: 40px;
+        color: #5a616B; 
+    }
+
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin:  auto;
+    }
+
+    .form-signin input[type="email"] {
+        font-size: 16px;
+        margin-bottom: -1px;
+        padding: 10px;
+        height: auto;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .img-responsive {
+        max-width: 150px;
+    }
+
+    .h1_upper {
+        text-transform: uppercase;
+    }
+
+    .button {
+        background-color: #ff6b6b; /* Cherry Pink */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button1 {border-radius: 4px;}
+}

@@ -45,7 +45,7 @@ docker-compose up
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-## Dump Database
+## Dump Data
 
 ```bash
 ./manage.py dumpdata --natural-foreign --indent 2 \
@@ -55,7 +55,7 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
     -e sessions > db.json
 ```
 
-## Load Database
+## Load Data
 
 ```bash
 ./manage.py loaddata db.json
@@ -66,7 +66,7 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ./manage.py makemigrations puput
 ./manage.py makemigrations avatar
 ./manage.py makemigrations
-
+```
 
 ## Check Deployment
 ```bash
