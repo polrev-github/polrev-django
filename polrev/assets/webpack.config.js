@@ -8,7 +8,8 @@ module.exports = {
   //context: path.resolve(__dirname, 'assets'),
   entry: {
     main: './main.js', 
-    calendar: './calendar.js'
+    calendar: './calendar.js',
+    iframe: './iframe.js'
   },
   output: {
     filename: '[name].js',
