@@ -1,4 +1,5 @@
 import 'iframe-resizer'
+import 'iframe-resizer/js/iframeResizer.contentWindow'
 
 document.addEventListener('DOMContentLoaded', function() {
     const iframeEl = document.getElementById('iframe');

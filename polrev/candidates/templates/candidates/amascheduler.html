@@ -5,15 +5,10 @@
 {% block content %}
 <style>
     iframe {
-      width: 1px;
-      min-width: 100%;
-      border:0
+      width: 100%;
+      height: calc(2000px - 20vw);
+      border:0;
     }
   </style>
-  <iframe id="iframe" src="https://outlook.office365.com/owa/calendar/PoliticalRevolutionAMAScheduler@political-revolution.com/bookings/"></iframe>
-{% endblock %}
-
-{% block scripts %}
-{{ block.super }}
-<script src="{% static 'dist/iframe.js' %}"></script>
+  <iframe id="iframe" scrolling='yes' src="https://outlook.office365.com/owa/calendar/PoliticalRevolutionAMAScheduler@political-revolution.com/bookings/"></iframe>
 {% endblock %}
