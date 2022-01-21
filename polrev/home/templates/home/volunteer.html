@@ -7,6 +7,11 @@ Volunteer
 
 {% block content %}
 <h1>Volunteer for The Political Revolution!</h1>
+
+<li class="nav-item px-2">
+    <a class="nav-link" href="{% url 'phonebanking' %}">Phonebanking</a>
+  </li>
+
 {% crispy form form.helper %}
 
 

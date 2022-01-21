@@ -1,13 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
-# from django.contrib.auth.models import User
 from accounts.models import User
-#from .models import Post
 from .forms import ContactForm, ProfileEditForm
 
 def index(request):
-    #posts = Post.objects.filter(last_published_at__lte=timezone.now()).order_by('last_published_at')
-    posts = []
     return render(request, 'home/index.html', {'posts': posts})
 
 '''

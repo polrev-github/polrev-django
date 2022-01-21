@@ -1,0 +1,32 @@
+{% extends "joyous/joyous_base.html" %}
+{% load static wagtailcore_tags i18n %}
+
+{% block content %}
+<div class="content joy-content">
+  <div class="d-flex bd-highlight">
+      <div class="flex-grow-1 bd-highlight joy-title joy-title--page">
+        <h1>{{ page.title }}</h1>
+      </div>
+
+    <div class="p-2 bd-highlight">
+      {% block view_choices %}
+      {% endblock view_choices %}
+    </div>
+
+  </div>
+
+  {% block cal_all %}
+  {% block cal_intro %}
+  {{ page.intro|richtext }}
+  {% endblock cal_intro %}
+  {% block cal_subtitle %}
+  {% endblock cal_subtitle %}
+  {% block cal_events %}
+  <div data-version="{{ version }}"></div>
+  {% endblock cal_events %}
+  {% block cal_footer %}<div class="joy-export">
+    <a href="{{ request.path }}?format=ical">{% trans "Export iCal" %}</a>
+  </div>{% endblock cal_footer %}
+  {% endblock cal_all %}
+</div>
+{% endblock %}

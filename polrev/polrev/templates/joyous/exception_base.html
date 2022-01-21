@@ -1,0 +1,10 @@
+{% extends "joyous/event_base.html" %}
+{% load wagtailcore_tags wagtailimages_tags i18n %}
+
+{% block event_footer %}
+<div class="joy-ev-related">
+  <div class="joy-ev-related__item">
+    <a class="joy-ev-related__overrides" href="{% pageurl overrides %}">{% trans "See also <strong>other occurrences</strong> of this event." %}</a>
+  </div>
+</div>
+{% endblock event_footer %}

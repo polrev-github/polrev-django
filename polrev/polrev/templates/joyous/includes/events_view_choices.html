@@ -1,0 +1,12 @@
+{% load wagtailcore_tags i18n %}
+<div class="btn-group" role="group" aria-label="View Choices">
+  {% if 'L' in page.view_choices %}<a type="button" class="btn btn-outline-primary joy-view-choices__link"
+     href="{{ listUrl }}">{{ listLink|default:_("List") }}</a>
+  {% endif %}
+  {% if 'W' in page.view_choices %}<a type="button" class="btn btn-outline-primary joy-view-choices__link"
+     href="{{ weeklyUrl }}">{{ weeklyLink|default:_("Weekly") }}</a>
+  {% endif %}
+  {% if 'M' in page.view_choices %}<a type="button" class="btn btn-outline-primary joy-view-choices__link"
+     href="{{ monthlyUrl }}">{{ monthlyLink|default:_("Monthly") }}</a>
+   {% endif %}
+</div>

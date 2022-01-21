@@ -20,6 +20,8 @@
   <link href="{% static 'dist/main.css' %}" rel="stylesheet" type="text/css">
   {% endblock %}
 
+  {% block extra_css %}{% endblock %}
+
   <title>
     {% block title %}
     {{ page.title }}
@@ -50,8 +52,11 @@
   {% include '_footer.html' %}
 
   {% block scripts %}
-  <script src="{% static 'dist/main.js' %}"></script>
+  <script src="{% static 'dist/main.js' %}" async></script>
   {% endblock %}
+
+  {% block extra_js %}{% endblock %}
+
 </body>
 
 </html>

@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     'puput',
     'colorful',
     'wagtailmarkdown',
-
     'modelcluster',
     'taggit',
 
+    'ls.joyous',
+    'wagtail.contrib.modeladmin',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

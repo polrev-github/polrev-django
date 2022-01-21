@@ -1,11 +1,12 @@
 from django.urls import path
 from . import views
+#from puput.views import EntryPageServe
 
 urlpatterns = [
     #path('', views.index, name='index'),
-    #path('blog', views.blog, name='blog'),
-    path('phonebanking/', views.phonebanking, name='phonebanking'),
+    #path('blog/', EntryPageServe.as_view(), name='blog'),
 
+    path('phonebanking/', views.phonebanking, name='phonebanking'),
     path('about-us/', views.about, name='about'),
     path('run-for-office/', views.rfo, name='rfo'),
     path('mission-statement/', views.mission, name='mission'),

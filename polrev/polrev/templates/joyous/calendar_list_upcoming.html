@@ -1,0 +1,22 @@
+{% extends "joyous/calendar_list_base.html" %}
+{% load wagtailcore_tags i18n %}
+
+{% block view_choices %}
+{% include "joyous/includes/events_view_choices.html" with listLink=_("Past Events") %}
+{% endblock view_choices %}
+
+{% block cal_view_class %}joy-cal-list--upcoming{% endblock %}
+
+{% block cal_subtitle %}
+<div class="joy-title joy-title--list">
+  <h2>{% trans "Upcoming Events" %}</h2>
+</div>
+{% endblock cal_subtitle %}
+
+{% block cal_footer %}
+<div class="joy-export">
+  <a href="{{ request.path }}?format=ical">{% trans "Export iCal" %}</a>
+    &nbsp;&nbsp;&nbsp;
+  <a href="{{ request.path }}?format=rss">{% trans "RSS Feed" %}</a>
+</div>
+{% endblock cal_footer %}

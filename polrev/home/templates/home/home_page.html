@@ -1,12 +1,9 @@
 {% extends "base.html" %}
 
-{% comment %}
+{% load wagtailcore_tags %}
+
 {% block content %}
-    <div class="postcards">
-        {% for post in posts %}
-            {% include 'blog/_postcard.html' %}
-        {% endfor %}
-    </div>
+
+{% include_block page.body %}
 
 {% endblock %}
-{% endcomment %}

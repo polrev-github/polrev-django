@@ -36,8 +36,6 @@ if settings.DEBUG:
 '''
 
 urlpatterns = urlpatterns + [
-    #re_path(r'^cms/', include(wagtailadmin_urls)),
-
     path('', include('home.urls')),
 
     path('accounts/', include('allauth.urls')),
@@ -49,7 +47,8 @@ urlpatterns = urlpatterns + [
     path('join-the-revolution-on-slack/', include('slack_invite.urls')),
 
     re_path(r'^comments/', include('django_comments_xtd.urls')),
+    
     path("", include(puput_urls)),
     path("", include(wagtail_urls)),
-
+    #re_path(r'^cms/', include(wagtailadmin_urls)),
 ]
