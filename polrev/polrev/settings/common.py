@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
 
+    "captcha",
+    "wagtailcaptcha",
+
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
     'django_social_share',
@@ -59,6 +62,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'home',
+    'forms',
     'search',
     'accounts',
     'events',
@@ -215,7 +219,7 @@ BASE_URL = 'https://political-revolution.com'
 
 PUPUT_AS_PLUGIN = True
 PUPUT_COMMENTS_PROVIDER = "puput.comments.DjangoCommentsProvider"
-PUPUT_ENTRY_MODEL = 'polrev.models.EntryAbstract'
+PUPUT_ENTRY_MODEL = 'blog.models.EntryAbstract'
 
 WAGTAILEMBEDS_FINDERS = [
     {

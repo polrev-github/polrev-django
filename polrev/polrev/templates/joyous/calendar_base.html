@@ -3,17 +3,21 @@
 
 {% block content %}
 <div class="content joy-content">
-  <div class="d-flex bd-highlight">
-      <div class="flex-grow-1 bd-highlight joy-title joy-title--page">
-        <h1>{{ page.title }}</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="joy-title joy-title--page">
+          <h1>{{ page.title }}</h1>
+        </div>
       </div>
 
-    <div class="p-2 bd-highlight">
-      {% block view_choices %}
-      {% endblock view_choices %}
+      <div class="col-md-4">
+        {% block view_choices %}
+        {% endblock view_choices %}
+      </div>
     </div>
-
   </div>
+
 
   {% block cal_all %}
   {% block cal_intro %}

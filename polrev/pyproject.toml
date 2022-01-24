@@ -25,6 +25,7 @@ boto3 = "^1.20.21"
 django-cors-headers = "^3.10.1"
 django-dbbackup = "^3.3.0"
 "ls.joyous" = "^1.4.0"
+wagtail-django-recaptcha = "^1.0"
 
 [tool.poetry.dev-dependencies]
 pyppeteer = "^0.2.6"
