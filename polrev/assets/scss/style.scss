@@ -13,22 +13,19 @@ a {
   padding: 10px 0;
 }
 
-/*a:hover {
-  color: $link-hover;
-}*/
-
 h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
   font-weight: bold;
 
 }
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
   color: $tertiary;
 }
 
 h1 {
   font-family: 'Slim Joe', sans-serif;
   font-size: 2rem;
+  margin-bottom: .75em !important;
 }
 h2 {
   font-size: 1.75rem;
@@ -123,7 +120,7 @@ footer {
 .site-footer {
   //color: #ffffff;
   background-color: $primary;
-  margin-top: 1rem;
+  //margin-top: 1rem;
 }
 
 .rightbar {

@@ -17,18 +17,14 @@ from wagtail.core.blocks import (
     CharBlock 
 )
 from wagtail.images.blocks import ImageChooserBlock
-#from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
 
-from colorful.fields import RGBColorField
 from puput.utils import get_image_model_path
-#from .blocks import ContentStreamBlock
 
 
 class EntryAbstract(models.Model):
     body = StreamField([
-        #('heading', CharBlock(form_classname="full title")),
         ('paragraph', RichTextBlock()),
         ('image', ImageChooserBlock()),
         ('markdown', MarkdownBlock(icon="code")),
@@ -52,11 +48,13 @@ class EntryAbstract(models.Model):
                     "If this field is not filled, a truncate version of body text will be used.")
     )
     num_comments = models.IntegerField(default=0, editable=False)
+    featured = models.BooleanField(default=False)
 
     content_panels = [
         MultiFieldPanel(
             [
                 FieldPanel('title', classname="title"),
+                FieldPanel('featured'),
                 ImageChooserPanel('header_image'),
                 StreamFieldPanel('body', classname="full"),
                 FieldPanel('excerpt', classname="full"),
@@ -76,7 +74,5 @@ class EntryAbstract(models.Model):
             heading=_("Metadata")),
     ]
 
-    #template = 'puput/story_page.html'
-    
     class Meta:
         abstract = True

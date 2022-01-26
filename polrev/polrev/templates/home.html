@@ -1,10 +1,11 @@
 {% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags %}
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
     <title>
         {% block title %}
-            {{ blog_page.title }}{% if blog_page.description %} | {{ blog_page.description }}{% endif %}
+            {{ page.title }}{% if page.description %} | {{ page.description }}{% endif %}
         {% endblock title %}
     </title>
     <meta charset="utf-8"/>
@@ -12,14 +13,14 @@
     <meta name="title"
           content="{% block meta_title %}
                         {% if blog_page.seo_title %}
-                            {{ blog_page.seo_title }}
+                            {{ page.seo_title }}
                         {% else %}
-                            {{ blog_page.title }}
+                            {{ page.title }}
                         {% endif %}
                    {% endblock meta_title %}"/>
     <meta name="description"
           content="{% block meta_description %}
-                        {{ blog_page.search_description }}
+                        {{ page.search_description }}
                    {% endblock meta_description %}"/>
     {% block social_share %}{% endblock social_share %}
     <link rel="canonical" href="{% block canonical %}{% canonical_url %}{% endblock canonical %}"/>
@@ -50,7 +51,7 @@
     <div class="row no-gutters">
         <div class="col-md-1">
             {% include '_leftbar.html' %}
-        </div>
+          </div>
     
         <div class="col-md-8">
             <main class="site-main paper">
@@ -61,12 +62,7 @@
 
         <div class="col-md-3">
             <div class="blog_sidebar">
-                <div class="rss-sitemap">
-                    <a href="{% feeds_url blog_page %}" target="_blank" title="RSS">
-                         <i class="fa fa-rss-square"></i> <span>{% trans 'Feed RSS' %}</span>
-                    </a>
-                </div>
-                <form name="search_form" class="search_form" method="get" action="{% routablepageurl blog_page 'entries_search' %}">
+                <form name="search_form" class="search_form" method="get" action="{% pageurl blog_page 'entries_search' %}">
                     <div class="input-group">
                         <input type="search" name="q" placeholder="{% trans 'Search' %}"
                             class="form-control py-2 border-right-0 border" >
@@ -89,24 +85,6 @@
                     <ul class="sidebar">
                         <h4>{% trans 'Popular Posts' %}</h4>
                         {% popular_entries blog_page.num_popular_entries %}
-                    </ul>
-                {% endif %}
-                {% if blog_page.display_categories %}
-                    <ul class="sidebar">
-                        <h4>{% trans 'Categories' %}</h4>
-                        {% categories_list %}
-                    </ul>
-                {% endif %}
-                {% if blog_page.display_tags %}
-                    <ul class="sidebar">
-                        <h4>{% trans 'Tags' %}</h4>
-                        {% tags_list %}
-                    </ul>
-                {% endif %}
-                {% if blog_page.display_archive %}
-                    <ul class="sidebar widget menu">
-                        <h4>{% trans 'Archive' %}</h4>
-                        {% archives_list %}
                     </ul>
                 {% endif %}
             </div>

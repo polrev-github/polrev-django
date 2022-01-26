@@ -9,6 +9,9 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
 
+from puput.models import BlogPage
+from puput.models import EntryPage
+
 class HomePage(Page):
     body = StreamField([
         ('paragraph', RichTextBlock()),
@@ -20,3 +23,11 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('body', classname="full"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(
+            request, *args, **kwargs)
+        context['blog_page'] = BlogPage.objects.first()
+        featured_articles = EntryPage.objects.live().filter(featured=True)
+        context['featured_articles'] = featured_articles
+        return context
