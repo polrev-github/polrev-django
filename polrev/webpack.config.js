@@ -7,13 +7,13 @@ module.exports = {
   // devtool: 'source-map',
   //context: path.resolve(__dirname, 'assets'),
   entry: {
-    main: './main.js', 
+    main: './assets/main.js', 
     //calendar: './calendar.js'
-    joyous: './joyous.js'
+    joyous: './assets/joyous.js'
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../polrev/static/dist'),
+    path: path.resolve(__dirname, './polrev/static/dist'),
   },
   plugins: [
     new MiniCssExtractPlugin({

@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'ls.joyous',
     'wagtail.contrib.modeladmin',
     
+    'mjml',
+    'birdsong',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +69,7 @@ INSTALLED_APPS = [
     'search',
     'accounts',
     'events',
+    'newsletter',
     'candidates',
     'volunteers',
     'slack_invite'
@@ -302,3 +306,6 @@ DBBACKUP_STORAGE_OPTIONS = {
 SLACK_URL = os.environ.get("SLACK_URL", "")
 SLACK_TEAM = os.environ.get("SLACK_TEAM", "")
 SLACK_TOKEN = os.environ.get("SLACK_TOKEN", "")
+
+# Wagtail Birdsong
+MJML_EXEC_CMD = './node_modules/.bin/mjml'

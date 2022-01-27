@@ -1,0 +1,30 @@
+{% extends "wagtailadmin/base.html" %}
+{% load i18n modeladmin_tags %}
+
+{% block titletag %}Send test campaign email{% endblock %}
+
+{% block content %}
+
+    {% block header %}
+        {% include "wagtailadmin/shared/header.html" with title="Send test" subtitle=self icon=view.header_icon %}
+    {% endblock %}
+
+    {% block content_main %}
+        <div class="nice-padding">
+            <form action="{{ send_url }}" method="POST">
+                {% csrf_token %}
+                <ul class="fields">
+                    {% for field in form %}
+                    <li>
+                        {% include 'wagtailadmin/shared/field.html' with field=field %}
+                    </li>
+                    {% endfor %}
+                    <li>
+                        <input type="submit" value="Send test email" class="button"/>
+                        <a href="{{ index_url }}" class="button button-secondary">Cancel</a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    {% endblock %}
+{% endblock %}

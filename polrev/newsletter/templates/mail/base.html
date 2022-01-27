@@ -1,0 +1,14 @@
+{% load mjml %}
+
+{% mjml %}
+    <mjml>
+        <mj-head>
+            {% block email_head %}
+            {% endblock email_head %}
+        </mj-head>
+        <mj-body>
+            {% block email_body %}
+            {% endblock email_body %}
+        </mj-body>
+    </mjml>
+{% endmjml %}
