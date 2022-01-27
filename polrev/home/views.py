@@ -3,14 +3,6 @@ from django.utils import timezone
 from accounts.models import User
 from .forms import ContactForm, ProfileEditForm
 
-def index(request):
-    return render(request, 'home/index.html', {'posts': posts})
-
-'''
-def blog(request):
-    posts = Post.objects.filter(last_published_at__lte=timezone.now()).order_by('last_published_at')
-    return render(request, 'blog/blog.html', {'posts': posts})
-'''
 
 def phonebanking(request):
     return render(request, 'home/phonebanking.html')

@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'accounts',
     'events',
     'candidates',
+    'volunteers',
     'slack_invite'
 ]
 
