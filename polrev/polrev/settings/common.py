@@ -122,7 +122,8 @@ DATABASES = {
 
 MIGRATION_MODULES = {
     'puput': 'polrev.migrations.puput',
-    'avatar': 'polrev.migrations.avatar'
+    'avatar': 'polrev.migrations.avatar',
+    'joyous': 'polrev.migrations.joyous'
 }
 
 AUTH_USER_MODEL = 'accounts.User'
