@@ -43,7 +43,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="moreDropdown">
               <a class="dropdown-item" href="{% url 'about' %}">About Us</a>
-              <a class="dropdown-item" href="{% url 'rfo' %}">Run for Office</a>
               <a class="dropdown-item" href="{% url 'mission' %}">Our Mission</a>
               <a class="dropdown-item" href="{% url 'by_laws' %}">By-Laws</a>
               <a class="dropdown-item" href="{% url 'issues' %}">Issues</a>
@@ -51,15 +50,6 @@
             </div>
           </li>
 
-          <!--<li class="nav-item">
-            <a class="nav-link" href="{% url 'calendar' %}">Calendar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/contact">Contact</a>
-          </li>-->
           {% if user.is_authenticated %}
           <li class="nav-item dropdown px-2">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"

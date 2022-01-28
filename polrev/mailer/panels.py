@@ -8,13 +8,13 @@ from birdsong.models import Contact
 
 class PreviewPanel(EditHandler):
     def render(self):
-        print(self.__dict__)
+        #print(self.__dict__)
 
         first_receipt = self.instance.receipts.first()
         if first_receipt:
             #preview_contact = self.contact_class.objects.filter(
-                preview_contact = Contact.objects.filter(
-                pk=first_receipt.pk).first()
+            preview_contact = Contact.objects.filter(
+            pk=first_receipt.pk).first()
         else:
             preview_contact = None
 
@@ -23,11 +23,4 @@ class PreviewPanel(EditHandler):
             self.instance.get_context(self.request, preview_contact),
         )
 
-        #return mark_safe('<div><h1>Fuck</h1><h1>Fuck</h1><h1>Fuck</h1><h1>Fuck</h1><h1>Fuck</h1></div>')
         return mark_safe(f"<fieldset>{preview}</fieldset>")
-    '''
-    def render(self):
-        return mark_safe(render_to_string(self.template, {
-            'self': self
-        }))
-    '''

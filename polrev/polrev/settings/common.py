@@ -65,11 +65,12 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'home',
+    'blog',
     'forms',
     'search',
     'accounts',
     'events',
-    'newsletter',
+    'mailer',
     'candidates',
     'volunteers',
     'slack_invite'
@@ -95,6 +96,9 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'blog', 'templates'),
+            os.path.join(BASE_DIR, 'events', 'templates'),
+            os.path.join(BASE_DIR, 'mailer', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

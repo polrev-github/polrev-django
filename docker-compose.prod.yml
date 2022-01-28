@@ -5,7 +5,7 @@ services:
     env_file: ./config/.prod.env
     restart: always
     labels:
-      - "traefik.http.routers.web.rule=Host(`${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.web.rule=Host(`${POLREV_DOMAIN}`, `www.${POLREV_DOMAIN}`)"
       - traefik.http.routers.web.tls=true
       - traefik.http.routers.web.tls.certresolver=le
       # Redirect all HTTP to HTTPS permanently

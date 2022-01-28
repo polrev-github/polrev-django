@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Candidates</h1>
 
-<div>
-    <ul class="list-group">
-        <li class="list-group-item">
-<a  href='https://forms.office.com/Pages/ResponsePage.aspx?id=2liv4n7UtE-SPRsQbA3VKgtxitoffcRHgHXXl6zlLZhUMUgyVEMxNEhBU05YWFlDVTkzMkhITUJGNC4u'>
-    Endorse a Candidate
-</a>
-</li>
-<li class="list-group-item">
-<a href="/candidates/amascheduler">Schedule AMA online</a>
-</li>
-</ul>
+<div >
+  <div class="row p-3">
+    <div class=" col-12 col-md-8">
+      <h1>Candidates</h1>
+      <p>
+      </p>
+    </div>
+
+    <div class="col-12 col-md-4">
+      {% include 'candidates/_sidebar.html' %}
+    </div>
+  </div>
 </div>
 
 {% endblock %}
