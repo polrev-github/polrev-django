@@ -1,5 +1,7 @@
 from .base import *
 
+from django.contrib.messages import constants as messages
+
 if not os.environ.get("IN_DOCKER"):
     os.environ['POSTGRES_HOST'] = 'localhost'
 
@@ -32,6 +34,8 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'crispy_bootstrap5',
+
+    "django_bootstrap5",
 
     "captcha",
     "wagtailcaptcha",
@@ -96,6 +100,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'accounts', 'templates'),
             os.path.join(BASE_DIR, 'blog', 'templates'),
             os.path.join(BASE_DIR, 'events', 'templates'),
             os.path.join(BASE_DIR, 'mailer', 'templates'),
@@ -313,3 +318,11 @@ SLACK_TOKEN = os.environ.get("SLACK_TOKEN", "")
 
 # Wagtail Birdsong
 MJML_EXEC_CMD = './node_modules/.bin/mjml'
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}

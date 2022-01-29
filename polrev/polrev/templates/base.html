@@ -43,6 +43,20 @@
 
       <div class="col-12 col-md-11  g-0">
         <main class="site-main">
+
+          {% if messages %}
+            <div class="p-3">
+                {% for message in messages %}
+                  <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message | safe }}
+                  </div>
+                {% endfor %}
+            </div>
+          {% endif %}
+  
           {% block content %}{% endblock %}
         </main>
       </div>
