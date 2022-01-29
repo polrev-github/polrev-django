@@ -94,7 +94,7 @@ git pull
 docker-compose build web
 cd polrev
 poetry update
-./manage.py reset_db --noinput
+./manage.py flush --noinput
 ./manage.py loaddata ./dump/db.json
 ```
 
