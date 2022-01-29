@@ -97,3 +97,8 @@ poetry update
 ./manage.py reset_db --noinput
 ./manage.py loaddata ./dump/db.json
 ```
+
+## Postgres
+```
+psql -U polrev polrev_dev
+```

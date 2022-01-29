@@ -8,7 +8,8 @@ if not os.environ.get("IN_DOCKER"):
 # Application definition
 
 INSTALLED_APPS = [
-
+    'wagtail.contrib.search_promotions',
+    'wagtail.contrib.settings',
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
