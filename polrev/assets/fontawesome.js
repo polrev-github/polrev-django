@@ -9,6 +9,7 @@ library.add(fas, far, fab)
 import {
   faUser,
   faUserCircle,
+  faChevronRight,
   faSearch,
   faCalendar,
   faFolderOpen,
@@ -33,6 +34,7 @@ import {
 library.add(
   faUser,
   faUserCircle,
+  faChevronRight,
   faSearch,
   faCalendar,
   faFolderOpen,
