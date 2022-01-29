@@ -52,13 +52,13 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
     -e contenttypes -e auth.permission  \
     -e wagtailcore.groupcollectionpermission \
     -e wagtailcore.grouppagepermission -e wagtailimages.rendition \
-    -e sessions > db.json
+    -e sessions > ./dump/db.json
 ```
 
 ## Load Data
 
 ```bash
-./manage.py loaddata db.json
+./manage.py loaddata ./dump/db.json
 ```
 
 ## Nuke Database
@@ -87,10 +87,13 @@ On the host:
 sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/backups
 ```
 
-## Update Production
+## Generic Production Update Procedure
 Stop the webserver
 ```
 git pull
+docker-compose build web
+cd polrev
+poetry update
 ./manage.py reset_db --noinput
 ./manage.py loaddata ./dump/db.json
 ```
