@@ -86,3 +86,11 @@ On the host:
 ```
 sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/backups
 ```
+
+## Update Production
+Stop the webserver
+```
+git pull
+./manage.py reset_db --noinput
+./manage.py loaddata ./dump/db.json
+```
