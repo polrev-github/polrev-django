@@ -23,7 +23,7 @@ class HomePage(Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('body', classname="full"),
     ]
-
+    '''
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(
             request, *args, **kwargs)
@@ -31,3 +31,4 @@ class HomePage(Page):
         featured_articles = EntryPage.objects.live().filter(featured=True)
         context['featured_articles'] = featured_articles
         return context
+    '''

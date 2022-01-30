@@ -47,8 +47,9 @@ urlpatterns = urlpatterns + [
     path('join-the-revolution-on-slack/', include('slack_invite.urls')),
 
     re_path(r'^comments/', include('django_comments_xtd.urls')),
+    re_path(r'^tz_detect/', include('tz_detect.urls')),
     
     path("", include(puput_urls)),
     path("", include(wagtail_urls)),
-    #re_path(r'^cms/', include(wagtailadmin_urls)),
+
 ]

@@ -421,6 +421,19 @@ python-versions = ">=3.6"
 Django = ">=2.2"
 
 [[package]]
+name = "django-tz-detect"
+version = "0.3.0"
+description = "Automatic user timezone detection for django"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = ">=1.4.2"
+pytz = "*"
+six = "*"
+
+[[package]]
 name = "djangorestframework"
 version = "3.13.1"
 description = "Web APIs for Django, made easy."
@@ -1080,7 +1093,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "fc4a4cc0aac79d1bf0a1dba023a431d635ca1ab5b61a810d0f6a112f92f69484"
+content-hash = "3bcad775cc8e443b96ba58fea4be405c809c7a7219e91ba807a4713070691ff9"
 
 [metadata.files]
 anyascii = [
@@ -1236,6 +1249,10 @@ django-timezone-field = [
 django-treebeard = [
     {file = "django-treebeard-4.5.1.tar.gz", hash = "sha256:80150017725239702054e5fa64dc66e383dc13ac262c8d47ee5a82cb005969da"},
     {file = "django_treebeard-4.5.1-py3-none-any.whl", hash = "sha256:7c2b1cdb1e9b46d595825186064a1228bc4d00dbbc186db5b0b9412357fba91c"},
+]
+django-tz-detect = [
+    {file = "django-tz-detect-0.3.0.tar.gz", hash = "sha256:fb94506a52a4d2d46e1aca007d0c7101903c037203bf69a2bbc186f0721a777b"},
+    {file = "django_tz_detect-0.3.0-py2.py3-none-any.whl", hash = "sha256:4c13811c21a7a233171392b5bb639a891b4241ca4a45b38ddbb19d348b5b3e07"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.13.1-py3-none-any.whl", hash = "sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa"},

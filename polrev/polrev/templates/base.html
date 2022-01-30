@@ -71,7 +71,8 @@
   {% endblock %}
 
   {% block extra_js %}{% endblock %}
-
+  {% load tz_detect %}
+  {% tz_detect %}
 </body>
 
 </html>

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'ls.joyous',
     'wagtail.contrib.modeladmin',
+    'tz_detect',
     
     'mjml',
     'birdsong',
@@ -92,6 +93,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    'tz_detect.middleware.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'polrev.urls'
@@ -113,6 +115,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.context_processors.blog'
             ],
         },
     },
