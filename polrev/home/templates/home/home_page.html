@@ -24,6 +24,7 @@
 
 {% include 'cta/candidate.html' %}
 
+<div class="py-3">
 <h2>Featured Articles</h2>
 {% for entry in featured_articles %}
 {% entry_url entry blog_page as post_url %}
@@ -63,5 +64,5 @@
     </section>
 </article>
 {% endfor %}
-
+</div>
 {% endblock %}

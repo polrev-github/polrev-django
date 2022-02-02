@@ -14,6 +14,7 @@ import {
   faCalendar,
   faFolderOpen,
   faTag,
+  faLink,
   faComments,
   faAngleLeft,
   faAngleRight,
@@ -28,7 +29,8 @@ import {
   faMeetup,
   faSlack,
   faTrello,
-  faLinkedin
+  faLinkedin,
+  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
@@ -39,6 +41,7 @@ library.add(
   faCalendar,
   faFolderOpen,
   faTag,
+  faLink,
   faComments,
   faAngleLeft,
   faAngleRight,
@@ -51,7 +54,8 @@ library.add(
   faMeetup,
   faSlack,
   faTrello,
-  faLinkedin
+  faLinkedin,
+  faInstagram,
   );
 
 dom.i2svg();

@@ -42,7 +42,7 @@ docker-compose up
 ### Production
 
 ```bash
-DJANGO_SETTINGS_MODULE=polrev.settings.production docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 ## Dump Data

@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'dbbackup',  # django-dbbackup
     'corsheaders',
 
+    'polrev',
     'home',
     'blog',
     'forms',
@@ -79,6 +80,7 @@ INSTALLED_APPS = [
     'mailer',
     'candidates',
     'volunteers',
+    'campaigns',
     'slack_invite'
 ]
 

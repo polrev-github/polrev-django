@@ -42,8 +42,9 @@ urlpatterns = urlpatterns + [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('event/', include('events.urls')),
-    path('candidate/', include('candidates.urls')),
+    #path('candidate/', include('candidates.urls')),
     path('volunteer/', include('volunteers.urls')),
+    path('campaign/', include('campaigns.urls')),
     path('join-the-revolution-on-slack/', include('slack_invite.urls')),
 
     re_path(r'^comments/', include('django_comments_xtd.urls')),

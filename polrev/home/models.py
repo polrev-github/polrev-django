@@ -9,8 +9,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
 
-from puput.models import BlogPage
-from puput.models import EntryPage
+#from puput.models import BlogPage
+#from puput.models import EntryPage
 
 class HomePage(Page):
     body = StreamField([
