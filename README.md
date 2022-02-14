@@ -88,14 +88,16 @@ sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/b
 ```
 
 ## Generic Production Update Procedure
-Stop the webserver
 ```
+docker-compose down
 git pull
 docker-compose build web
 cd polrev
 poetry update
 ./manage.py flush --noinput
 ./manage.py loaddata ./dump/db.json
+cd ..
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
 ## Postgres
