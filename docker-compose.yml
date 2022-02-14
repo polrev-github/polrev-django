@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: ./polrev
-    depends_on:
+    links:
       - db
     env_file: ./config/.dev.env
     environment:
@@ -50,8 +50,6 @@ services:
       volumes:
           - /var/opt/polrev/backups:/backups
       links:
-          - db
-      depends_on:
           - db
       networks:
         - polrev

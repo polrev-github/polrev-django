@@ -2,7 +2,7 @@ services:
 
   # Django
   web:
-    depends_on:
+    links:
       - s3
     env_file: ./config/.dev.env
     environment:
@@ -35,7 +35,7 @@ services:
   # Database Admin
   dbadmin:
     image: dpage/pgadmin4:latest
-    depends_on:
+    links:
       - db
     ports:
         - "4444:80"
