@@ -88,12 +88,17 @@ sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/b
 ```
 
 ## Generic Production Update Procedure
+
+Might want to do a poetry update before you push.
+
 ```
 docker-compose down
 git pull
 docker-compose build web
+poetry shell
 cd polrev
 poetry update
+./manage.py migrate
 ./manage.py flush --noinput
 ./manage.py loaddata ./dump/db.json
 cd ..
