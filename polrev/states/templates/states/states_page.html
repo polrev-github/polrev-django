@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+{% load shuffle %}
+
+{% block content %}
+<div>
+  <h1>States</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for state in states %}
+    <div class="col">
+      <div class="card" >
+        <div class="card-body">
+          <h4 class="card-title">{{state.title}}</h4>
+          <p class="card-text">{{state.subtitle}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

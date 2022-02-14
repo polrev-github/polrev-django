@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'accounts',
     'events',
     'mailer',
+    'states',
     'candidates',
     'volunteers',
     'campaigns',

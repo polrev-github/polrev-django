@@ -16,7 +16,7 @@ from wagtailmarkdown.blocks import MarkdownBlock
 
 from puput.utils import get_image_model_path
 
-class CandidatesPage(Page):
+class StatesPage(Page):
     body = StreamField([
         ('paragraph', RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -30,29 +30,26 @@ class CandidatesPage(Page):
 
     # Parent page / subpage type rules
     parent_page_types = ['home.HomePage']
-    subpage_types = ['candidates.CandidatePage']
+    subpage_types = ['states.StatePage']
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(
             request, *args, **kwargs)
-        #context['candidates'] = CandidatePage.objects.all()
-        context['candidates'] = CandidatePage.objects.order_by('state__title')
+        context['states'] = StatePage.objects.all()
         return context
 
 
-class CandidatePage(Page):
+class StatePage(Page):
     subtitle = models.CharField(
         verbose_name=_('subtitle'),
         max_length=255,
-        help_text=_("Example: Candidate, U.S. Senate OH | Candidate, U.S. House OH-11")
+        help_text=_("Example: Ua Mau ke Ea o ka ‘Āina i ka Pono")
     )
 
-    state = models.ForeignKey(
-        'states.StatePage',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='candidates',
+    abbreviation = models.CharField(
+        verbose_name=_('abbreviation'),
+        max_length=2,
+        help_text=_("Example: AK, AL, AR")
     )
 
     body = StreamField([
@@ -71,26 +68,13 @@ class CandidatePage(Page):
         related_name='+'
     )
 
-    featured = models.BooleanField(default=False)
-
-    # Social Media
-    facebook = models.URLField("facebook", blank=True)
-    twitter = models.URLField("twitter", blank=True)
-    instagram = models.URLField("instagram", blank=True)
-    website = models.URLField("website", blank=True)
-
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname="subtitle"),
-        PageChooserPanel('state', 'states.StatePage'),
-        FieldPanel('featured'),
+        FieldPanel('abbreviation', classname="abbreviation"),
         ImageChooserPanel('header_image'),
         StreamFieldPanel('body', classname="full"),
-        FieldPanel('facebook'),
-        FieldPanel('twitter'),
-        FieldPanel('instagram'),
-        FieldPanel('website'),
     ]
 
     # Parent page / subpage type rules
-    parent_page_types = ['candidates.CandidatesPage']
+    parent_page_types = ['states.StatesPage']
     subpage_types = []
