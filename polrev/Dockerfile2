@@ -1,37 +1,16 @@
-# Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.10.2-slim-bullseye AS python-base
+# Dockerfile
+# Uses multi-stage builds requiring Docker 17.05 or higher
+# See https://docs.docker.com/develop/develop-images/multistage-build/
 
-# Port used by this container to serve HTTP.
-EXPOSE 8000
+# Creating a python base with shared environment variables
+FROM python:3.10.2-slim-bullseye AS base
+#RUN groupadd --gid 1000 node \
+#  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-# Set environment variables.
-# 1. Force Python stdout and stderr streams to be unbuffered.
-# 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
-#    command.
-ARG DJANGO_ENV
-
-ENV DJANGO_ENV=${DJANGO_ENV} \
-  PORT=8000 \
-  # python:
-  PYTHONFAULTHANDLER=1 \
-  PYTHONUNBUFFERED=1 \
-  PYTHONHASHSEED=random \
-  PYTHONDONTWRITEBYTECODE=1 \
-  # pip:
-  PIP_NO_CACHE_DIR=off \
-  PIP_DISABLE_PIP_VERSION_CHECK=on \
-  PIP_DEFAULT_TIMEOUT=100 \
-  # poetry:
-  POETRY_VERSION=1.1.12 \
-  POETRY_NO_INTERACTION=1 \
-  POETRY_VIRTUALENVS_CREATE=false \
-  POETRY_CACHE_DIR='/var/cache/pypoetry' \
-  PATH="$PATH:/root/.local/bin"
-
+RUN mkdir -p /polrev && useradd -d /polrev -u 1000 polrev && chown -R polrev /polrev
 
 # Node
-FROM python-base AS python-node-base
-ENV NODE_VERSION 17.4.0
+ENV NODE_VERSION 17.5.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
@@ -115,8 +94,44 @@ RUN set -ex \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   # smoke test
   && yarn --version
-  
-FROM python-node-base as django-base
+
+FROM base AS python-base
+
+ENV PYTHONUNBUFFERED=1 \
+    # python:
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=random \
+    # pip:
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    # poetry:
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    PYSETUP_PATH="/opt/pysetup" \
+    VENV_PATH="/opt/pysetup/.venv" \
+    # python:
+    PYTHONFAULTHANDLER=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONHASHSEED=random \
+    # poetry:
+    POETRY_VERSION=1.1.12 \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_CACHE_DIR='/var/cache/pypoetry' \
+    PATH="$PATH:/root/.local/bin" \
+    # django:
+    PORT=8000
+
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+
+# Port used by this container to serve HTTP.
+EXPOSE $PORT
+
+FROM base AS django-base
 
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
@@ -129,40 +144,87 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
   zlib1g-dev \
   libwebp-dev \
   postgresql-client \
-  ca-certificates \
-  # Installing `poetry` package manager:
-  # https://github.com/python-poetry/poetry
-  && curl -sSL 'https://install.python-poetry.org' | python - \
-  && poetry --version \
   && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /polrev && useradd -d /polrev -u 1000 polrev && chown -R polrev /polrev
+# Install the application server.
+RUN pip install "gunicorn==20.0.4"
 
-COPY --chown=polrev:polrev ./poetry.lock ./pyproject.toml /tmp/
-WORKDIR /tmp
+# builder-base is used to build dependencies
+FROM django-base AS builder-base
+# Install Poetry - respects $POETRY_VERSION & $POETRY_HOME
+RUN  curl -sSL https://install.python-poetry.org | \
+  POETRY_HOME=${POETRY_HOME} POETRY_VERSION=${POETRY_VERSION} python3 -
 
-# Project initialization:
-RUN echo "$DJANGO_ENV" && poetry version \
-  && poetry install \
-    $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--no-dev'; fi) \
-    --no-interaction --no-ansi \
-  # Upgrading pip, it is insecure, remove after `pip@21.1`
-  && poetry run pip install -U pip \
-  # Cleaning poetry installation's cache for production:
-  && if [ "$DJANGO_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
+ENV PATH="${PATH}:/root/.poetry/bin"
 
-USER polrev
+# We copy our Python requirements here to cache them
+# and install only runtime deps using poetry
+WORKDIR $PYSETUP_PATH
+COPY ./poetry.lock ./pyproject.toml ./
+RUN poetry install --no-dev  # respects 
 
+
+# 'development' stage installs all dev deps and can be used to develop code.
+# For example using docker-compose to mount local volume under /app
 FROM django-base AS development
-
 ENV DJANGO_SETTINGS_MODULE=polrev.settings.dev
-WORKDIR /app
-ENTRYPOINT ["bash", "./docker-entrypoint.sh", "$0 $@"]
-CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "polrev.wsgi:application"]
 
+# Copying poetry and venv into image
+COPY --from=builder-base $POETRY_HOME $POETRY_HOME
+COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
+
+# Copying in our entrypoint
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+# venv already has runtime deps installed we get a quicker install
+WORKDIR $PYSETUP_PATH
+RUN poetry install
+
+WORKDIR /app
+COPY . .
+
+EXPOSE $PORT
+#ENTRYPOINT /docker-entrypoint.sh $0 $@
+ENTRYPOINT /docker-entrypoint.sh
+#CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "main:app"]
+
+
+# 'lint' stage runs black and isort
+# running in check mode means build will fail if any linting errors occur
+FROM development AS lint
+RUN black --config ./pyproject.toml --check app tests
+RUN isort --settings-path ./pyproject.toml --recursive --check-only
+CMD ["tail", "-f", "/dev/null"]
+
+
+# 'test' stage runs our unit tests with pytest and
+# coverage.  Build will fail if test coverage is under 95%
+FROM development AS test
+RUN coverage run --rcfile ./pyproject.toml -m pytest ./tests
+RUN coverage report --fail-under 95
+
+
+# 'production' stage uses the clean 'python-base' stage and copies
+# in only our runtime deps that were installed in the 'builder-base'
 FROM django-base AS production
 
 ENV DJANGO_SETTINGS_MODULE=polrev.settings.production
+
+COPY --from=builder-base $VENV_PATH $VENV_PATH
+#COPY ./docker/gunicorn_conf.py /gunicorn_conf.py
+
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+COPY ./app /app
 WORKDIR /app
-ENTRYPOINT ["bash", "./docker-entrypoint.sh", "$0 $@"]
-CMD [ "gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config ./gunicorn.conf.py", "polrev.wsgi:application"]
+
+  
+######
+USER polrev
+
+#ENTRYPOINT /docker-entrypoint.sh $0 $@
+#CMD [ "gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config /gunicorn_conf.py", "main:app"]
+
+ENTRYPOINT ["bash", "./docker-entrypoint.sh"]

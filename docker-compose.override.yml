@@ -2,6 +2,9 @@ services:
 
   # Django
   web:
+    build:
+      target: development
+
     links:
       - s3
     env_file: ./config/.dev.env

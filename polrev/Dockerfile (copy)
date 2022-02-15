@@ -1,5 +1,5 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.10.2-slim-bullseye AS python-base
+FROM python:3.10.2-slim-bullseye
 
 # Port used by this container to serve HTTP.
 EXPOSE 8000
@@ -28,9 +28,42 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
   POETRY_CACHE_DIR='/var/cache/pypoetry' \
   PATH="$PATH:/root/.local/bin"
 
+# Install system packages required by Wagtail and Django.
+RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
+  curl \
+  wget \
+  gnupg \
+  build-essential \
+  libpq-dev \
+  libjpeg62-turbo-dev \
+  zlib1g-dev \
+  libwebp-dev \
+  postgresql-client \
+  # Installing `poetry` package manager:
+  # https://github.com/python-poetry/poetry
+  && curl -sSL 'https://install.python-poetry.org' | python - \
+  && poetry --version \
+  && rm -rf /var/lib/apt/lists/*
 
-# Node
-FROM python-base AS python-node-base
+# Install the application server.
+RUN pip install "gunicorn==20.0.4"
+
+RUN mkdir -p /polrev && useradd -d /polrev -u 1000 polrev && chown -R polrev /polrev
+
+COPY --chown=polrev:polrev ./poetry.lock ./pyproject.toml /tmp/
+WORKDIR /tmp
+
+# Project initialization:
+RUN echo "$DJANGO_ENV" && poetry version \
+  && poetry install \
+    $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--no-dev'; fi) \
+    --no-interaction --no-ansi \
+  # Upgrading pip, it is insecure, remove after `pip@21.1`
+  && poetry run pip install -U pip \
+  # Cleaning poetry installation's cache for production:
+  && if [ "$DJANGO_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
+
+######
 ENV NODE_VERSION 17.4.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
@@ -116,53 +149,9 @@ RUN set -ex \
   # smoke test
   && yarn --version
   
-FROM python-node-base as django-base
-
-# Install system packages required by Wagtail and Django.
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
-  curl \
-  wget \
-  gnupg \
-  build-essential \
-  libpq-dev \
-  libjpeg62-turbo-dev \
-  zlib1g-dev \
-  libwebp-dev \
-  postgresql-client \
-  ca-certificates \
-  # Installing `poetry` package manager:
-  # https://github.com/python-poetry/poetry
-  && curl -sSL 'https://install.python-poetry.org' | python - \
-  && poetry --version \
-  && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /polrev && useradd -d /polrev -u 1000 polrev && chown -R polrev /polrev
-
-COPY --chown=polrev:polrev ./poetry.lock ./pyproject.toml /tmp/
-WORKDIR /tmp
-
-# Project initialization:
-RUN echo "$DJANGO_ENV" && poetry version \
-  && poetry install \
-    $(if [ "$DJANGO_ENV" = 'production' ]; then echo '--no-dev'; fi) \
-    --no-interaction --no-ansi \
-  # Upgrading pip, it is insecure, remove after `pip@21.1`
-  && poetry run pip install -U pip \
-  # Cleaning poetry installation's cache for production:
-  && if [ "$DJANGO_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
-
+######
 USER polrev
 
-FROM django-base AS development
-
-ENV DJANGO_SETTINGS_MODULE=polrev.settings.dev
 WORKDIR /app
-ENTRYPOINT ["bash", "./docker-entrypoint.sh", "$0 $@"]
-CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "polrev.wsgi:application"]
 
-FROM django-base AS production
-
-ENV DJANGO_SETTINGS_MODULE=polrev.settings.production
-WORKDIR /app
-ENTRYPOINT ["bash", "./docker-entrypoint.sh", "$0 $@"]
-CMD [ "gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config ./gunicorn.conf.py", "polrev.wsgi:application"]
+ENTRYPOINT ["bash", "./docker-entrypoint.sh"]

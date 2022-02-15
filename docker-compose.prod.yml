@@ -2,6 +2,8 @@ services:
 
   # Django
   web:
+    build:
+      target: production
     env_file: ./config/.prod.env
     restart: always
     labels:
