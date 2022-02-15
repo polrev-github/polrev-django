@@ -33,6 +33,7 @@ django-tz-detect = "^0.3.0"
 tzdata = "^2021.5"
 uvicorn = "^0.17.4"
 gunicorn = "^20.1.0"
+wagtail-autocomplete = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
 pyppeteer = "^0.2.6"

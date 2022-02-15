@@ -6,7 +6,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 from wagtail.contrib.sitemaps.views import sitemap
-
+from wagtailautocomplete.urls.admin import urlpatterns as autocomplete_admin_urls
 from puput import urls as puput_urls
 
 from search import views as search_views
@@ -15,6 +15,8 @@ from search import views as search_views
 from . import monkey_patch
 
 urlpatterns = [
+    re_path(r'^admin/autocomplete/', include(autocomplete_admin_urls)),
+
     path('django-admin/', admin.site.urls),
 
     path('admin/', include(wagtailadmin_urls)),
@@ -49,7 +51,6 @@ urlpatterns = urlpatterns + [
 
     re_path(r'^comments/', include('django_comments_xtd.urls')),
     re_path(r'^tz_detect/', include('tz_detect.urls')),
-    
     path("", include(puput_urls)),
     path("", include(wagtail_urls)),
 

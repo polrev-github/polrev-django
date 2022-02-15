@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'wagtailmarkdown',
     'modelcluster',
     'taggit',
+    'wagtailautocomplete',
 
     'ls.joyous',
     'wagtail.contrib.modeladmin',

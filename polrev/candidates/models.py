@@ -14,6 +14,8 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
 
+from wagtailautocomplete.edit_handlers import AutocompletePanel
+
 from puput.utils import get_image_model_path
 
 class CandidatesPage(Page):
@@ -81,7 +83,8 @@ class CandidatePage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('subtitle', classname="subtitle"),
-        PageChooserPanel('state', 'states.StatePage'),
+        #PageChooserPanel('state', 'states.StatePage'),
+        AutocompletePanel('state'),
         FieldPanel('featured'),
         ImageChooserPanel('header_image'),
         StreamFieldPanel('body', classname="full"),
