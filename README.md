@@ -96,8 +96,10 @@ docker-compose down
 git pull
 docker-compose build web
 poetry shell
+docker-compose up db
 cd polrev
 poetry update
+./manage.py makemigrations
 ./manage.py migrate
 ./manage.py flush --noinput
 ./manage.py loaddata ./dump/db.json
