@@ -20,9 +20,11 @@
 
 
   {% block cal_all %}
+  {% comment %}
   {% block cal_intro %}
   {{ page.intro|richtext }}
   {% endblock cal_intro %}
+  {% endcomment %}
   {% block cal_subtitle %}
   {% endblock cal_subtitle %}
   {% block cal_events %}

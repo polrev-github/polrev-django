@@ -10,19 +10,26 @@
   <div class="joy-title joy-title--page">
     <h1>{{ page.title }}</h1>
   </div>
-  {% endblock event_title %}{% block event_image %}{% if page.image %}
-  <div class="joy-img">
-    {% image page.image width-350 class="joy-img__img" %}
-  </div>{% endif %}{% endblock event_image %}
-  {% block event_who %}{% include "joyous/includes/who.html" with event=page %}{% endblock event_who %}
-  {% block event_when %}{% include "joyous/includes/when.html" with event=page %}{% endblock event_when %}
-  {% block event_where %}{% include "joyous/includes/where.html" with event=page %}{% endblock event_where %}
-  {% block event_details %}<div class="joy-ev-details joy-field">
-    {{ page.details|richtext }}
-  </div>{% endblock event_details %}
+  <div class="row">
+    <div class="col-lg-5 col-md-7">
+      {% endblock event_title %}{% block event_image %}{% if page.image %}
+      <div class="joy-img">
+        {% image page.image width-350 class="joy-img__img" %}
+      </div>{% endif %}{% endblock event_image %}
+    </div>
+    <div class="col-lg-7 col-md-5">
+      {% block event_who %}{% include "joyous/includes/who.html" with event=page %}{% endblock event_who %}
+      {% block event_when %}{% include "joyous/includes/when.html" with event=page %}{% endblock event_when %}
+      {% block event_where %}{% include "joyous/includes/where.html" with event=page %}{% endblock event_where %}
+      {% block event_details %}<div class="joy-ev-details joy-field py-1">
+        {{ page.details|richtext }}
+      </div>{% endblock event_details %}
+    </div>
+  </div>
+
   {% block event_footer %}
   <div class="joy-export">
-    <a href="{{ request.path }}?format=google" target="_blank">{% trans "Google Calendar" %}</a>
+    <a href="{{ request.path }}?format=google" target="_blank"><i class="fas fa-calendar-plus mx-1"></i>{% trans "Google Calendar" %}</a>
     &nbsp;&nbsp;&nbsp;
     <a href="{{ request.path }}?format=ical">{% trans "Export iCal" %}</a>
   </div>

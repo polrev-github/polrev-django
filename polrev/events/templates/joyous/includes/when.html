@@ -1,5 +1,5 @@
 {% load wagtailcore_tags joyous_tags i18n %}
-  <div class="joy-ev-when joy-field">
+  <div class="joy-ev-when joy-field lead py-1">
     {{ event.when }}
   </div>
 {% with event_from_when=event.postponed_from_when %}{% if event_from_when %}
