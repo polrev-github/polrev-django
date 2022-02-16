@@ -1,0 +1,7 @@
+{% extends "joyous/event_base.html" %}
+{% load joyous_tags %}
+
+{% block event_footer %}
+  {% future_exceptions %}
+  {{ block.super }}
+{% endblock %}

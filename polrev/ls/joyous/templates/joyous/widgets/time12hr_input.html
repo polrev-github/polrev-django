@@ -1,0 +1,6 @@
+{% include 'django/forms/widgets/time.html' %}
+<script>
+$(function() {
+    initTime12hrChooser("{{ widget.attrs.id|escapejs }}");
+});
+</script>
