@@ -155,14 +155,12 @@ USER polrev
 
 FROM django-base AS development
 
-ENV DJANGO_SETTINGS_MODULE=polrev.settings.dev
 WORKDIR /app
 ENTRYPOINT ["bash", "./docker-entrypoint.sh", "$0 $@"]
 CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "polrev.wsgi:application"]
 
 FROM django-base AS production
 
-ENV DJANGO_SETTINGS_MODULE=polrev.settings.production
 WORKDIR /app
 ENTRYPOINT ["bash", "./docker-entrypoint.sh", "$0 $@"]
 CMD [ "gunicorn", "--worker-class uvicorn.workers.UvicornWorker", "--config ./gunicorn.conf.py", "polrev.wsgi:application"]

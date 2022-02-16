@@ -2,8 +2,6 @@
 
 set -e
 
-yarn
-yarn build
 # activate our virtual environment here
 #. /opt/pysetup/.venv/bin/activate
 
