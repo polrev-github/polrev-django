@@ -1,0 +1,57 @@
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+
+from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
+
+from .state import StateCandidatePageBase
+from areas.widgets.school_district_widgets import SchoolDistrictChooser
+from offices.widgets import OfficeTypeChooser, SchoolDistrictOfficeChooser
+
+class SchoolDistrictCandidatePage(StateCandidatePageBase):
+
+    class Meta:
+        verbose_name = "School District Candidate"
+
+    district_ref = models.ForeignKey(
+        'areas.SchoolDistrict',
+        on_delete=models.PROTECT,
+        related_name='school_district_candidates',
+    )
+
+    school_district_office_ref = models.ForeignKey(
+        'offices.SchoolDistrictOffice',
+        verbose_name=_('office'),
+        on_delete=models.PROTECT,
+        related_name='school_district_candidates',
+        null=True,
+    )
+
+    office_panels = StateCandidatePageBase.office_panels + [
+        FieldPanel('district_ref', widget=SchoolDistrictChooser(linked_fields={
+            'state_ref': {'id': 'id_state_ref'}
+        })),
+        FieldPanel('office_type_ref', widget=OfficeTypeChooser(linked_fields={
+            'state_ref': {'id': 'id_state_ref'} # TODO:  Unused but keep.  Filter by area?
+        })),
+        FieldPanel('school_district_office_ref', widget=SchoolDistrictOfficeChooser(linked_fields={
+            'state_ref': {'id': 'id_state_ref'},
+            'district_ref': {'id': 'id_district_ref'},
+            'office_type_ref': {'id': 'id_office_type_ref'},
+        })),
+    ]
+
+    edit_handler = TabbedInterface([
+        ObjectList(StateCandidatePageBase.content_panels, heading='Content'),
+        ObjectList(office_panels, heading='Office'),
+        ObjectList(StateCandidatePageBase.promote_panels, heading='Promote'),
+        ObjectList(StateCandidatePageBase.settings_panels, heading='Settings', classname="settings"),
+    ])
+
+    parent_page_types = ['candidates.CandidatesPage']
+    subpage_types = []
+    
+
+    def save(self, *args, **kwargs):
+        self.area_ref = self.district_ref
+        self.office_ref = self.school_district_office_ref
+        super().save(*args, **kwargs)

@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
+    'generic_chooser',
 
     # AllAuth
     'allauth',
@@ -79,11 +80,13 @@ INSTALLED_APPS = [
     'accounts',
     'events',
     'mailer',
-    'states',
-    'candidates',
+
     'volunteers',
     'campaigns',
-    'slack_invite'
+    'slack_invite',
+    'areas',
+    'offices',
+    'candidates',
 ]
 
 MIDDLEWARE = [

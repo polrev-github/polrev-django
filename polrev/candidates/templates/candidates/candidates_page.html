@@ -12,23 +12,32 @@
   </a>
 
   </p>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="d-grid gap-3">
     {% for candidate in candidates %}
-    <div class="col">
-      <div class="card" >
-        {% image candidate.header_image original as header_image %}
-        <img src="{{header_image.url}}" class="card-img-top" alt="..." style="height:50vh; object-fit: cover;">
-        <div class="card-body">
-          <h4 class="card-title">{{candidate.title}}</h4>
-          <p class="card-text">{{candidate.subtitle}}</p>
-
-          <a href="{{candidate.facebook}}"> <i class="fab fa-facebook fa-lg"></i></a>
-          <a href="{{candidate.twitter}}"><i class="fab fa-twitter fa-lg"></i></a>
-          <a href="{{candidate.instagram}}"><i class="fab fa-instagram fa-lg"></i></a>
-          <a href="{{candidate.website}}"><i class="fas fa-link fa-lg"></i></a>
-        </div>
+    <div class="card">
+      <div class="row no-gutters">
+          <div class="col-auto">
+            {% image candidate.image original as image %}
+            <img src="{{image.url}}" class="card-img-top" alt="..." style="height:25vh; object-fit: cover;">
+          </div>
+          <div class="col ">
+              <div class="card-body card-block px-2">
+                <h4 class="card-title">{{candidate.title}}</h4>
+                <p class="card-subtitle">{{candidate.office_type_ref.title}}</p>
+                <p class="card-subtitle"><a href={{candidate.office_ref.website}}>{{candidate.area_ref.title}}</a></p>
+                <p class="card-text"></p>
+      
+              </div>
+          </div>
+      </div>
+      <div class="card-footer w-100 text-muted">
+        <a href="{{candidate.facebook}}"> <i class="fab fa-facebook fa-lg"></i></a>
+        <a href="{{candidate.twitter}}"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="{{candidate.instagram}}"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="{{candidate.website}}"><i class="fas fa-link fa-lg"></i></a>
       </div>
     </div>
+
     {% endfor %}
   </div>
 </div>
