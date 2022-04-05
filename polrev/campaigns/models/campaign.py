@@ -3,12 +3,15 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from modelcluster.fields import ParentalManyToManyField
+
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 
 from wagtail.admin.edit_handlers import StreamFieldPanel
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 from wagtail.core.blocks import RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
@@ -144,9 +147,25 @@ class CampaignPage(Page):
     ballotpedia = models.URLField("ballotpedia", blank=True)
     wikipedia = models.URLField("wikipedia", blank=True)
 
+    # Parties and Endorsements
+    parties = ParentalManyToManyField(
+        'parties.Party',
+        blank=True,
+        related_name='campaigns'
+    )
+
+    endorsements = ParentalManyToManyField(
+        'parties.Party',
+        blank=True,
+        related_name='endorsed_campaigns'
+    )
+
     office_panels = []
 
     content_panels = Page.content_panels + [
+        AutocompletePanel('parties', target_model='parties.Party'),
+        AutocompletePanel('endorsements', target_model='parties.Party'),
+
         ImageChooserPanel('image'),
         FieldPanel('incumbent'),
         FieldPanel('featured'),

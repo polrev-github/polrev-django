@@ -39,6 +39,8 @@ INSTALLED_APPS = [
 
     "django_bootstrap5",
 
+    "colorfield",
+
     "captcha",
     "wagtailcaptcha",
 
@@ -84,6 +86,7 @@ INSTALLED_APPS = [
     'slack_invite',
     'areas',
     'offices',
+    'parties',
 
     # Portals
     'portals.volunteer',
