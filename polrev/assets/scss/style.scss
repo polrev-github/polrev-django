@@ -62,9 +62,6 @@ figcaption {
 #site-header-main {
   left: 0;
   right: 0;
-}
-
-#site-header-main {
   display: inline-block;
   position: absolute;
   top: 0;
@@ -156,9 +153,12 @@ footer {
   .navbar-collapse {
     background-color: #04243E;
   }  
-  #masthead .navbar {
+  #masthead #site-navbar-home {
     display: inline-block;
     position: absolute !important;
+  }
+  #masthead #site-navbar {
+    display: inline-block;
   }  
 }
 

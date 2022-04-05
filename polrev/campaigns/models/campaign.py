@@ -1,11 +1,12 @@
 import datetime
+import us
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from modelcluster.fields import ParentalManyToManyField
-
 from wagtail.core.models import Page
+from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core.fields import StreamField
 
 from wagtail.admin.edit_handlers import StreamFieldPanel
@@ -22,7 +23,7 @@ from puput.utils import get_image_model_path
 
 import us
 
-class CampaignsPage(Page):
+class CampaignsPage(RoutablePageMixin, Page):
     body = StreamField([
         ('paragraph', RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -39,12 +40,34 @@ class CampaignsPage(Page):
         'campaigns.YearPage',
     ]
 
+    @route(r'^$') # will override the default Page serving mechanism
+    def current_campaigns(self, request):
+        #events = CampaignPage.objects.live().filter(event_date__gte=datetime.date.today())
+        campaigns = CampaignPage.objects.order_by('state_fips')
+
+        return self.render(request, context_overrides={
+            'title': "Current campaigns",
+            'campaigns': campaigns,
+        })
+
+    @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
+    def category_view(self, request, state_slug):
+        state = us.states.lookup(state_slug.capitalize(), field='name')
+        state_fips = state.fips
+        campaigns = CampaignPage.objects.filter(state_fips=state_fips)
+
+        return self.render(request, context_overrides={
+            'title': "State campaigns",
+            'campaigns': campaigns,
+        })
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(
             request, *args, **kwargs)
         #context['campaigns'] = CampaignPage.objects.all()
         #context['campaigns'] = CampaignPage.objects.order_by('state__title')
         context['campaigns'] = CampaignPage.objects.order_by('state_fips')
+        context['states'] = us.states.STATES
         return context
 
 
