@@ -5,7 +5,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 
 from areas.models.area import Area
 
-from areas.widgets import CountyChooser
+from areas.widgets.county_widgets import CountyChooser
 
 class CountyCouncilDistrict(Area):
     state_ref = models.ForeignKey(

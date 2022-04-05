@@ -3,7 +3,7 @@ from django.db import models
 from wagtail.admin.edit_handlers import FieldPanel
 
 from .state import StateOfficeBase
-from areas.widgets import CongressionalDistrictChooser
+from areas.widgets.congressional_district_widgets import CongressionalDistrictChooser
 
 class UsHouseOffice(StateOfficeBase):
     district_ref = models.ForeignKey(

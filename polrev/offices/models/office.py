@@ -8,23 +8,6 @@ from model_utils.managers import InheritanceManager
 
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
 
-class OfficeType(models.Model):
-    TYPE_US_SENATE = 1
-    TYPE_US_HOUSE = 2
-    TYPE_STATE_SENATE = 3
-    TYPE_STATE_HOUSE = 4
-    
-    class Meta:
-        ordering = ['title']
-
-    title = models.CharField(
-        verbose_name=_('title'),
-        max_length=256,
-        help_text=_("Example: U.S. Senate, State House, Mayor, City Council")
-    )
-
-    def __str__(self):
-        return self.title
 
 class Office(models.Model):
     STATE_CHOICES = list = [(k, v) for k, v in us.states.mapping('fips', 'name').items()]

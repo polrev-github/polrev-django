@@ -1,3 +1,4 @@
+from .office_type import *
 from .office import *
 from .state import *
 from .us_senate import *

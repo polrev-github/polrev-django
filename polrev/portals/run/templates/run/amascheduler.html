@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<style>
+    iframe {
+      width: 100%;
+      height: calc(2000px - 20vw);
+      border:0;
+    }
+  </style>
+  <iframe id="iframe" scrolling='yes' src="https://outlook.office365.com/owa/calendar/PoliticalRevolutionAMAScheduler@political-revolution.com/bookings/"></iframe>
+{% endblock %}

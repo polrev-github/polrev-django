@@ -4,7 +4,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 from .state import StateOfficeBase
-from areas.widgets import StateHouseDistrictChooser
+from areas.widgets.legislate_district_widgets import StateHouseDistrictChooser
 
 class StateHouseOffice(StateOfficeBase):
     district_ref = models.ForeignKey(

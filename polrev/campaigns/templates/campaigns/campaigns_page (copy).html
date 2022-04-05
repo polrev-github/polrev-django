@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+{% load shuffle %}
+
+{% block content %}
+<div>
+  <h1>Campaigns</h1>
+  <p>
+  <a class="btn btn-primary my-1" style="font-weight: 600; border-radius: 9999px;" href="https://forms.office.com/Pages/ResponsePage.aspx?id=2liv4n7UtE-SPRsQbA3VKgtxitoffcRHgHXXl6zlLZhUMUgyVEMxNEhBU05YWFlDVTkzMkhITUJGNC4u">
+    Endorse a Campaign
+    <i class="fas fa-chevron-right"></i>
+  </a>
+
+  </p>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for campaign in campaigns %}
+    <div class="col">
+      <div class="card" >
+        {% image campaign.image original as image %}
+        <img src="{{image.url}}" class="card-img-top" alt="..." style="height:50vh; object-fit: cover;">
+        <div class="card-body">
+          <h4 class="card-title">{{campaign.title}}</h4>
+          <p class="card-subtitle">{{campaign.office_type_ref.title}}</p>
+          <p class="card-subtitle">{{campaign.area_ref.title}}</p>
+          <p class="card-text"></p>
+
+          <a href="{{campaign.facebook}}"> <i class="fab fa-facebook fa-lg"></i></a>
+          <a href="{{campaign.twitter}}"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="{{campaign.instagram}}"><i class="fab fa-instagram fa-lg"></i></a>
+          <a href="{{campaign.website}}"><i class="fas fa-link fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

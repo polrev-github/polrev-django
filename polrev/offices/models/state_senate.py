@@ -4,7 +4,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
 from .state import StateOfficeBase
-from areas.widgets import StateSenateDistrictChooser
+from areas.widgets.legislate_district_widgets import StateSenateDistrictChooser
 
 class StateSenateOffice(StateOfficeBase):
 

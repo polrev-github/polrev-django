@@ -3,7 +3,7 @@ from django.db import models
 from wagtail.admin.edit_handlers import FieldPanel
 
 from .state import StateOfficeBase
-from areas.widgets import CountyChooser
+from areas.widgets.county_widgets import CountyChooser
 
 class CountyOffice(StateOfficeBase):
 

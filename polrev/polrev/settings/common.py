@@ -80,13 +80,14 @@ INSTALLED_APPS = [
     'accounts',
     'events',
     'mailer',
-
-    'volunteers',
     'campaigns',
     'slack_invite',
     'areas',
     'offices',
-    'candidates',
+
+    # Portals
+    'portals.volunteer',
+    'portals.run',
 ]
 
 MIDDLEWARE = [
