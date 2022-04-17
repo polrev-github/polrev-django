@@ -17,7 +17,7 @@ class StateSenateOfficeAdmin(ModelAdmin):
     search_fields = ('title',)
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(StateSenateOfficeAdmin)
+#modeladmin_register(StateSenateOfficeAdmin)
 
 
 @hooks.register('register_admin_viewset')

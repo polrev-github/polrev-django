@@ -45,7 +45,7 @@ class EntryAbstract(models.Model):
         verbose_name=_('excerpt'),
         blank=True,
         help_text=_("Entry excerpt to be displayed on entries list. "
-                    "If this field is not filled, a truncate version of body text will be used.")
+                    "If this field is not filled, a truncated version of body text will be used.")
     )
     num_comments = models.IntegerField(default=0, editable=False)
     featured = models.BooleanField(default=False)

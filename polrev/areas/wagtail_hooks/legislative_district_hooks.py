@@ -17,7 +17,7 @@ class StateSenateDistrictAdmin(ModelAdmin):
     search_fields = ('title',)
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(StateSenateDistrictAdmin)
+#modeladmin_register(StateSenateDistrictAdmin)
 
 class StateHouseDistrictAdmin(ModelAdmin):
     model = StateHouseDistrict
@@ -31,7 +31,7 @@ class StateHouseDistrictAdmin(ModelAdmin):
     search_fields = ('title',)
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(StateHouseDistrictAdmin)
+#modeladmin_register(StateHouseDistrictAdmin)
 
 @hooks.register('register_admin_viewset')
 def register_state_senate_district_chooser_viewset():

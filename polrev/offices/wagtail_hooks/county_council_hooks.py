@@ -18,7 +18,7 @@ class CountyCouncilOfficeAdmin(ModelAdmin):
     autocomplete_fields = ['county_ref']
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(CountyCouncilOfficeAdmin)
+#modeladmin_register(CountyCouncilOfficeAdmin)
 
 @hooks.register('register_admin_viewset')
 def register_county_chooser_viewset():

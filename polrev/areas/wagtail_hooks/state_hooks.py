@@ -15,4 +15,4 @@ class StateAdmin(ModelAdmin):
     search_fields = ('title', 'state_usps')
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(StateAdmin)
+#modeladmin_register(StateAdmin)

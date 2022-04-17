@@ -32,4 +32,5 @@ class LocalCouncilDistrict(Area):
     def save(self, *args, **kwargs):
         self.kind = self.KIND_LOCAL_COUNCIL_DISTRICT
         #self.title = f"{self.state_ref.name} {self.name}"
+        self.state_fips = self.state_ref.state_fips
         super().save(*args, **kwargs)

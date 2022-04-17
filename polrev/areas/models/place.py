@@ -33,5 +33,6 @@ class Place(Area):
     ]
 
     def save(self, *args, **kwargs):
+        self.state_fips = self.state_ref.state_fips
         self.title = f"{self.name}, {self.state_ref.name}"
         super().save(*args, **kwargs)

@@ -9,7 +9,7 @@ from wagtail.core.models import Page
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core.fields import StreamField
 
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.admin.edit_handlers import StreamFieldPanel, RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtailautocomplete.edit_handlers import AutocompletePanel
@@ -144,6 +144,13 @@ class CampaignPage(Page):
         ('markdown', MarkdownBlock(icon="code")),
         ('embed', EmbedBlock(max_width=800, max_height=400))
     ], blank=True)
+    
+    excerpt = RichTextField(
+        verbose_name=_('excerpt'),
+        blank=True,
+        help_text=_("Entry excerpt to be displayed on entries list. "
+                    "If this field is not filled, a truncated version of body text will be used.")
+    )
 
     image = models.ForeignKey(
         get_image_model_path(),
@@ -171,12 +178,13 @@ class CampaignPage(Page):
     wikipedia = models.URLField("wikipedia", blank=True)
 
     # Parties and Endorsements
+    '''
     parties = ParentalManyToManyField(
         'parties.Party',
         blank=True,
         related_name='campaigns'
     )
-
+    '''
     endorsements = ParentalManyToManyField(
         'parties.Party',
         blank=True,
@@ -186,14 +194,14 @@ class CampaignPage(Page):
     office_panels = []
 
     content_panels = Page.content_panels + [
-        AutocompletePanel('parties', target_model='parties.Party'),
+        #AutocompletePanel('parties', target_model='parties.Party'),
         AutocompletePanel('endorsements', target_model='parties.Party'),
 
         ImageChooserPanel('image'),
         FieldPanel('incumbent'),
         FieldPanel('featured'),
         StreamFieldPanel('body', classname="full"),
-
+        FieldPanel('excerpt'),
         MultiFieldPanel(
             [
                 FieldPanel('facebook'),

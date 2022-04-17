@@ -17,7 +17,7 @@ class OfficeTypeAdmin(ModelAdmin):
     search_fields = ('title',)
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(OfficeTypeAdmin)
+#modeladmin_register(OfficeTypeAdmin)
 
 @hooks.register('register_admin_viewset')
 def register_office_type_chooser_viewset():

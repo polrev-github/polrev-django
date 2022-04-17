@@ -45,5 +45,6 @@ class StateHouseDistrict(LegislativeDistrict):
     def save(self, *args, **kwargs):
         self.kind = self.KIND_STATE_HOUSE_DISTRICT
         self.name = f"State House District {self.district_num}"
+        self.state_fips = self.state_ref.state_fips
         self.title = f"{self.state_ref.name} {self.name}"
         super().save(*args, **kwargs)

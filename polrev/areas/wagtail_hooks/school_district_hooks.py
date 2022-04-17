@@ -19,7 +19,7 @@ class SchoolDistrictAdmin(ModelAdmin):
     search_fields = ('title',)
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(SchoolDistrictAdmin)
+#modeladmin_register(SchoolDistrictAdmin)
 
 @hooks.register('register_admin_viewset')
 def register_place_chooser_viewset():

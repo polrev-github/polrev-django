@@ -18,7 +18,7 @@ class CountyCouncilDistrictAdmin(ModelAdmin):
     search_fields = ('title',)
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
-modeladmin_register(CountyCouncilDistrictAdmin)
+#modeladmin_register(CountyCouncilDistrictAdmin)
 
 @hooks.register('register_admin_viewset')
 def register_county_council_district_chooser_viewset():

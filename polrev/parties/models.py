@@ -10,6 +10,7 @@ from colorfield.fields import ColorField
 class Party(ClusterableModel):
 
     class Meta:
+        verbose_name_plural = 'Parties'
         ordering = ['title']
 
     title = models.TextField(

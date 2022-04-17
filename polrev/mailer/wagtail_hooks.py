@@ -25,7 +25,7 @@ class NewsletterAdmin(CampaignAdmin):
     campaign = Newsletter
     menu_label = 'Newsletter'
     menu_icon = 'mail'
-    menu_order = 200
+    menu_order = 1000
     #form_view_extra_js = ['birdsong_fix/js/preview_campaign.js']
     form_view_extra_js = None
     #form_view_extra_css = ['birdsong_fix/css/campaign-editor.css']
