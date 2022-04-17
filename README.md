@@ -52,21 +52,11 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
     -e contenttypes -e auth.permission  \
     -e wagtailcore.groupcollectionpermission \
     -e wagtailcore.grouppagepermission -e wagtailimages.rendition \
-    -e sessions -o ./dump/db.json
-```
-
-### Compress
-```bash
--o ./dump/db.json.gz
+    -e sessions -o ./dump/db.json.gz
 ```
 
 ## Load Data
 
-```bash
-./manage.py loaddata ./dump/db.json
-```
-
-### Uncompress
 ```bash
 ./manage.py loaddata ./dump/db.json.gz
 ```
