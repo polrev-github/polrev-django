@@ -95,8 +95,8 @@ Might want to do a poetry update before you push.
 docker-compose down
 git pull
 docker-compose build web
-poetry shell
 docker-compose up db
+poetry shell
 cd polrev
 poetry update
 ./manage.py makemigrations

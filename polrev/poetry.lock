@@ -1,6 +1,6 @@
 [[package]]
 name = "anyascii"
-version = "0.3.0"
+version = "0.3.1"
 description = "Unicode to ASCII transliteration"
 category = "main"
 optional = false
@@ -55,14 +55,14 @@ webencodings = "*"
 
 [[package]]
 name = "boto3"
-version = "1.21.34"
+version = "1.21.42"
 description = "The AWS SDK for Python"
 category = "main"
 optional = false
 python-versions = ">= 3.6"
 
 [package.dependencies]
-botocore = ">=1.24.34,<1.25.0"
+botocore = ">=1.24.42,<1.25.0"
 jmespath = ">=0.7.1,<2.0.0"
 s3transfer = ">=0.5.0,<0.6.0"
 
@@ -71,7 +71,7 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 
 [[package]]
 name = "botocore"
-version = "1.24.34"
+version = "1.24.42"
 description = "Low-level, data-driven core of boto 3."
 category = "main"
 optional = false
@@ -202,7 +202,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
 name = "django"
-version = "3.2.12"
+version = "3.2.13"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -291,7 +291,7 @@ Django = ">=1.11"
 
 [[package]]
 name = "django-comments-xtd"
-version = "2.9.5"
+version = "2.9.6"
 description = "Django Comments Framework extension app with thread support, follow up notifications and email confirmations."
 category = "main"
 optional = false
@@ -299,14 +299,14 @@ python-versions = "*"
 
 [package.dependencies]
 Django = ">=3,<5"
-django-contrib-comments = ">=2.1,<2.2"
+django-contrib-comments = ">=2.2,<2.3"
 djangorestframework = ">=3.12,<3.14"
 docutils = "*"
 six = "*"
 
 [[package]]
 name = "django-contrib-comments"
-version = "2.1.0"
+version = "2.2.0"
 description = "The code formerly known as django.contrib.comments."
 category = "main"
 optional = false
@@ -836,14 +836,14 @@ python-versions = "*"
 
 [[package]]
 name = "pyparsing"
-version = "3.0.7"
-description = "Python parsing module"
+version = "3.0.8"
+description = "pyparsing module - Classes and methods to define and execute parsing grammars"
 category = "main"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.6.8"
 
 [package.extras]
-diagrams = ["jinja2", "railroad-diagrams"]
+diagrams = ["railroad-diagrams", "jinja2"]
 
 [[package]]
 name = "pyppeteer"
@@ -963,7 +963,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "soupsieve"
-version = "2.3.1"
+version = "2.3.2.post1"
 description = "A modern CSS selector implementation for Beautiful Soup."
 category = "main"
 optional = false
@@ -979,7 +979,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "tablib"
-version = "3.2.0"
+version = "3.2.1"
 description = "Format agnostic tabular data library (XLS, JSON, YAML, CSV)"
 category = "main"
 optional = false
@@ -1078,7 +1078,7 @@ standard = ["websockets (>=10.0)", "httptools (>=0.4.0)", "watchgod (>=0.6)", "p
 
 [[package]]
 name = "wagtail"
-version = "2.16.1"
+version = "2.16.2"
 description = "A Django content management system."
 category = "main"
 optional = false
@@ -1091,7 +1091,7 @@ Django = ">=3.2,<4.1"
 django-filter = ">=2.2,<22"
 django-modelcluster = ">=5.2,<6.0"
 django-taggit = ">=2.0,<3.0"
-django-treebeard = ">=4.2.0,<4.5 || >4.5,<5.0"
+django-treebeard = ">=4.5.1,<5.0"
 djangorestframework = ">=3.11.1,<4.0"
 draftjs-exporter = ">=2.1.5,<3.0"
 html5lib = ">=0.999,<2"
@@ -1105,7 +1105,7 @@ xlsxwriter = ">=1.2.8,<4.0"
 
 [package.extras]
 docs = ["pyenchant (>=3.1.1,<4)", "sphinxcontrib-spelling (>=5.4.0,<6)", "Sphinx (>=1.5.2)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (==5.0.4)", "recommonmark (>=0.7.1)"]
-testing = ["python-dateutil (>=2.7)", "pytz (>=2014.7)", "elasticsearch (>=5.0,<6.0)", "Jinja2 (>=2.11,<3.0)", "boto3 (>=1.16,<1.17)", "freezegun (>=0.3.8)", "openpyxl (>=2.6.4)", "Unidecode (>=0.04.14,<2.0)", "azure-mgmt-cdn (>=5.1,<6.0)", "azure-mgmt-frontdoor (>=0.3,<0.4)", "coverage (>=3.7.0)", "flake8 (>=3.6.0)", "isort (==5.6.4)", "flake8-blind-except (==0.1.1)", "flake8-print (==2.0.2)", "doc8 (==0.8.1)", "jinjalint (>=0.5)", "docutils (==0.15)", "polib (>=1.1,<2.0)"]
+testing = ["python-dateutil (>=2.7)", "pytz (>=2014.7)", "elasticsearch (>=5.0,<6.0)", "Jinja2 (>=3.0,<3.1)", "boto3 (>=1.16,<1.17)", "freezegun (>=0.3.8)", "openpyxl (>=2.6.4)", "Unidecode (>=0.04.14,<2.0)", "azure-mgmt-cdn (>=5.1,<6.0)", "azure-mgmt-frontdoor (>=0.3,<0.4)", "coverage (>=3.7.0)", "flake8 (>=3.6.0)", "isort (==5.6.4)", "flake8-blind-except (==0.1.1)", "flake8-print (==2.0.2)", "doc8 (==0.8.1)", "jinjalint (>=0.5)", "docutils (==0.15)", "polib (>=1.1,<2.0)"]
 
 [[package]]
 name = "wagtail-autocomplete"
@@ -1247,8 +1247,8 @@ content-hash = "a88c9f0bcb490632b83f9781f66122d21d9c54fa98f8eb223a0b36fdad7e5171
 
 [metadata.files]
 anyascii = [
-    {file = "anyascii-0.3.0-py3-none-any.whl", hash = "sha256:68f6917fe5b22caf7dde8551b838e5e17d5e3c96c55734485699bd03ad92237f"},
-    {file = "anyascii-0.3.0.tar.gz", hash = "sha256:24f27431fb64c6c93a33125fb66f8cba007a5262bc1faabeafeda5f4bb70b593"},
+    {file = "anyascii-0.3.1-py3-none-any.whl", hash = "sha256:8707d3185017435933360462a65e2c70a4818490745804f38a5ca55e59eb56a0"},
+    {file = "anyascii-0.3.1.tar.gz", hash = "sha256:dedf57728206e286c91eed7c759505a5e45c8cd01367dd40c2f7248bb15c11f6"},
 ]
 appdirs = [
     {file = "appdirs-1.4.4-py2.py3-none-any.whl", hash = "sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"},
@@ -1268,12 +1268,12 @@ bleach = [
     {file = "bleach-3.3.1.tar.gz", hash = "sha256:306483a5a9795474160ad57fce3ddd1b50551e981eed8e15a582d34cef28aafa"},
 ]
 boto3 = [
-    {file = "boto3-1.21.34-py3-none-any.whl", hash = "sha256:9d2175ad0f5de587473f20b062b1ef462d1e5ee547bb22bdd36e28442823e0a9"},
-    {file = "boto3-1.21.34.tar.gz", hash = "sha256:6cbc3aae70af5f35869d7b2f114cc953edf925231febf892d609682b2ba3f9f0"},
+    {file = "boto3-1.21.42-py3-none-any.whl", hash = "sha256:895fb88c69be78f82cfee58a79c97a3ad8d4a2a1209041a411d7d6b9fc5393e4"},
+    {file = "boto3-1.21.42.tar.gz", hash = "sha256:bcb541175a7d190dd919a0af0e807ee6e9d26f135551e741b10d94343f2d7588"},
 ]
 botocore = [
-    {file = "botocore-1.24.34-py3-none-any.whl", hash = "sha256:4402900838fad0c46c78f16a497709039f10e945c6ef1f0df5d9a98c80f1563b"},
-    {file = "botocore-1.24.34.tar.gz", hash = "sha256:ec849864a6791c04ac6c52539dae34d53856cd32eb7e5481a3465aab7bd93555"},
+    {file = "botocore-1.24.42-py3-none-any.whl", hash = "sha256:14aee41c8bf59d2dd2d89e8751fa37d3c95dcb92707d1966aa02697e914c1417"},
+    {file = "botocore-1.24.42.tar.gz", hash = "sha256:a2baa9484bbaee96ef312c049b8e360badcab58329e487b57567644a571b5f4a"},
 ]
 certifi = [
     {file = "certifi-2021.10.8-py2.py3-none-any.whl", hash = "sha256:d62a0163eb4c2344ac042ab2bdf75399a71a2d8c7d47eac2e2ee91b9d6339569"},
@@ -1382,8 +1382,8 @@ defusedxml = [
     {file = "defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"},
 ]
 django = [
-    {file = "Django-3.2.12-py3-none-any.whl", hash = "sha256:9b06c289f9ba3a8abea16c9c9505f25107809fb933676f6c891ded270039d965"},
-    {file = "Django-3.2.12.tar.gz", hash = "sha256:9772e6935703e59e993960832d66a614cf0233a1c5123bc6224ecc6ad69e41e2"},
+    {file = "Django-3.2.13-py3-none-any.whl", hash = "sha256:b896ca61edc079eb6bbaa15cf6071eb69d6aac08cce5211583cfb41515644fdf"},
+    {file = "Django-3.2.13.tar.gz", hash = "sha256:6d93497a0a9bf6ba0e0b1a29cccdc40efbfc76297255b1309b3a884a688ec4b6"},
 ]
 django-allauth = [
     {file = "django-allauth-0.47.0.tar.gz", hash = "sha256:2bcf09d4c6e672620981d283f555d643982ac066b71f8947dbd81882a1d7c5e8"},
@@ -1408,12 +1408,12 @@ django-colorful = [
     {file = "django_colorful-1.3-py2.py3-none-any.whl", hash = "sha256:49d3feefdabdf6a22931c12ce1ed0cbb4596e7754e66bd55c0f362c0a369e5cb"},
 ]
 django-comments-xtd = [
-    {file = "django-comments-xtd-2.9.5.tar.gz", hash = "sha256:b03cd8c342714b95b98d8626c7198363acc82d5130aa4cfcaf3565e3af90c3d9"},
-    {file = "django_comments_xtd-2.9.5-py3-none-any.whl", hash = "sha256:edca69792cd5cfe0d1074c0dfbe14aa8c4d53c0c7fbac50bd7e15c92976f3bd6"},
+    {file = "django-comments-xtd-2.9.6.tar.gz", hash = "sha256:3c06d68d9167dcbc2879d4437f53da6164c3815d03efeb8bc701a01c6ca90848"},
+    {file = "django_comments_xtd-2.9.6-py3-none-any.whl", hash = "sha256:d638e432523472a85c781d3b54bbc1a1b04234b566c7f5484e2bde11c516f083"},
 ]
 django-contrib-comments = [
-    {file = "django-contrib-comments-2.1.0.tar.gz", hash = "sha256:d82f1d04690550df026553053903deec0c52dc54212e1b79241b08f0355cff2c"},
-    {file = "django_contrib_comments-2.1.0-py3-none-any.whl", hash = "sha256:e02c7341ea1f4bcdfa347851dbf5e632d3e591d84b4f77de2f90b93398897f3c"},
+    {file = "django-contrib-comments-2.2.0.tar.gz", hash = "sha256:48de00f15677e016a216aeff205d6e00e4391c9a5702136c64119c472b7356da"},
+    {file = "django_contrib_comments-2.2.0-py3-none-any.whl", hash = "sha256:2ca79060bbc8fc5b636981ef6e50f35ab83649af75fc1be47bf770636be3271c"},
 ]
 django-cors-headers = [
     {file = "django-cors-headers-3.11.0.tar.gz", hash = "sha256:eb98389bf7a2afc5d374806af4a9149697e3a6955b5a2dc2bf049f7d33647456"},
@@ -1742,8 +1742,8 @@ pymeeus = [
     {file = "PyMeeus-0.5.11.tar.gz", hash = "sha256:bb9d670818d8b0594317b48a7dadea02a0594e5344263bf2054e1a011c8fed55"},
 ]
 pyparsing = [
-    {file = "pyparsing-3.0.7-py3-none-any.whl", hash = "sha256:a6c06a88f252e6c322f65faf8f418b16213b51bdfaece0524c1c1bc30c63c484"},
-    {file = "pyparsing-3.0.7.tar.gz", hash = "sha256:18ee9022775d270c55187733956460083db60b37d0d0fb357445f3094eed3eea"},
+    {file = "pyparsing-3.0.8-py3-none-any.whl", hash = "sha256:ef7b523f6356f763771559412c0d7134753f037822dad1b16945b7b846f7ad06"},
+    {file = "pyparsing-3.0.8.tar.gz", hash = "sha256:7bf433498c016c4314268d95df76c81b842a4cb2b276fa3312cfb1e1d85f6954"},
 ]
 pyppeteer = [
     {file = "pyppeteer-0.2.6-py3-none-any.whl", hash = "sha256:85adde940cc96820725db59cbdb13384aefd0dd043858cfa4f1c086c0f9e4137"},
@@ -1782,16 +1782,16 @@ six = [
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
 soupsieve = [
-    {file = "soupsieve-2.3.1-py3-none-any.whl", hash = "sha256:1a3cca2617c6b38c0343ed661b1fa5de5637f257d4fe22bd9f1338010a1efefb"},
-    {file = "soupsieve-2.3.1.tar.gz", hash = "sha256:b8d49b1cd4f037c7082a9683dfa1801aa2597fb11c3a1155b7a5b94829b4f1f9"},
+    {file = "soupsieve-2.3.2.post1-py3-none-any.whl", hash = "sha256:3b2503d3c7084a42b1ebd08116e5f81aadfaea95863628c80a3b774a11b7c759"},
+    {file = "soupsieve-2.3.2.post1.tar.gz", hash = "sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d"},
 ]
 sqlparse = [
     {file = "sqlparse-0.4.2-py3-none-any.whl", hash = "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"},
     {file = "sqlparse-0.4.2.tar.gz", hash = "sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae"},
 ]
 tablib = [
-    {file = "tablib-3.2.0-py3-none-any.whl", hash = "sha256:1ba12da7b0b17e33f5997fb1bc8ed560aae3535f5892ae5e5c01a056c47d4d78"},
-    {file = "tablib-3.2.0.tar.gz", hash = "sha256:12d8686454c721de88d8ca5adf07e1f419ef6dbcecedf65e8950d4a329daf3a0"},
+    {file = "tablib-3.2.1-py3-none-any.whl", hash = "sha256:870d7e688f738531a14937a055e8bba404fbc388e77d4d500b2c904075d1019c"},
+    {file = "tablib-3.2.1.tar.gz", hash = "sha256:a57f2770b8c225febec1cb1e65012a69cf30dd28be810e0ff98d024768c7d0f1"},
 ]
 telepath = [
     {file = "telepath-0.2-py35-none-any.whl", hash = "sha256:801615094d3d964e178183099bf04020f4ff9c84ec43945d40b096df0a5767ee"},
@@ -1817,8 +1817,8 @@ uvicorn = [
     {file = "uvicorn-0.17.6.tar.gz", hash = "sha256:5180f9d059611747d841a4a4c4ab675edf54c8489e97f96d0583ee90ac3bfc23"},
 ]
 wagtail = [
-    {file = "wagtail-2.16.1-py3-none-any.whl", hash = "sha256:129bb91c422e5c2b3603ebc67e9c392541cb564e55a5b864881905ca246a2c4e"},
-    {file = "wagtail-2.16.1.tar.gz", hash = "sha256:53dbd62a93da97c4ef6982652a103ab9be5bfe03f34cf5bc796c5d716b9020e8"},
+    {file = "wagtail-2.16.2-py3-none-any.whl", hash = "sha256:d48ea4d45d09f8482a1b4632e0dca1aad99489cc26386f2af32b306e014832ba"},
+    {file = "wagtail-2.16.2.tar.gz", hash = "sha256:ee23dc1ba39d4785d20acc95274b29dbcf83f5d9fd670555f541f2a88eec9daa"},
 ]
 wagtail-autocomplete = [
     {file = "wagtail-autocomplete-0.7.0.tar.gz", hash = "sha256:69d4b72407532781014c9766a57977eb56f16bb1ad97a0e9133d2c67383e4596"},
