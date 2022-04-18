@@ -33,7 +33,8 @@ class StateSenateCampaignPage(StateCampaignPageBase):
         })),
         FieldPanel('state_senate_office_ref', widget=StateSenateOfficeChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'},
-            'district_ref': {'id': 'id_district_ref'}
+            'district_ref': {'id': 'id_district_ref'},
+            'office_type': {'title': 'State Senate'}
         })),
     ]
 

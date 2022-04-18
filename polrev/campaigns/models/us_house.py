@@ -9,6 +9,9 @@ from areas.widgets.congressional_district_widgets import CongressionalDistrictCh
 from offices.widgets import UsHouseOfficeChooser
 
 class UsHouseCampaignPage(StateCampaignPageBase):
+    class Meta:
+        verbose_name = "U.S. House Campaign"
+
     district_ref = models.ForeignKey(
         'areas.CongressionalDistrict',
         verbose_name=_('district'),
@@ -30,7 +33,8 @@ class UsHouseCampaignPage(StateCampaignPageBase):
         })),
         FieldPanel('us_house_office_ref', widget=UsHouseOfficeChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'},
-            'district_ref': {'id': 'id_district_ref'}
+            'district_ref': {'id': 'id_district_ref'},
+            'office_type': {'title': 'U.S. House'}
         })),
     ]
 
@@ -49,6 +53,3 @@ class UsHouseCampaignPage(StateCampaignPageBase):
         self.office_ref = self.us_house_office_ref
         self.office_type_ref = self.office_ref.type_ref
         super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "US House Campaign"

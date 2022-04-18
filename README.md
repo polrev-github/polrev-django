@@ -89,7 +89,15 @@ sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/b
 
 ## Generic Production Update Procedure
 
-Might want to do a poetry update before you push.
+### Development
+
+```
+poetry update
+./manage.py makemigrations
+git push
+```
+
+### Production
 
 ```
 docker-compose down
@@ -99,10 +107,9 @@ docker-compose up db
 poetry shell
 cd polrev
 poetry update
-./manage.py makemigrations
 ./manage.py migrate
 ./manage.py flush --noinput
-./manage.py loaddata ./dump/db.json
+./manage.py loaddata ./dump/db.json.gz
 cd ..
 docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ```
@@ -110,4 +117,32 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 ## Postgres
 ```
 psql -U polrev polrev_dev
+```
+
+## [prodrigestivill/postgres-backup-local](https://hub.docker.com/r/prodrigestivill/postgres-backup-local)
+### Backup
+```
+docker run --rm -v "$PWD:/backups" -u "$(id -u):$(id -g)" -e POSTGRES_HOST=db -e POSTGRES_DB=polrev_dev -e POSTGRES_USER=polrev -e POSTGRES_PASSWORD=polrev  prodrigestivill/postgres-backup-local /backup.sh
+```
+
+### Restore
+```
+docker exec --tty --interactive polrev-dbbackup-1 /bin/sh -c "zcat ./backups/daily/polrev_dev-20220317-041422.sql.gz | psql --host db --username=polrev --dbname=polrev_dev -W"
+```
+
+## Docker
+
+### Backup
+```
+docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev_dev | gzip -9 > 20220418.sql.gz 
+```
+
+### Restore
+```
+
+```
+
+## SCP
+```
+scp 20220418.sql.gz kurt@political-revolution.com:Dev/polrev
 ```

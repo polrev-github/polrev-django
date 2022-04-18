@@ -51,6 +51,7 @@ class LocalCouncilCampaignPage(StateCampaignPageBase):
             'place_ref': {'id': 'id_place_ref'},
             'district_ref': {'id': 'id_district_ref'},
             'office_type_ref': {'id': 'id_office_type_ref'},
+            'office_type': {'title': 'City Council'}
         })),
     ]
 

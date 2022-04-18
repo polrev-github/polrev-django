@@ -41,8 +41,8 @@ INSTALLED_APPS = [
 
     "colorfield",
 
-    "captcha",
-    "wagtailcaptcha",
+    #"captcha",
+    #"wagtailcaptcha",
 
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
@@ -58,8 +58,8 @@ INSTALLED_APPS = [
     'wagtail.contrib.modeladmin',
     'tz_detect',
     
-    'mjml',
-    'birdsong',
+    #'mjml',
+    #'birdsong',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -77,11 +77,11 @@ INSTALLED_APPS = [
     'polrev',
     'home',
     'blog',
-    'forms',
+    #'forms',
     'search',
     'accounts',
     'events',
-    'mailer',
+    #'mailer',
     'campaigns',
     'slack_invite',
     'areas',

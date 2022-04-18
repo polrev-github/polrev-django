@@ -32,7 +32,8 @@ class StateHouseCampaignPage(StateCampaignPageBase):
         })),
         FieldPanel('state_house_office_ref', widget=StateHouseOfficeChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'},
-            'district_ref': {'id': 'id_district_ref'}
+            'district_ref': {'id': 'id_district_ref'},
+            'office_type': {'title': 'State House'}
         })),
     ]
 

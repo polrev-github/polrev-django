@@ -194,10 +194,9 @@ class CampaignPage(Page):
     office_panels = []
 
     content_panels = Page.content_panels + [
+        ImageChooserPanel('image'),
         #AutocompletePanel('parties', target_model='parties.Party'),
         AutocompletePanel('endorsements', target_model='parties.Party'),
-
-        ImageChooserPanel('image'),
         FieldPanel('incumbent'),
         FieldPanel('featured'),
         StreamFieldPanel('body', classname="full"),
@@ -234,6 +233,10 @@ class CampaignPage(Page):
     @classmethod
     def create_office_panels(cls):
         return []
+
+    @classmethod
+    def autocomplete_create(kls: type, value: str):
+        return kls.objects.create(title=value)
 
 class FederalCampaignPage(CampaignPage):
     pass

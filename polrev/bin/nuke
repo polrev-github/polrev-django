@@ -1,4 +1,4 @@
-./nukemigrations
+./bin/nukemigrations
 
 ./manage.py makemigrations puput
 ./manage.py makemigrations avatar

@@ -370,20 +370,6 @@ python-versions = ">=3.6"
 Django = ">=2.2"
 
 [[package]]
-name = "django-mjml"
-version = "0.12.0"
-description = "Use MJML in Django templates"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-django = ">=1.8,<4.1"
-
-[package.extras]
-requests = ["requests[security] (>=2.20)", "requests (>=2.20)"]
-
-[[package]]
 name = "django-model-utils"
 version = "4.2.0"
 description = "Django model mixins and utilities"
@@ -407,17 +393,6 @@ pytz = ">=2015.2"
 
 [package.extras]
 taggit = ["django-taggit (>=0.20)"]
-
-[[package]]
-name = "django-recaptcha"
-version = "3.0.0"
-description = "Django recaptcha form field/widget app."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-django = "*"
 
 [[package]]
 name = "django-social-share"
@@ -1123,32 +1098,6 @@ docs = ["Sphinx (>=1.7)", "sphinx-rtd-theme (>=0.4.0)"]
 test = ["tox", "pytest (>=3.5)", "pytest-django (>=3.2)", "beautifulsoup4 (>=4.8)", "html5lib (>=0.999999999)", "pytest-pythonpath (>=0.7.2)"]
 
 [[package]]
-name = "wagtail-birdsong"
-version = "0.2.0"
-description = "Create and send email campaigns from Wagtail"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-django-mjml = "*"
-wagtail = ">=2.7"
-
-[[package]]
-name = "wagtail-django-recaptcha"
-version = "1.0"
-description = "A simple recaptcha field for Wagtail Form Pages."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-django-recaptcha = "*"
-
-[package.extras]
-testing = ["tox (>=2.3.1,<2.4)", "coverage (>=4.1.0,<4.2)", "flake8 (>=3.2.0,<3.3)", "isort (==4.2.5)", "wagtail (==2.0)"]
-
-[[package]]
 name = "wagtail-generic-chooser"
 version = "0.3.1"
 description = "A toolkit for custom chooser popups in Wagtail"
@@ -1243,7 +1192,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a88c9f0bcb490632b83f9781f66122d21d9c54fa98f8eb223a0b36fdad7e5171"
+content-hash = "79d1ccbfffa022271a96623bf633c729287adb7c5e5065d7dc0aa51865d12b7d"
 
 [metadata.files]
 anyascii = [
@@ -1433,10 +1382,6 @@ django-filter = [
     {file = "django-filter-21.1.tar.gz", hash = "sha256:632a251fa8f1aadb4b8cceff932bb52fe2f826dd7dfe7f3eac40e5c463d6836e"},
     {file = "django_filter-21.1-py3-none-any.whl", hash = "sha256:f4a6737a30104c98d2e2a5fb93043f36dd7978e0c7ddc92f5998e85433ea5063"},
 ]
-django-mjml = [
-    {file = "django-mjml-0.12.0.tar.gz", hash = "sha256:326d4e6ec17e3f1ff7b4ef506b6f70756542d89916f980f41491a87d27a200d8"},
-    {file = "django_mjml-0.12.0-py2.py3-none-any.whl", hash = "sha256:5de85d8758c6d7ffa7278f578c5ea3b4ca9a1921e82de23c26e6c5c8149c4ffd"},
-]
 django-model-utils = [
     {file = "django-model-utils-4.2.0.tar.gz", hash = "sha256:e7a95e102f9c9653427eadab980d5d59e1dea972913b9c9e01ac37f86bba0ddf"},
     {file = "django_model_utils-4.2.0-py3-none-any.whl", hash = "sha256:a768a25c80514e0ad4e4a6f9c02c44498985f36c5dfdea47b5b1e8cf994beba6"},
@@ -1444,10 +1389,6 @@ django-model-utils = [
 django-modelcluster = [
     {file = "django-modelcluster-5.3.tar.gz", hash = "sha256:0347cdcacb19a1078ee56cc3e6d5413ba27b8a5900710c53bb92b5d8ff3819cd"},
     {file = "django_modelcluster-5.3-py2.py3-none-any.whl", hash = "sha256:f9f4250e706ee5e57503a30fbf37058b73e9fdc3190d75031338b81913cc9b4e"},
-]
-django-recaptcha = [
-    {file = "django-recaptcha-3.0.0.tar.gz", hash = "sha256:253197051288923cae675d7eff91b619e3775311292a5dbaf27a8a55ffebc670"},
-    {file = "django_recaptcha-3.0.0-py3-none-any.whl", hash = "sha256:1aed69fd6ac8fd9e99e52665392ae6748f8b6339ace656fad779fe0c6c915a52"},
 ]
 django-social-share = [
     {file = "django-social-share-2.2.1.tar.gz", hash = "sha256:4062c31ddad15eb9f7796cdfaae5a813018a3fd8da2b77f3e063e3a31252f84a"},
@@ -1823,13 +1764,6 @@ wagtail = [
 wagtail-autocomplete = [
     {file = "wagtail-autocomplete-0.7.0.tar.gz", hash = "sha256:69d4b72407532781014c9766a57977eb56f16bb1ad97a0e9133d2c67383e4596"},
     {file = "wagtail_autocomplete-0.7.0-py3-none-any.whl", hash = "sha256:f8f8b2e2e4d0229946a20fa439af17f252e3865a6cb9b27903c284a0c065edd8"},
-]
-wagtail-birdsong = [
-    {file = "wagtail-birdsong-0.2.0.tar.gz", hash = "sha256:86220d20a8f2ccc4f1f2cf4c870ee56fb32ffce345312c44154521aca33a2403"},
-    {file = "wagtail_birdsong-0.2.0-py3-none-any.whl", hash = "sha256:f8fb35b6698b6187c0360766ef64c7b661ca18f2cfbf638660298c6cbf7ab58e"},
-]
-wagtail-django-recaptcha = [
-    {file = "wagtail-django-recaptcha-1.0.tar.gz", hash = "sha256:fc177e75da966e9db1dfd9a566c40d30567518d9280b5db4fec4d50a8c853154"},
 ]
 wagtail-generic-chooser = [
     {file = "wagtail-generic-chooser-0.3.1.tar.gz", hash = "sha256:2757d762f8c4dae26f93e25a23c0c6373dbca9934c0f08e7e3655a17d18994a4"},
