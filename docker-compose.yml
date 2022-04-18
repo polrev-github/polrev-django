@@ -34,6 +34,7 @@ services:
       - 5432:5432
     volumes:
       - db:/pg-data
+      - /var/opt/polrev/backups:/backups
     networks:
       - polrev
 

@@ -139,10 +139,10 @@ docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev_dev | gzip -9 > 202
 
 ### Restore
 ```
-
+docker inspect -f '{{ json .Mounts }}' polrev-db-1 | python -m json.tool
 ```
 
 ## SCP
 ```
-scp 20220418.sql.gz kurt@political-revolution.com:Dev/polrev
+scp 20220418.sql.gz me@political-revolution.com:Dev
 ```
