@@ -23,11 +23,11 @@
     {% for campaign in campaign_group.list %}
     <div class="card">
       <div class="row no-gutters">
-          <div class="col-auto">
+          <div class="col-3 col-xs-3 col-sm-3">
             {% image campaign.image max-200x250 as image %}
             <img src="{{image.url}}" alt="{{campaign.title}}">
           </div>
-          <div class="col ">
+          <div class="col-9 col-xs-9 col-sm-9 ">
               <div class="card-body card-block px-2">
                 <h4 class="card-title">{{campaign.title}}</h4>
                 <h5 class="card-subtitle mb-2 text-muted">
