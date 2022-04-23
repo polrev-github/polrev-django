@@ -137,12 +137,20 @@ docker exec --tty --interactive polrev-dbbackup-1 /bin/sh -c "zcat ./backups/dai
 docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev_dev | gzip -9 > 20220418.sql.gz 
 ```
 
-### Restore
-```
-docker inspect -f '{{ json .Mounts }}' polrev-db-1 | python -m json.tool
-```
-
-## SCP
+### SCP
 ```
 scp 20220418.sql.gz me@political-revolution.com:Dev
+```
+
+### Restore
+```
+docker cp 20220418.sql.gz polrev_dbbackup_1:/backups
+
+docker exec --tty --interactive polrev_dbbackup_1 /bin/sh -c "zcat ./backups/20220418.sql.gz | psql --host db --username=polrev --dbname=polrev_dev -W"
+ ```
+
+## Delete Wagtail Renditions
+```
+./manage.py dbshell
+polrev_dev=# delete from wagtailimages_rendition;
 ```

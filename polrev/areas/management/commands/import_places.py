@@ -50,7 +50,10 @@ class Command(BaseCommand):
 
     SKIP_STATE = ['AS', 'GU', 'MP', 'PR', 'VI']
     SKIP_TYPE = ['CDP']
-    SKIP_STAT = ['F', 'N', 'S']
+    #SKIP_STAT = ['F', 'N', 'S']
+    SKIP_STAT = ['N', 'S']
+    #NOTE:  F: identifies a fictitious entity created to fill the Census Bureau's geographic hierarchy
+    # Unfortunately I missed major metropolitan areas by skipping this.
 
     KIND_MAP = {
         'city': Area.KIND_CITY,

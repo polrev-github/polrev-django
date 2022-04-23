@@ -57,7 +57,16 @@
                     {% if entry.header_image %}
                         <span class="img-responsive">
                             {% image entry.header_image fill-800x240 as header_image %}
-                            <img alt="{{ entry.header_image.title }}" src="{{ header_image.url }}">
+                            <img
+                            src="{{ header_image.url }}"
+                            alt="{{ entry.header_image.title }}"
+                            {% if header_image.focal_point %}
+                                data-focus-x="{{ header_image.focal_point.centroid.x }}"
+                                data-focus-y="{{ header_image.focal_point.centroid.y }}"
+                                data-focus-width="{{ header_image.focal_point.width }}"
+                                data-focus-height="{{ header_image.focal_point.height }}"
+                            {% endif %}
+                            />
                         </span>
                     {% endif %}
                     {% include 'puput/entry_links.html' %}

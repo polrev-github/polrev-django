@@ -2,6 +2,7 @@ from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
+from wagtail.search import index
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
 
 
@@ -31,8 +32,13 @@ class County(Area):
     )
 
     panels = Area.panels + [
+        FieldPanel('state_ref'),
         FieldPanel('county_fips'),
         FieldPanel('class_fips'),
+    ]
+
+    search_fields = Area.search_fields + [
+        index.FilterField('state_ref_id')
     ]
 
     def save(self, *args, **kwargs):

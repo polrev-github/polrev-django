@@ -22,6 +22,7 @@ class SchoolDistrict(Area):
     )
 
     panels = Area.panels + [
+        FieldPanel('state_ref'),
         FieldPanel('lea_code'),
     ]
 

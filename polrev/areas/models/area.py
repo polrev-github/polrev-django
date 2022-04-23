@@ -108,9 +108,7 @@ class Area(index.Indexed, models.Model):
     )
     
     panels = [
-        #FieldPanel('title'),
         FieldPanel('name'),
-        FieldPanel('state_fips'),
     ]
 
     search_fields = [

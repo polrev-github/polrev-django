@@ -24,6 +24,7 @@ class Place(Area):
     )
 
     panels = Area.panels + [
+        FieldPanel('state_ref'),
         FieldPanel('place_fips'),
         FieldPanel('counties'),
     ]

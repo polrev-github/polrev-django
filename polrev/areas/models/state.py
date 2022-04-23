@@ -15,6 +15,7 @@ class State(Area):
 
     panels = Area.panels + [
         FieldPanel('state_usps'),
+        FieldPanel('state_fips'),
     ]
 
     def save(self, *args, **kwargs):
