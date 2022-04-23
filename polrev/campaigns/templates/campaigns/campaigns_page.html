@@ -21,31 +21,31 @@
     {% for campaign_group in campaign_list %}
     <h2>{{campaign_group.grouper|fips_title}}</h2>
     {% for campaign in campaign_group.list %}
+
     <div class="card">
       <div class="row no-gutters">
-          <div class="col-3 col-xs-3 col-sm-3">
-            {% image campaign.image max-200x250 as image %}
-            <img src="{{image.url}}" alt="{{campaign.title}}">
+        <div class="col-12  col-sm-12 col-lg-3">
+          {% image campaign.image max-200x250 as image %}
+          <img class="p-3" src="{{image.url}}" alt="{{campaign.title}}">
+        </div>
+        <div class="col-12 col-sm-12 col-lg-9">
+          <div class="card-body card-block px-2">
+            <h4 class="card-title">{{campaign.title}}</h4>
+            <h5 class="card-subtitle mb-2 text-muted">
+              {{campaign.office_type_ref.title}} - <a href={{campaign.office_ref.website}}>{{campaign.area_ref.title}}</a>
+            </h5>
+            <div class="card-text">
+              {{ campaign.excerpt|richtext }}
+            </div>
+            <p class="card-text">
+              {% for endorsement in campaign.endorsements.all %}
+                <a title="{{endorsement.title}}" href="{{endorsement.website}}">
+                  <span class="badge" style="background-color:{{endorsement.color}};">{{endorsement.abbrev}}</span>
+                </a>
+              {% endfor %}
+            </p>
           </div>
-          <div class="col-9 col-xs-9 col-sm-9 ">
-              <div class="card-body card-block px-2">
-                <h4 class="card-title">{{campaign.title}}</h4>
-                <h5 class="card-subtitle mb-2 text-muted">
-                  {{campaign.office_type_ref.title}} - <a href={{campaign.office_ref.website}}>{{campaign.area_ref.title}}</a>
-                </h5>
-                <div class="card-text">
-                  {{ campaign.excerpt|richtext }}
-                </div>
-                <p class="card-text">
-                  {% for endorsement in campaign.endorsements.all %}
-                    <a title="{{endorsement.title}}" href="{{endorsement.website}}">
-                      <span class="badge" style="background-color:{{endorsement.color}};">{{endorsement.abbrev}}</span>
-                    </a>
-                  {% endfor %}
-                </p>
-      
-              </div>
-          </div>
+        </div>
       </div>
       <div class="card-footer w-100 text-muted">
         <a class="p-1" title="Website" href="{{campaign.website}}"> <i class="fas fa-link fa-lg"></i></a>
@@ -59,6 +59,7 @@
         <a class="p-1" title="Ballotpedia" href="{{campaign.ballotpedia}}"><i class="fas fa-info-circle fa-lg"></i></a>
       </div>
     </div>
+
     <br />
     {% endfor %}
     {% endfor %}
