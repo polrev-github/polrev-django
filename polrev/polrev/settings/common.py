@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     'polrev',
     'home',
     'blog',
-    #'forms',
+    'forms',
     'search',
     'accounts',
     'events',

@@ -1,30 +1,29 @@
 from django.db import models
-from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import (
-    FieldPanel, FieldRowPanel,
-    InlinePanel, MultiFieldPanel
-)
-from wagtail.core.fields import RichTextField
-from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtailcaptcha.models import WagtailCaptchaEmailForm
 
-class FormField(AbstractFormField):
-    page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
+from wagtail.core.models import Page
+from wagtail.admin.edit_handlers import FieldPanel
+
+class FormsPage(Page):
+
+    parent_page_types = ['home.HomePage']
+    subpage_types = [
+        'forms.FormPage',
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(
+            request, *args, **kwargs)
+        context['forms'] = FormsPage.objects.all()
 
 
-class FormPage(WagtailCaptchaEmailForm):
-    intro = RichTextField(blank=True)
-    thank_you_text = RichTextField(blank=True)
+class FormPage(Page):
 
-    content_panels = AbstractEmailForm.content_panels + [
-        FieldPanel('intro', classname="full"),
-        InlinePanel('form_fields', label="Form fields"),
-        FieldPanel('thank_you_text', classname="full"),
-        MultiFieldPanel([
-            FieldRowPanel([
-                FieldPanel('from_address', classname="col6"),
-                FieldPanel('to_address', classname="col6"),
-            ]),
-            FieldPanel('subject'),
-        ], "Email"),
+    form_url = models.URLField("form url")
+    height = models.PositiveIntegerField(default=2000)
+
+    parent_page_types = ['forms.FormsPage']
+
+    content_panels = Page.content_panels + [
+        FieldPanel('form_url'),
+        FieldPanel('height'),
     ]

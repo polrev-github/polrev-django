@@ -1,15 +1,14 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags crispy_forms_tags %}
+
+{% load static %}
 
 {% block content %}
-
-  <h1>Contact</h1>
-  <br>
-
-  <form action="{% pageurl page %}" method="POST" >
-    {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit" class="btn btn-primary" >Submit</button>
-  </form>
-
+<style>
+    iframe {
+      width: 100%;
+      height: calc({{page.height}}px - 20vw);
+      border:0;
+    }
+  </style>
+  <iframe id="iframe" frameborder="0" marginheight="0"  src="{{page.form_url}}"></iframe>
 {% endblock %}

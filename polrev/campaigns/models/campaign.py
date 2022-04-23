@@ -54,7 +54,6 @@ class CampaignsPage(RoutablePageMixin, Page):
     def category_view(self, request, state_slug):
         name = state_slug.replace('-', ' ')
         name = ' '.join(i.capitalize() for i in name.split())
-        print(name)
         state = us.states.lookup(name, field='name')
         state_fips = state.fips
         campaigns = CampaignPage.objects.filter(state_fips=state_fips)
