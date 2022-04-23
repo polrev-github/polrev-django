@@ -234,9 +234,6 @@ class CampaignPage(Page):
     def create_office_panels(cls):
         return []
 
-    @classmethod
-    def autocomplete_create(kls: type, value: str):
-        return kls.objects.create(title=value)
 
 class FederalCampaignPage(CampaignPage):
     pass

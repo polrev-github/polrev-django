@@ -35,5 +35,9 @@ class Party(ClusterableModel):
         FieldPanel('website'),
     ]
 
+    @classmethod
+    def autocomplete_create(kls: type, value: str):
+        return kls.objects.create(title=value)
+
     def __str__(self):
         return self.title
