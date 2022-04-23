@@ -24,8 +24,8 @@
     <div class="card">
       <div class="row no-gutters">
           <div class="col-auto">
-            {% image campaign.image fill-200x200 as image %}
-            <img src="{{image.url}}" alt="{{campaign.title}}">
+            {% image campaign.image original as image %}
+            <img src="{{image.url}}" alt="..." style="height:25vh; object-fit: cover;">
           </div>
           <div class="col ">
               <div class="card-body card-block px-2">
