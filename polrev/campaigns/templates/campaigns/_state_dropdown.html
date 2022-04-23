@@ -4,7 +4,7 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     {% for state in states %}
-      <li><a class="dropdown-item" href="/campaigns/state/{{state.name}}">{{state.name}}</a></li>
+      <li><a class="dropdown-item" href="/campaigns/state/{{state.name|slugify}}">{{state.name}}</a></li>
     {% endfor %}
   </ul>
 </div>

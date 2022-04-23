@@ -52,7 +52,10 @@ class CampaignsPage(RoutablePageMixin, Page):
 
     @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
     def category_view(self, request, state_slug):
-        state = us.states.lookup(state_slug.capitalize(), field='name')
+        name = state_slug.replace('-', ' ')
+        name = ' '.join(i.capitalize() for i in name.split())
+        print(name)
+        state = us.states.lookup(name, field='name')
         state_fips = state.fips
         campaigns = CampaignPage.objects.filter(state_fips=state_fips)
 
@@ -201,14 +204,6 @@ class CampaignPage(Page):
         FieldPanel('featured'),
         StreamFieldPanel('body', classname="full"),
         FieldPanel('excerpt'),
-        MultiFieldPanel(
-            [
-                FieldPanel('facebook'),
-                FieldPanel('twitter'),
-                FieldPanel('instagram'),
-            ],
-            heading="Social Media Links",
-        ),
 
         MultiFieldPanel(
             [
@@ -216,6 +211,15 @@ class CampaignPage(Page):
                 FieldPanel('donate'),
             ],
             heading="Campaign Links",
+        ),
+
+        MultiFieldPanel(
+            [
+                FieldPanel('facebook'),
+                FieldPanel('twitter'),
+                FieldPanel('instagram'),
+            ],
+            heading="Social Media Links",
         ),
 
         MultiFieldPanel(
@@ -229,10 +233,6 @@ class CampaignPage(Page):
     ]
 
     parent_page_types = ['campaigns.YearPage']
-
-    @classmethod
-    def create_office_panels(cls):
-        return []
 
 
 class FederalCampaignPage(CampaignPage):

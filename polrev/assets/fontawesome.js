@@ -20,7 +20,9 @@ import {
   faAngleLeft,
   faAngleRight,
   faRssSquare,
-  faCalendarPlus
+  faCalendarPlus,
+  faInfo,
+  faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -33,6 +35,7 @@ import {
   faTrello,
   faLinkedin,
   faInstagram,
+  faWikipediaW,
 } from "@fortawesome/free-brands-svg-icons";
 
 library.add(
@@ -50,6 +53,8 @@ library.add(
   faAngleRight,
   faRssSquare,
   faCalendarPlus,
+  faInfo,
+  faInfoCircle,
 
   faGithub,
   faFacebook, 
@@ -60,6 +65,7 @@ library.add(
   faTrello,
   faLinkedin,
   faInstagram,
+  faWikipediaW,
   );
 
 dom.i2svg();
