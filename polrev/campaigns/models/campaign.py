@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 import us
 
 from django.db import models
@@ -156,7 +157,7 @@ class CampaignPage(Page):
         related_name='campaigns',
     )
 
-    date = models.DateTimeField(verbose_name=_("Election date"), default=datetime.datetime.today)
+    date = models.DateTimeField(verbose_name=_("Election date"), default=timezone.now)
 
     body = StreamField([
         ('paragraph', RichTextBlock()),

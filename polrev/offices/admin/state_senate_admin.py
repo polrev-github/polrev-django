@@ -1,14 +1,8 @@
 from django.contrib import admin
-from areas.models import StateSenateDistrict, StateHouseDistrict
+from offices.models import StateSenateOffice
 
-class StateSenateDistrictAdmin(admin.ModelAdmin):
+class StateSenateOfficeAdmin(admin.ModelAdmin):
     search_fields = ['title']
     list_filter = ('state_ref',)
 
-admin.site.register(StateSenateDistrict, StateSenateDistrictAdmin)
-
-class StateHouseDistrictAdmin(admin.ModelAdmin):
-    search_fields = ['title']
-    list_filter = ('state_ref',)
-
-admin.site.register(StateHouseDistrict, StateHouseDistrictAdmin)
+admin.site.register(StateSenateOffice, StateSenateOfficeAdmin)

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from areas.models import State
+from offices.models import StateOffice
 
-class StateAdmin(admin.ModelAdmin):
+class StateOfficeAdmin(admin.ModelAdmin):
     search_fields = ['title']
-    list_filter = ('state_usps',)
+    list_filter = ('state_ref',)
 
-admin.site.register(State, StateAdmin)
+admin.site.register(StateOffice, StateOfficeAdmin)
