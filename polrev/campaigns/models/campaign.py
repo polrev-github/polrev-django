@@ -42,8 +42,8 @@ class CampaignsPage(RoutablePageMixin, Page):
 
     @route(r'^$') # will override the default Page serving mechanism
     def current_campaigns(self, request):
-        #events = CampaignPage.objects.live().filter(event_date__gte=datetime.date.today())
-        campaigns = CampaignPage.objects.order_by('state_fips')
+        #campaigns = CampaignPage.objects.order_by('state_fips')
+        campaigns = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority', 'office_ref__title')
 
         return self.render(request, context_overrides={
             'title': "Current campaigns",
@@ -66,9 +66,9 @@ class CampaignsPage(RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(
             request, *args, **kwargs)
-        #context['campaigns'] = CampaignPage.objects.all()
-        #context['campaigns'] = CampaignPage.objects.order_by('state__title')
-        context['campaigns'] = CampaignPage.objects.order_by('state_fips')
+        context['campaigns'] = CampaignPage.objects.all()
+        #context['campaigns'] = CampaignPage.objects.order_by('state_fips')
+        #context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
         context['states'] = us.states.STATES
         return context
 
@@ -103,8 +103,10 @@ class YearPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(
             request, *args, **kwargs)
-        context['campaigns'] = CampaignPage.objects.all()
-        #context['campaigns'] = CampaignPage.objects.order_by('state__title')
+        #context['campaigns'] = CampaignPage.objects.all()
+        context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
+        context['states'] = us.states.STATES
+
         return context
 
 

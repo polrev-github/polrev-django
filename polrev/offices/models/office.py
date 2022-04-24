@@ -43,12 +43,6 @@ class Office(models.Model):
         help_text=_("Example: U.S. Senate, Ohio")
     )
 
-    subtitle = models.CharField(
-        verbose_name=_('subtitle'),
-        max_length=255,
-        help_text=_("Example: Candidate, U.S. Senate OH | Candidate, U.S. House OH-11")
-    )
-
     website = models.URLField("website", blank=True)
 
     area_panels = []

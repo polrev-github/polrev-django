@@ -6,6 +6,10 @@ from .state import StateOfficeBase
 from areas.widgets.congressional_district_widgets import CongressionalDistrictChooser
 
 class UsHouseOffice(StateOfficeBase):
+
+    class Meta:
+        verbose_name = "US House Office"
+
     district_ref = models.ForeignKey(
         'areas.CongressionalDistrict',
         on_delete=models.PROTECT,
@@ -23,6 +27,3 @@ class UsHouseOffice(StateOfficeBase):
     def save(self, *args, **kwargs):
         self.area_ref = self.district_ref
         super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "US House Office"

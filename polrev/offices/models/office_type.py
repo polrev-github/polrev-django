@@ -16,5 +16,10 @@ class OfficeType(models.Model):
         help_text=_("Example: U.S. Senate, State House, Mayor, City Council")
     )
 
+    priority = models.PositiveSmallIntegerField(
+        default=0,
+        help_text=_("Sorting priority.  Example: 0, 100, etc")
+    )
+
     def __str__(self):
         return self.title

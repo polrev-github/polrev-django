@@ -10,12 +10,7 @@ urlpatterns = [
     path('issues/', views.issues, name='issues'),
     path('transparency/', views.transparency, name='transparency'),
 
-    #path('volunteer', views.volunteer, name='volunteer'),
     path('register-to-vote/', views.register, name='register'),
     path('privacy-policy/', views.privacy, name='privacy'),
-    #path('contact', views.contact, name='contact'),
     path('endorsements/', views.endorsements, name='endorsements'),
-
-    #path('profiles/<slug:username>/edit', views.profile_edit, name='profile_edit'),
-    #path('profiles/<slug:username>/', views.profile, name='profile'),
 ]
