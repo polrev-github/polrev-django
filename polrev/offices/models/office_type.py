@@ -17,7 +17,7 @@ class OfficeType(models.Model):
     )
 
     priority = models.PositiveSmallIntegerField(
-        default=0,
+        default=1000,
         help_text=_("Sorting priority.  Example: 0, 100, etc")
     )
 
