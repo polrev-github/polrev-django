@@ -10,9 +10,6 @@ def phonebanking(request):
 def about(request):
     return render(request, 'home/about.html')
 
-def rfo(request):
-    return render(request, 'home/rfo.html')
-
 def mission(request):
     return render(request, 'home/mission.html')
 
@@ -25,34 +22,5 @@ def issues(request):
 def transparency(request):
     return render(request, 'home/transparency.html')
 
-def volunteer(request):
-    return render(request, 'home/volunteer.html', {'form': ContactForm})
-
-def endorsements(request):
-    return render(request, 'home/endorsements.html')
-
-def register(request):
-    return render(request, 'home/register.html')
-
 def privacy(request):
     return render(request, 'home/privacy.html')
-
-def contact(request):
-    return render(request, 'home/contact.html', {'form': ContactForm})
-
-'''
-def post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    return render(request, 'blog/post.html', {'post': post})
-'''
-
-'''
-def profile(request, username):
-    profile = get_object_or_404(User, username=username)
-    posts = Post.objects.filter(owner=profile)
-    return render(request, 'home/profile.html', {'profile': profile, 'posts': posts})
-
-def profile_edit(request, username):
-    profile = get_object_or_404(User, username=username)
-    return render(request, 'home/profile_edit.html', {'profile': profile, 'form': ProfileEditForm})
-'''

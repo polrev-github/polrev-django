@@ -10,6 +10,8 @@ class UsSenateCampaignPage(StateCampaignPageBase):
     class Meta:
         verbose_name = "U.S. Senate Campaign"
 
+    template = 'campaigns/campaign_page.html'
+
     us_senate_office_ref = models.ForeignKey(
         'offices.UsSenateOffice',
         verbose_name=_('office'),

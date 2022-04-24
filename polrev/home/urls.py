@@ -4,13 +4,9 @@ from . import views
 urlpatterns = [
     path('phonebanking/', views.phonebanking, name='phonebanking'),
     path('about-us/', views.about, name='about'),
-    path('run-for-office/', views.rfo, name='rfo'),
     path('mission-statement/', views.mission, name='mission'),
     path('by-laws/', views.by_laws, name='by_laws'),
     path('issues/', views.issues, name='issues'),
     path('transparency/', views.transparency, name='transparency'),
-
-    path('register-to-vote/', views.register, name='register'),
     path('privacy-policy/', views.privacy, name='privacy'),
-    path('endorsements/', views.endorsements, name='endorsements'),
 ]

@@ -73,7 +73,9 @@ class CampaignsPage(RoutablePageMixin, Page):
         return context
 
 
-class YearPage(Page):
+class YearPage(RoutablePageMixin, Page):
+    template = 'campaigns/campaigns_page.html'
+
     body = StreamField([
         ('paragraph', RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -100,17 +102,31 @@ class YearPage(Page):
         'campaigns.SchoolDistrictCampaignPage',
         ]
 
+    @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
+    def category_view(self, request, state_slug):
+        name = state_slug.replace('-', ' ')
+        name = ' '.join(i.capitalize() for i in name.split())
+        state = us.states.lookup(name, field='name')
+        state_fips = state.fips
+        campaigns = CampaignPage.objects.child_of(self).filter(state_fips=state_fips)
+
+        return self.render(request, context_overrides={
+            'title': "State campaigns",
+            'campaigns': campaigns,
+        })
+
     def get_context(self, request, *args, **kwargs):
-        context = super().get_context(
-            request, *args, **kwargs)
+        context = super().get_context(request, *args, **kwargs)
         #context['campaigns'] = CampaignPage.objects.all()
-        context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
+        #context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
+        context['campaigns'] = CampaignPage.objects.child_of(self).order_by('state_fips', 'office_type_ref__priority')
+
         context['states'] = us.states.STATES
 
         return context
 
-
 class CampaignPage(Page):
+
     STATE_CHOICES = list = [(k, v) for k, v in us.states.mapping('fips', 'name').items()]
 
     state_fips = models.CharField(
@@ -234,6 +250,14 @@ class CampaignPage(Page):
     ]
 
     parent_page_types = ['campaigns.YearPage']
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        #context['campaigns'] = CampaignPage.objects.all()
+        #context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
+        context['campaign'] = self
+
+        return context
 
 
 class FederalCampaignPage(CampaignPage):
