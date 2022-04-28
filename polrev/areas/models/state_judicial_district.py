@@ -7,15 +7,19 @@ from wagtail.admin.edit_handlers import FieldPanel
 from areas.models import Area
 
 
-class DistrictCourt(Area):
+class StateJudicialDistrict(Area):
     class Meta:
         ordering = ['number']
+
+    def __init__(self, *args, **kwargs):        
+        super().__init__(*args, **kwargs)
+        self.kind = self.KIND_STATE_JUDICIAL_DISTRICT
 
     state_ref = models.ForeignKey(
         'areas.State',
         verbose_name=_('State'),
         on_delete=models.PROTECT,
-        related_name='district_courts'
+        related_name='state_judicial_districts'
     )
 
     number = models.PositiveSmallIntegerField()
@@ -30,7 +34,7 @@ class DistrictCourt(Area):
     ]
 
     def save(self, *args, **kwargs):
-        self.kind = self.KIND_DISTRICT_COURT
+        self.kind = self.KIND_STATE_JUDICIAL_DISTRICT
         self.state_fips = self.state_ref.state_fips
         self.title = f"{self.state_ref.name} {self.name}"
         super().save(*args, **kwargs)

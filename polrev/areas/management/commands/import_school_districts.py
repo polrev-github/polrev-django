@@ -74,8 +74,6 @@ class Command(BaseCommand):
 
             print(row)
 
-            kind = Area.KIND_UNKNOWN
-
             kind = self.KIND_MAP[district_type]
 
             print(kind)

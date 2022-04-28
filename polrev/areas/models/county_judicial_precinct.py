@@ -7,7 +7,7 @@ from areas.models.area import Area
 
 from areas.widgets.county_widgets import CountyChooser
 
-class PrecinctCourt(Area):
+class CountyJudicialPrecinct(Area):
     class Meta:
         ordering = ['number']
 
@@ -15,14 +15,14 @@ class PrecinctCourt(Area):
         'areas.State',
         verbose_name=_('State'),
         on_delete=models.PROTECT,
-        related_name='precinct_courts'
+        related_name='county_judicial_precincts'
     )
 
     county_ref = models.ForeignKey(
         'areas.County',
         verbose_name=_('County'),
         on_delete=models.PROTECT,
-        related_name='precinct_courts'
+        related_name='county_judicial_precincts'
     )
 
     number = models.PositiveSmallIntegerField()
@@ -36,7 +36,7 @@ class PrecinctCourt(Area):
     ]
 
     def save(self, *args, **kwargs):
-        self.kind = self.KIND_PRECINT_COURT
+        self.kind = self.KIND_COUNTY_JUDICIAL_PRECINT
         self.state_fips = self.state_ref.state_fips
         self.title = f"{self.county_ref.title}, {self.name}"
         super().save(*args, **kwargs)
