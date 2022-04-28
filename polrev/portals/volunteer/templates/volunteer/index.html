@@ -1,59 +1,49 @@
-{% extends "base.html" %}
+{% extends "leftbar_layout.html" %}
 {% load i18n static  %}
 
 {% block title %}
 Volunteers
 {% endblock title %}
 
+{% block leftbar %}
+{% include 'volunteer/_sidebar.html' %}
+{% endblock leftbar %}
+
 {% block content %}
 
-<div >
-  <div class="row">
-    <div class=" col-12 col-md-8">
-      <h1>Volunteer for The Political Revolution!</h1>
-      <p>
-        HELP US ELECT PROGRESSIVES NATIONWIDE!
-      </p>
-      <p>
-      <a class="btn btn-primary my-1" style="font-weight: 600; border-radius: 9999px;" href="/forms/volunteer">
-        Sign up to be a Volunteer!
-        <i class="fas fa-chevron-right"></i>
-      </a>
-      <a class="btn btn-primary my-1" style="font-weight: 600; border-radius: 9999px;" href="/forms/moderator">
-        Sign up to be a Moderator!
-        <i class="fas fa-chevron-right"></i>
-      </a>
-      <hr/>
+<div>
+    <div>
+    <h1>Volunteer for The Political Revolution!</h1>
+    <p>
+      HELP US ELECT PROGRESSIVES NATIONWIDE!
     </p>
-      <h2>
-        Phonebanking Team
-      </h2>
-      <h2>
-        Social Media Team
-      </h2>
-      <h2>
-        Writing Team
-      </h2>
-      <h2>
-        Fundraising Team
-      </h2>
-      <h2>
-        Candidate Outreach Team
-      </h2>
-      <h2>
-        Web and App Development Team
-      </h2>
-      <br/>
-      <p>
-        If you have any questions about volunteering with The Political Revolution, send an email to <a href="mailto:info@political-revolution.com">info@political-revolution.com</a>, and we will get back to you as soon as possible!
-      </p>
-      
-    </div>
-
-    <div class="col-12 col-md-4">
-      {% include 'volunteer/_sidebar.html' %}
-    </div>
+    <p>
+    <hr/>
+  </p>
+    <h2>
+      Phonebanking Team
+    </h2>
+    <h2>
+      Social Media Team
+    </h2>
+    <h2>
+      Writing Team
+    </h2>
+    <h2>
+      Fundraising Team
+    </h2>
+    <h2>
+      Candidate Outreach Team
+    </h2>
+    <h2>
+      Web and App Development Team
+    </h2>
+    <br/>
+    <p>
+      If you have any questions about volunteering with The Political Revolution, send an email to <a href="mailto:info@political-revolution.com">info@political-revolution.com</a>, and we will get back to you as soon as possible!
+    </p>
   </div>
+
 </div>
 
 {% endblock %}

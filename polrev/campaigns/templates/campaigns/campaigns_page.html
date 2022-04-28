@@ -1,25 +1,31 @@
-{% extends "base.html" %}
+{% extends "leftbar_layout.html" %}
 {% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
 {% load shuffle %}
 {% load custom_tags %}
 
+{% block leftbar %}
+{% include 'campaigns/_sidebar.html' %}
+{% endblock leftbar %}
+
 {% block content %}
 <div>
-  <div class="row">
-    <div class="col-12 col-md-9">
-
-      <nav class="navbar">
-        <h1 class="navbar-brand">{{page.title}}</h1>
-        <div class="d-flex">
-          {% include 'campaigns/_state_dropdown.html' %}
-        </div>  
-      </nav>
+  <nav class="navbar">
+    <h1 class="navbar-brand">{{page.title}}</h1>
+    <div class="d-flex">
+        {% include 'campaigns/_state_dropdown.html' %}
+    </div>  
+  </nav>
     
 
   <div class="d-grid gap-3">
     {% regroup campaigns by state_fips as campaign_list %}
     {% for campaign_group in campaign_list %}
-    <h2>{{campaign_group.grouper|fips_title}}</h2>
+
+    <div style="display: flex; align-items:center;">
+      <img class="m-2" src="{% static 'img/tpr.png' %}" width="64" height="64" alt="">
+      <h2 >{{campaign_group.grouper|fips_title}}</h2>
+    </div>
+
     {% for campaign in campaign_group.list %}
 
     {% include 'campaigns/_campaign_card.html' %}
@@ -27,13 +33,6 @@
     {% endfor %}
     {% endfor %}
   </div>
-
-</div>
-
-  <div class="col-12 col-md-3">
-    {% include 'campaigns/_sidebar.html' %}
-  </div>
-</div>
 
 </div>
 

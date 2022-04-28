@@ -1,17 +1,21 @@
-{% extends "base.html" %}
+{% extends "leftbar_layout.html" %}
 
 {% load i18n static %}
 
 {% block head %}
-{{ block.super }}
+  {{ block.super }}
 {% endblock %}
 
 {% block title %}
-Campaign
+  Campaign
 {% endblock title %}
 
+{% block leftbar %}
+  {% include 'run/_sidebar.html' %}
+{% endblock leftbar %}
+
 {% block content %}
-<div class="row flex-lg-row-reverse align-items-center g-5">
+<div class="row flex-lg-row-reverse align-items-center">
   <div class="col-10 col-sm-8 col-lg-6">
     <img src="{% static 'img/capitol.jpg'%}" class="d-block mx-lg-auto img-fluid" alt="The United States Capitol Rotunda" width="700" height="500" loading="lazy">
   </div>

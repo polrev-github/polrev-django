@@ -43,6 +43,12 @@ class Area(index.Indexed, models.Model):
     KIND_SD_ELEMENTARY = 23
     KIND_SD_SECONDARY = 24
 
+    # Judicial
+    KIND_FEDERAL_COURT = 24
+    KIND_CIRCUIT_COURT = 25
+    KIND_DISTRICT_COURT = 26
+    KIND_PRECINT_COURT = 27
+
     KIND_MAP = {
         KIND_UNKNOWN: 'Unknown',
         KIND_STATE: 'State',
@@ -69,7 +75,12 @@ class Area(index.Indexed, models.Model):
         # School Districts
         KIND_SD_UNIFIED: 'Unified School District',
         KIND_SD_ELEMENTARY: 'Elementary School District',
-        KIND_SD_SECONDARY: 'Secondary School District'
+        KIND_SD_SECONDARY: 'Secondary School District',
+        # Judicial
+        KIND_FEDERAL_COURT: 'Federal Court',
+        KIND_CIRCUIT_COURT: 'Circuit Court',
+        KIND_DISTRICT_COURT: 'District Court',
+        KIND_PRECINT_COURT: 'Precinct Court',
     }
 
     KIND_CHOICES = list = [(k, v) for k, v in KIND_MAP.items()]

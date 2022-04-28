@@ -9,11 +9,26 @@ Volunteers
 
 <div >
   <div class="row">
-    <div class=" col-12 col-md-8">
+    <div class="col-12 col-md-2">
+      {% include 'volunteer/_sidebar.html' %}
+    </div>
+  
+    <div class="col-12 col-md-9 py-2">
       <h1>Volunteer for The Political Revolution!</h1>
       <p>
         HELP US ELECT PROGRESSIVES NATIONWIDE!
       </p>
+      <p>
+      <a class="btn btn-primary my-1" style="font-weight: 600; border-radius: 9999px;" href="/forms/volunteer">
+        Sign up to be a Volunteer!
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      <a class="btn btn-primary my-1" style="font-weight: 600; border-radius: 9999px;" href="/forms/moderator">
+        Sign up to be a Moderator!
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      <hr/>
+    </p>
       <h2>
         Phonebanking Team
       </h2>
@@ -39,10 +54,11 @@ Volunteers
       
     </div>
 
-    <div class="col-12 col-md-4">
-      {% include 'volunteers/_sidebar.html' %}
-    </div>
+  <div class="col-12 col-md-1">
+      {% include '_ribbon.html' %}
   </div>
+  
+</div>
 </div>
 
 {% endblock %}

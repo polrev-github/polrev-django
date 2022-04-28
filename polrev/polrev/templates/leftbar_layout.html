@@ -35,29 +35,22 @@
 <body>
   {% include '_navbar.html' %}
 
-  <div class="container">
+  <div class="container-fluid g-0">
     <div class="row">
-      <div class="col-12 col-md-1">
-        {% include '_ribbon.html' %}
+
+      <div class="col-12 col-md-2">
+        {% block leftbar %}{% endblock %}
       </div>
-
-        <main class="site-main col-12 col-md-11">
-
-          {% if messages %}
-            <div class="p-3">
-                {% for message in messages %}
-                  <div class="alert {{ message.tags }} alert-dismissible shadow fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ message | safe }}
-                  </div>
-                {% endfor %}
-            </div>
-          {% endif %}
   
+      <div class="col-12 col-md-9">
+        <main class="site-main">
           {% block content %}{% endblock %}
         </main>
+      </div>
+
+      <div class="col-12 col-md-1">
+          {% include '_ribbon.html' %}
+      </div>
 
     </div>
   </div>

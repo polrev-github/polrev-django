@@ -119,6 +119,15 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 psql -U polrev polrev_dev
 ```
 
+## [django-dbbackup](https://github.com/jazzband/django-dbbackup)
+
+This is set up to dump to an s3 bucket
+Run from inside the django container
+
+```
+./manage.py dbbackup -z
+```
+
 ## [prodrigestivill/postgres-backup-local](https://hub.docker.com/r/prodrigestivill/postgres-backup-local)
 ### Backup
 ```
@@ -154,3 +163,16 @@ docker exec --tty --interactive polrev_dbbackup_1 /bin/sh -c "zcat ./backups/202
 ./manage.py dbshell
 polrev_dev=# delete from wagtailimages_rendition;
 ```
+
+## S3 Synchronization
+
+https://github.com/rclone/rclone/issues/2658
+```
+ rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
+ ./manage.py dbrestore -z
+ rclone sync polrev:polrev minio:polrev --no-gzip-encoding
+```
+
+## Time Synchronization
+ sudo apt install ntpdate
+ wsl -d docker-desktop -e "hwclock -s"
