@@ -5,10 +5,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 from .state import StateOfficeBase
 from areas.widgets.place_widgets import PlaceChooser
 
-class LocalOffice(StateOfficeBase):
-
-    class Meta:
-        verbose_name = "Local Office"
+class LocalOfficeBase(StateOfficeBase):
 
     place_ref = models.ForeignKey(
         'areas.Place',
@@ -23,7 +20,12 @@ class LocalOffice(StateOfficeBase):
         })),
     ]
 
-    panels = area_panels + StateOfficeBase.other_panels
+class LocalOffice(LocalOfficeBase):
+
+    class Meta:
+        verbose_name = "Local Office"
+
+    panels = LocalOfficeBase.area_panels + StateOfficeBase.other_panels
 
     def save(self, *args, **kwargs):
         self.area_ref = self.place_ref

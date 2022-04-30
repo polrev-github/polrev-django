@@ -6,11 +6,12 @@ from .us_senate_hooks import *
 from .us_house_hooks import *
 from .state_senate_hooks import *
 from .state_house_hooks import *
+from .school_district_hooks import *
+
 from .county_hooks import *
 from .local_hooks import *
 from .local_council_hooks import *
 from .county_council_hooks import *
-from .school_district_hooks import *
 
 class OfficeGroup(ModelAdminGroup):
     menu_label = 'Offices'
@@ -23,11 +24,11 @@ class OfficeGroup(ModelAdminGroup):
         UsHouseOfficeAdmin,
         StateSenateOfficeAdmin,
         StateHouseOfficeAdmin,
+        SchoolDistrictOfficeAdmin,
         CountyOfficeAdmin,
         LocalOfficeAdmin,
         LocalCouncilOfficeAdmin,
         CountyCouncilOfficeAdmin,
-        SchoolDistrictOfficeAdmin
     )
 
 modeladmin_register(OfficeGroup)

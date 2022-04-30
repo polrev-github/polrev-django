@@ -5,10 +5,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 from .state import StateOfficeBase
 from areas.widgets.county_widgets import CountyChooser
 
-class CountyOffice(StateOfficeBase):
-
-    class Meta:
-        verbose_name = "County Office"
+class CountyOfficeBase(StateOfficeBase):
 
     county_ref = models.ForeignKey(
         'areas.County',
@@ -23,8 +20,15 @@ class CountyOffice(StateOfficeBase):
         })),
     ]
 
-    panels = area_panels + StateOfficeBase.other_panels
+
+class CountyOffice(CountyOfficeBase):
+
+    class Meta:
+        verbose_name = "County Office"
+
+    panels = CountyOfficeBase.area_panels + StateOfficeBase.other_panels
 
     def save(self, *args, **kwargs):
         self.area_ref = self.county_ref
         super().save(*args, **kwargs)
+

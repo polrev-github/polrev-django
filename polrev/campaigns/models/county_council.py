@@ -3,22 +3,15 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
 
-from .state import StateCampaignPageBase
+from .county import CountyCampaignPageBase
 from areas.widgets.county_widgets import CountyChooser
 from areas.widgets.county_council_district_widgets import CountyCouncilDistrictChooser
 from offices.widgets import OfficeTypeChooser, CountyCouncilOfficeChooser
 
-class CountyCouncilCampaignPage(StateCampaignPageBase):
+class CountyCouncilCampaignPage(CountyCampaignPageBase):
 
     class Meta:
         verbose_name = "County Council Campaign"
-
-    county_ref = models.ForeignKey(
-        'areas.County',
-        verbose_name=_('county'),
-        on_delete=models.PROTECT,
-        related_name='county_council_campaigns',
-    )
 
     district_ref = models.ForeignKey(
         'areas.CountyCouncilDistrict',
@@ -35,10 +28,7 @@ class CountyCouncilCampaignPage(StateCampaignPageBase):
         null=True,
     )
 
-    office_panels = StateCampaignPageBase.office_panels + [
-        FieldPanel('county_ref', widget=CountyChooser(linked_fields={
-            'state_ref': {'id': 'id_state_ref'}
-        })),
+    office_panels = CountyCampaignPageBase.office_panels + [
         FieldPanel('district_ref', widget=CountyCouncilDistrictChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'},
             'county_ref': {'id': 'id_county_ref'}
@@ -55,10 +45,10 @@ class CountyCouncilCampaignPage(StateCampaignPageBase):
     ]
 
     edit_handler = TabbedInterface([
-        ObjectList(StateCampaignPageBase.content_panels, heading='Content'),
+        ObjectList(CountyCampaignPageBase.content_panels, heading='Content'),
         ObjectList(office_panels, heading='Office'),
-        ObjectList(StateCampaignPageBase.promote_panels, heading='Promote'),
-        ObjectList(StateCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(CountyCampaignPageBase.promote_panels, heading='Promote'),
+        ObjectList(CountyCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
     ])
 
     parent_page_types = ['campaigns.YearPage']

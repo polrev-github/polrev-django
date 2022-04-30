@@ -7,10 +7,8 @@ from .state import StateCampaignPageBase
 from areas.widgets.county_widgets import CountyChooser
 from offices.widgets import OfficeTypeChooser, CountyOfficeChooser
 
-class CountyCampaignPage(StateCampaignPageBase):
 
-    class Meta:
-        verbose_name = "County Campaign"
+class CountyCampaignPageBase(StateCampaignPageBase):
 
     county_ref = models.ForeignKey(
         'areas.County',
@@ -18,6 +16,21 @@ class CountyCampaignPage(StateCampaignPageBase):
         on_delete=models.PROTECT,
         related_name='county_campaigns',
     )
+
+    office_panels = StateCampaignPageBase.office_panels + [
+        FieldPanel('county_ref', widget=CountyChooser(linked_fields={
+            'state_ref': {'id': 'id_state_ref'}
+        })),
+    ]
+
+    parent_page_types = ['campaigns.YearPage']
+    subpage_types = []
+
+
+class CountyCampaignPage(CountyCampaignPageBase):
+
+    class Meta:
+        verbose_name = "County Campaign"
 
     county_office_ref = models.ForeignKey(
         'offices.CountyOffice',
@@ -27,10 +40,7 @@ class CountyCampaignPage(StateCampaignPageBase):
         null=True,
     )
 
-    office_panels = StateCampaignPageBase.office_panels + [
-        FieldPanel('county_ref', widget=CountyChooser(linked_fields={
-            'state_ref': {'id': 'id_state_ref'}
-        })),
+    office_panels = CountyCampaignPageBase.office_panels + [
         FieldPanel('office_type_ref', widget=OfficeTypeChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'} # TODO:  Unused but keep.  Filter by area?
         })),

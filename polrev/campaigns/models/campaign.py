@@ -96,11 +96,12 @@ class YearPage(RoutablePageMixin, Page):
         'campaigns.UsHouseCampaignPage',
         'campaigns.StateSenateCampaignPage',
         'campaigns.StateHouseCampaignPage',
+        'campaigns.SchoolDistrictCampaignPage',
+
         'campaigns.CountyCampaignPage',
         'campaigns.LocalCampaignPage',
         'campaigns.LocalCouncilCampaignPage',
         'campaigns.CountyCouncilCampaignPage',
-        'campaigns.SchoolDistrictCampaignPage',
         ]
 
     @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")

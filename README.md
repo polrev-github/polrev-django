@@ -167,10 +167,12 @@ polrev_dev=# delete from wagtailimages_rendition;
 ## S3 Synchronization
 
 https://github.com/rclone/rclone/issues/2658
+
 ```
- rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
- ./manage.py dbrestore -z
- rclone sync polrev:polrev minio:polrev --no-gzip-encoding
+rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
+./manage.py dbrestore -z
+#rclone sync polrev:polrev minio:polrev --no-gzip-encoding
+rclone sync polrev:polrev/media minio:polrev/media
 ```
 
 ## Time Synchronization

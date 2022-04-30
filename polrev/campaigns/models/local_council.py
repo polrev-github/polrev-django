@@ -3,22 +3,15 @@ from django.utils.translation import gettext_lazy as _
 
 from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
 
-from .state import StateCampaignPageBase
+from .local import LocalCampaignPageBase
 from areas.widgets.place_widgets import PlaceChooser
 from areas.widgets.local_council_district_widgets import LocalCouncilDistrictChooser
 from offices.widgets import OfficeTypeChooser, LocalCouncilOfficeChooser
 
-class LocalCouncilCampaignPage(StateCampaignPageBase):
+class LocalCouncilCampaignPage(LocalCampaignPageBase):
 
     class Meta:
         verbose_name = "Local Council Campaign"
-
-    place_ref = models.ForeignKey(
-        'areas.Place',
-        verbose_name=_('place'),
-        on_delete=models.PROTECT,
-        related_name='local_council_campaigns',
-    )
 
     district_ref = models.ForeignKey(
         'areas.LocalCouncilDistrict',
@@ -35,10 +28,7 @@ class LocalCouncilCampaignPage(StateCampaignPageBase):
         null=True,
     )
 
-    office_panels = StateCampaignPageBase.office_panels + [
-        FieldPanel('place_ref', widget=PlaceChooser(linked_fields={
-            'state_ref': {'id': 'id_state_ref'}
-        })),
+    office_panels = LocalCampaignPageBase.office_panels + [
         FieldPanel('district_ref', widget=LocalCouncilDistrictChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'},
             'place_ref': {'id': 'id_place_ref'}
@@ -56,10 +46,10 @@ class LocalCouncilCampaignPage(StateCampaignPageBase):
     ]
 
     edit_handler = TabbedInterface([
-        ObjectList(StateCampaignPageBase.content_panels, heading='Content'),
+        ObjectList(LocalCampaignPageBase.content_panels, heading='Content'),
         ObjectList(office_panels, heading='Office'),
-        ObjectList(StateCampaignPageBase.promote_panels, heading='Promote'),
-        ObjectList(StateCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(LocalCampaignPageBase.promote_panels, heading='Promote'),
+        ObjectList(LocalCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
     ])
 
     parent_page_types = ['campaigns.YearPage']

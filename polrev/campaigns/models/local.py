@@ -7,16 +7,29 @@ from .state import StateCampaignPageBase
 from areas.widgets.place_widgets import PlaceChooser
 from offices.widgets import OfficeTypeChooser, LocalOfficeChooser
 
-class LocalCampaignPage(StateCampaignPageBase):
 
-    class Meta:
-        verbose_name = "Local Campaign"
+class LocalCampaignPageBase(StateCampaignPageBase):
 
     place_ref = models.ForeignKey(
         'areas.Place',
         on_delete=models.PROTECT,
         related_name='local_campaigns',
     )
+
+    office_panels = StateCampaignPageBase.office_panels + [
+        FieldPanel('place_ref', widget=PlaceChooser(linked_fields={
+            'state_ref': {'id': 'id_state_ref'}
+        })),
+    ]
+
+    parent_page_types = ['campaigns.YearPage']
+    subpage_types = []
+    
+
+class LocalCampaignPage(LocalCampaignPageBase):
+
+    class Meta:
+        verbose_name = "Local Campaign"
 
     local_office_ref = models.ForeignKey(
         'offices.LocalOffice',
@@ -26,10 +39,7 @@ class LocalCampaignPage(StateCampaignPageBase):
         null=True,
     )
 
-    office_panels = StateCampaignPageBase.office_panels + [
-        FieldPanel('place_ref', widget=PlaceChooser(linked_fields={
-            'state_ref': {'id': 'id_state_ref'}
-        })),
+    office_panels = LocalCampaignPageBase.office_panels + [
         FieldPanel('office_type_ref', widget=OfficeTypeChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'} # TODO:  Unused but keep.  Filter by area?
         })),
@@ -46,10 +56,6 @@ class LocalCampaignPage(StateCampaignPageBase):
         ObjectList(StateCampaignPageBase.promote_panels, heading='Promote'),
         ObjectList(StateCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
     ])
-
-    parent_page_types = ['campaigns.YearPage']
-    subpage_types = []
-    
 
     def save(self, *args, **kwargs):
         self.area_ref = self.place_ref
