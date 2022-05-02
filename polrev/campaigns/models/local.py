@@ -21,9 +21,6 @@ class LocalCampaignPageBase(StateCampaignPageBase):
             'state_ref': {'id': 'id_state_ref'}
         })),
     ]
-
-    parent_page_types = ['campaigns.YearPage']
-    subpage_types = []
     
 
 class LocalCampaignPage(LocalCampaignPageBase):
@@ -56,6 +53,10 @@ class LocalCampaignPage(LocalCampaignPageBase):
         ObjectList(StateCampaignPageBase.promote_panels, heading='Promote'),
         ObjectList(StateCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
     ])
+
+    template = 'campaigns/campaign_page.html'
+    parent_page_types = ['campaigns.YearPage']
+    subpage_types = []
 
     def save(self, *args, **kwargs):
         self.area_ref = self.place_ref

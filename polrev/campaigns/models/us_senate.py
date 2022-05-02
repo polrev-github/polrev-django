@@ -10,8 +10,6 @@ class UsSenateCampaignPage(StateCampaignPageBase):
     class Meta:
         verbose_name = "U.S. Senate Campaign"
 
-    template = 'campaigns/campaign_page.html'
-
     us_senate_office_ref = models.ForeignKey(
         'offices.UsSenateOffice',
         verbose_name=_('office'),
@@ -20,6 +18,7 @@ class UsSenateCampaignPage(StateCampaignPageBase):
         null=True,
     )
 
+    template = 'campaigns/campaign_page.html'
     parent_page_types = ['campaigns.YearPage']
     subpage_types = []
 

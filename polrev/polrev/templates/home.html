@@ -65,14 +65,13 @@
                 <form name="search_form" class="search_form" method="get" action="{% pageurl blog_page 'entries_search' %}">
                     <div class="input-group">
                         <input type="search" name="q" placeholder="{% trans 'Search' %}"
-                            class="form-control py-2 border-right-0 border" >
+                            class="form-control border-right-0 border" >
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary border-left-0 border" type="submit">
                                 <i class="fa fa-search"></i>
                             </button>
                         </span>
-                    </div>
-                  
+                    </div>                  
                 </form>
 
                 {% if blog_page.display_last_entries %}

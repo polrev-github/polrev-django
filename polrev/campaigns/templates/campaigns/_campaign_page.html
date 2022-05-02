@@ -4,34 +4,23 @@
     <div class="row no-gutters">
       <div class="col-12 col-sm-12 col-lg-4 col-xl-4" style="max-width: 300px">
         {% image campaign.image original as image %}
-        <a href="{{campaign.url}}">
-            <img class="p-2"
-            src="{{image.url}}"
-            alt="{{campaign.title}}"
-            style="width: 100%; height: 300px; object-fit: cover;"
-            {% if image.focal_point %}
-            data-focus-x="{{ image.focal_point.centroid.x }}"
-            data-focus-y="{{ image.focal_point.centroid.y }}"
-            data-focus-width="{{ image.focal_point.width }}"
-            data-focus-height="{{ image.focal_point.height }}"
-            {% endif %}
-            />
-        </a>
+        <img class="p-2"
+          src="{{image.url}}"
+          alt="{{campaign.title}}"
+          style="width: 100%; height: 300px; object-fit: cover;"
+          {% if image.focal_point %}
+          data-focus-x="{{ image.focal_point.centroid.x }}"
+          data-focus-y="{{ image.focal_point.centroid.y }}"
+          data-focus-width="{{ image.focal_point.width }}"
+          data-focus-height="{{ image.focal_point.height }}"
+          {% endif %}
+        />
       </div>
       <div class="col-12 col-sm-12 col-lg-8 col-xl-8">
         <div class="card-body card-block px-2">
-          <a href="{{campaign.url}}">
-          <h4 class="card-title">{{campaign.title}}</h4>
-          </a>
-          <h5 class="card-subtitle mb-2 text-muted">
-            {{campaign.office_type_ref.title}} - <a href={{campaign.office_ref.website}}>{{campaign.area_ref.title}}</a>
-          </h5>
           <div class="card-text">
             {{ campaign.excerpt|richtext }}
           </div>
-          <p class="card-text">
-            <a class="button" href="{{campaign.url}}">continue reading&raquo;</a>
-          </p>
           <p class="card-text">
             {% for endorsement in campaign.endorsements.all %}
               <a title="{{endorsement.title}}" href="{{endorsement.website}}">

@@ -9,7 +9,7 @@ from modelcluster.fields import ParentalManyToManyField
 from wagtail.core.models import Page
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from wagtail.core.fields import StreamField
-
+from wagtail.search import index
 from wagtail.admin.edit_handlers import StreamFieldPanel, RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -23,109 +23,6 @@ from wagtailmarkdown.blocks import MarkdownBlock
 from puput.utils import get_image_model_path
 
 import us
-
-class CampaignsPage(RoutablePageMixin, Page):
-    body = StreamField([
-        ('paragraph', RichTextBlock()),
-        ('image', ImageChooserBlock()),
-        ('markdown', MarkdownBlock(icon="code")),
-        ('embed', EmbedBlock(max_width=800, max_height=400))
-    ], blank=True)
-
-    content_panels = Page.content_panels + [
-        StreamFieldPanel('body', classname="full"),
-    ]
-
-    parent_page_types = ['home.HomePage']
-    subpage_types = [
-        'campaigns.YearPage',
-    ]
-
-    @route(r'^$') # will override the default Page serving mechanism
-    def current_campaigns(self, request):
-        #campaigns = CampaignPage.objects.order_by('state_fips')
-        campaigns = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__rank', 'office_ref__number')
-
-        return self.render(request, context_overrides={
-            'title': "Current campaigns",
-            'campaigns': campaigns,
-        })
-
-    @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
-    def state_view(self, request, state_slug):
-        name = state_slug.replace('-', ' ')
-        name = ' '.join(i.capitalize() for i in name.split())
-        state = us.states.lookup(name, field='name')
-        state_fips = state.fips
-        campaigns = CampaignPage.objects.filter(state_fips=state_fips).order_by('office_type_ref__rank', 'office_ref__number')
-
-        return self.render(request, context_overrides={
-            'title': "State campaigns",
-            'campaigns': campaigns,
-        })
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(
-            request, *args, **kwargs)
-        context['campaigns'] = CampaignPage.objects.all()
-        #context['campaigns'] = CampaignPage.objects.order_by('state_fips')
-        #context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
-        context['states'] = us.states.STATES
-        return context
-
-
-class YearPage(RoutablePageMixin, Page):
-    template = 'campaigns/campaigns_page.html'
-
-    body = StreamField([
-        ('paragraph', RichTextBlock()),
-        ('image', ImageChooserBlock()),
-        ('markdown', MarkdownBlock(icon="code")),
-        ('embed', EmbedBlock(max_width=800, max_height=400))
-    ], blank=True)
-
-    content_panels = Page.content_panels + [
-        StreamFieldPanel('body', classname="full"),
-    ]
-
-    # Parent page / subpage type rules
-    parent_page_types = ['campaigns.CampaignsPage']
-    subpage_types = [
-        'campaigns.StateCampaignPage',
-        'campaigns.UsSenateCampaignPage',
-        'campaigns.UsHouseCampaignPage',
-        'campaigns.StateSenateCampaignPage',
-        'campaigns.StateHouseCampaignPage',
-        'campaigns.SchoolDistrictCampaignPage',
-
-        'campaigns.CountyCampaignPage',
-        'campaigns.LocalCampaignPage',
-        'campaigns.LocalCouncilCampaignPage',
-        'campaigns.CountyCouncilCampaignPage',
-        ]
-
-    @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
-    def category_view(self, request, state_slug):
-        name = state_slug.replace('-', ' ')
-        name = ' '.join(i.capitalize() for i in name.split())
-        state = us.states.lookup(name, field='name')
-        state_fips = state.fips
-        campaigns = CampaignPage.objects.child_of(self).filter(state_fips=state_fips)
-
-        return self.render(request, context_overrides={
-            'title': "State campaigns",
-            'campaigns': campaigns,
-        })
-
-    def get_context(self, request, *args, **kwargs):
-        context = super().get_context(request, *args, **kwargs)
-        #context['campaigns'] = CampaignPage.objects.all()
-        #context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
-        context['campaigns'] = CampaignPage.objects.child_of(self).order_by('state_fips', 'office_type_ref__priority')
-
-        context['states'] = us.states.STATES
-
-        return context
 
 class CampaignPage(Page):
 
@@ -252,6 +149,13 @@ class CampaignPage(Page):
     ]
 
     parent_page_types = ['campaigns.YearPage']
+
+    '''
+    search_fields = Page.search_fields + [
+        index.SearchField('title'),
+        index.SearchField('body'),
+    ]
+    '''
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)

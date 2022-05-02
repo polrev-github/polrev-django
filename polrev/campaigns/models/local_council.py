@@ -52,6 +52,7 @@ class LocalCouncilCampaignPage(LocalCampaignPageBase):
         ObjectList(LocalCampaignPageBase.settings_panels, heading='Settings', classname="settings"),
     ])
 
+    template = 'campaigns/campaign_page.html'
     parent_page_types = ['campaigns.YearPage']
     subpage_types = []
     

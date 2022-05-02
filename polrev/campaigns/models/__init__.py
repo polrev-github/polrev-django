@@ -1,4 +1,7 @@
 from .campaign import *
+from .campaigns import *
+from .year import *
+
 from .state import *
 from .us_senate import *
 from .us_house import *

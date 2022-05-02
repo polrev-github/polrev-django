@@ -1,28 +1,23 @@
-{% extends "base.html" %}
+{% extends "leftbar_layout.html" %}
 {% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
-{% load shuffle %}
 {% load custom_tags %}
+
+{% block leftbar %}
+{% include 'campaigns/_campaign_page_sidebar.html' %}
+{% endblock leftbar %}
 
 {% block content %}
 <div>
-  <div class="row">
-    <div class="col-12 col-md-9">
-
-      <nav class="navbar">
-        <h1 class="navbar-brand">{{page.title}}</h1>
-        <div class="d-flex">
-        </div>  
-      </nav>
-    
-
-    {% include 'campaigns/_campaign_card.html' %}
-
-</div>
-
-  <div class="col-12 col-md-3">
-    {% include 'campaigns/_sidebar.html' %}
+  <nav class="navbar">
+    <h1>{{page.title}}</h1>
+    <div class="d-flex">
+    </div>  
+  </nav>
+  <div class="pb-3">
+  {{campaign.office_type_ref.title}} - <a href={{campaign.office_ref.website}}>{{campaign.area_ref.title}}</a>
   </div>
-</div>
+  
+  {% include 'campaigns/_campaign_page.html' %}
 
 </div>
 
