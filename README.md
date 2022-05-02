@@ -180,5 +180,12 @@ rclone sync minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
 ```
 
 ## Time Synchronization
- sudo apt install ntpdate
- wsl -d docker-desktop -e "hwclock -s"
+```
+sudo apt install ntpdate
+wsl -d docker-desktop -e "hwclock -s"
+```
+
+## Search
+```
+./manage.py update_index
+```

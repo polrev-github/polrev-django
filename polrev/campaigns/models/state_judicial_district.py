@@ -5,7 +5,7 @@ from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
 
 from .state import StateCampaignPageBase
 from areas.widgets.state_judicial_district_widgets import StateJudicialDistrictChooser
-from offices.widgets import StateJudicialDistrictOfficeChooser
+from offices.widgets import OfficeTypeChooser, StateJudicialDistrictOfficeChooser
 
 class StateJudicialDistrictCampaignPage(StateCampaignPageBase):
 
@@ -30,9 +30,13 @@ class StateJudicialDistrictCampaignPage(StateCampaignPageBase):
         FieldPanel('district_ref', widget=StateJudicialDistrictChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'}
         })),
+        FieldPanel('office_type_ref', widget=OfficeTypeChooser(linked_fields={
+            'state_ref': {'id': 'id_state_ref'} # TODO:  Unused but keep.  Filter by area?
+        })),
         FieldPanel('state_judicial_district_office_ref', widget=StateJudicialDistrictOfficeChooser(linked_fields={
             'state_ref': {'id': 'id_state_ref'},
             'district_ref': {'id': 'id_district_ref'},
+            'office_type_ref': {'id': 'id_office_type_ref'},
         })),
     ]
 

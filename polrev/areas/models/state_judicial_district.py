@@ -22,7 +22,7 @@ class StateJudicialDistrict(Area):
         related_name='state_judicial_districts'
     )
 
-    district_num = models.PositiveSmallIntegerField()
+    district_num = models.PositiveSmallIntegerField('district number')
     
     panels = Area.panels + [
         FieldPanel('state_ref'),
@@ -36,5 +36,6 @@ class StateJudicialDistrict(Area):
     def save(self, *args, **kwargs):
         self.kind = self.KIND_STATE_JUDICIAL_DISTRICT
         self.state_fips = self.state_ref.state_fips
+        self.name = f"Judicial District {self.district_num}"
         self.title = f"{self.state_ref.name} {self.name}"
         super().save(*args, **kwargs)

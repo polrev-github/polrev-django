@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from generic_chooser.views import ModelChooserMixin, ModelChooserCreateTabMixin, ModelChooserViewSet
 
 from areas.models import CountyCouncilDistrict
-#from areas.forms import CountyCouncilDistrictForm
 
 class CountyCouncilDistrictChooserMixin(ModelChooserMixin):
     preserve_url_parameters = ['state_ref', 'county_ref',]  # preserve this URL parameter on pagination / search
