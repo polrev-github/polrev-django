@@ -1,29 +1,39 @@
-<ul class="pagination">
-  {% if campaigns.has_previous %}
-    <li class="page-item">
-      <a href="?page={{ campaigns.previous_page_number }}" class="page-link">
-        Previous
-      </a>
-    </li>
-  {% else %}
-    <li class="page-item disabled">
-      <a href="#" class="page-link">
-        Previous
-      </a>
-    </li>
-  {% endif %}
+{% if campaigns %}
+    {% if campaigns.has_other_pages %}
+    <nav aria-label="Item pagination">
+      <ul class="pagination">
+        {% if campaigns.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ campaigns.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% endif %}
 
-  {% if campaigns.has_next %}
-    <li class="page-item">
-      <a href="?page={{ campaigns.next_page_number }}" class="page-link">
-        Next
-      </a>
-    </li>
-  {% else %}
-    <li class="page-item disabled">
-      <a href="#" class="page-link">
-        Next
-      </a>
-    </li>
-  {% endif %}
-</ul>
+        {% for page_number in campaigns.paginator.page_range %}
+            {% if campaigns.number == page_number %}
+                <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="#">{{page_number}}</a>
+                </li
+            {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_number }}">
+                    {{ page_number }}
+                  </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if campaigns.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ campaigns.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>  
+        {% endif %}
+  </nav>
+
+    {% endif %}
+{% else %}
+    <p>No items found.</p>
+{% endif %}

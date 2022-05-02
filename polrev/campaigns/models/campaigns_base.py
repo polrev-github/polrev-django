@@ -35,7 +35,6 @@ class CampaignsPageBase(RoutablePageMixin, Page):
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        #context['campaigns'] = self.get_campaigns()
         context['states'] = us.states.STATES
 
         paginator = Paginator(self.get_campaigns(), 10)

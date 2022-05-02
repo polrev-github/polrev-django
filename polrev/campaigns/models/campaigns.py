@@ -42,16 +42,7 @@ class CampaignsPage(CampaignsPageBase):
     subpage_types = [
         'campaigns.YearPage',
     ]
-    '''
-    @route(r'^$') # will override the default Page serving mechanism
-    def current_campaigns(self, request):
-        campaigns = self.get_campaigns()
 
-        return self.render(request, context_overrides={
-            'title': "Current campaigns",
-            'campaigns': campaigns,
-        })
-    '''
     def get_campaigns(self):
         campaigns = CampaignPage.objects.live().order_by('state_fips', 'office_type_ref__rank', 'office_ref__number')
         return campaigns
