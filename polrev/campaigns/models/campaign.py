@@ -44,7 +44,7 @@ class CampaignsPage(RoutablePageMixin, Page):
     @route(r'^$') # will override the default Page serving mechanism
     def current_campaigns(self, request):
         #campaigns = CampaignPage.objects.order_by('state_fips')
-        campaigns = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority', 'office_ref__title')
+        campaigns = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__rank', 'office_ref__number')
 
         return self.render(request, context_overrides={
             'title': "Current campaigns",
@@ -52,12 +52,12 @@ class CampaignsPage(RoutablePageMixin, Page):
         })
 
     @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
-    def category_view(self, request, state_slug):
+    def state_view(self, request, state_slug):
         name = state_slug.replace('-', ' ')
         name = ' '.join(i.capitalize() for i in name.split())
         state = us.states.lookup(name, field='name')
         state_fips = state.fips
-        campaigns = CampaignPage.objects.filter(state_fips=state_fips)
+        campaigns = CampaignPage.objects.filter(state_fips=state_fips).order_by('office_type_ref__rank', 'office_ref__number')
 
         return self.render(request, context_overrides={
             'title': "State campaigns",

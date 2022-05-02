@@ -8,7 +8,7 @@ class OfficeType(models.Model):
     TYPE_STATE_HOUSE = 4
     
     class Meta:
-        ordering = ['title']
+        ordering = ['rank']
 
     title = models.CharField(
         verbose_name=_('title'),
@@ -16,7 +16,7 @@ class OfficeType(models.Model):
         help_text=_("Example: U.S. Senate, State House, Mayor, City Council")
     )
 
-    priority = models.PositiveSmallIntegerField(
+    rank = models.PositiveSmallIntegerField(
         default=1000,
         help_text=_("Sorting priority.  Example: 0, 100, etc")
     )

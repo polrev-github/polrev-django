@@ -31,6 +31,7 @@ class SchoolDistrictOfficeChooserCreateTabMixin(ModelChooserCreateTabMixin):
         data['type_ref'] = type_ref
         office_type = OfficeType.objects.get(id=type_ref)
         data['title'] = f"{office_type.title}, {district.title}"
+        data['number'] = int(district.lea_code)
         return data
 
 class SchoolDistrictOfficeChooserViewSet(ModelChooserViewSet):
@@ -41,5 +42,5 @@ class SchoolDistrictOfficeChooserViewSet(ModelChooserViewSet):
     page_title = _("Choose an office")
     per_page = 10
     #order_by = 'title'
-    fields = ['type_ref', 'state_ref', 'district_ref', 'title', 'website']
+    fields = ['type_ref', 'state_ref', 'district_ref', 'title', 'number', 'website']
 

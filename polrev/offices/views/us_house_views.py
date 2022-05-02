@@ -27,6 +27,7 @@ class UsHouseOfficeChooserCreateTabMixin(ModelChooserCreateTabMixin):
         data['state_ref'] = state_ref
         data['district_ref'] = district_ref
         data['title'] = f"U.S. House, {district.title}"
+        data['number'] = district.cd_num
         return data
 
 
@@ -35,8 +36,8 @@ class UsHouseOfficeChooserViewSet(ModelChooserViewSet):
     create_tab_mixin_class = UsHouseOfficeChooserCreateTabMixin
     #icon = 'user'
     model = UsHouseOffice
-    page_title = _("Choose a district office")
+    page_title = _("Choose an office")
     per_page = 10
     order_by = 'title'
-    fields = ['type_ref', 'state_ref', 'district_ref', 'title', 'website']
+    fields = ['type_ref', 'state_ref', 'district_ref', 'title', 'number', 'website']
 

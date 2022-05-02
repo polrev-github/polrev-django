@@ -174,6 +174,10 @@ rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
 #rclone sync polrev:polrev minio:polrev --no-gzip-encoding
 rclone sync polrev:polrev/media minio:polrev/media
 ```
+### To Production
+```
+rclone sync minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
+```
 
 ## Time Synchronization
  sudo apt install ntpdate

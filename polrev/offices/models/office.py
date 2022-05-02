@@ -13,7 +13,8 @@ class Office(models.Model):
     STATE_CHOICES = list = [(k, v) for k, v in us.states.mapping('fips', 'name').items()]
 
     class Meta:
-        ordering = ['title']
+        #ordering = ['title']
+        ordering = ['state_fips', 'number']
 
     type_ref = models.ForeignKey(
         'offices.OfficeType',
@@ -45,10 +46,16 @@ class Office(models.Model):
 
     website = models.URLField("website", blank=True)
 
+    number = models.PositiveSmallIntegerField(
+        default=0,
+        help_text=_("Sorting priority.  Example: 0, 100, etc")
+    )
+
     area_panels = []
 
     other_panels = [
         FieldPanel('website'),
+        FieldPanel('number'),
     ]
 
     def __str__(self):
