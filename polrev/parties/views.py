@@ -20,8 +20,7 @@ class PartyChooserCreateTabMixin(ModelChooserCreateTabMixin):
         data = self.initial.copy()
         state_ref = self.request.GET.get('state_ref')
         type_ref = self.request.GET.get('office_type_ref')
-        print('XXXXXXXXXXX')
-        print(state_ref)
+
         state = State.objects.get(id=state_ref)
         data['state_ref'] = state_ref
         data['type_ref'] = type_ref

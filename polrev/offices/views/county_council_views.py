@@ -24,8 +24,7 @@ class CountyCouncilOfficeChooserCreateTabMixin(ModelChooserCreateTabMixin):
         county_ref = self.request.GET.get('county_ref')
         district_ref = self.request.GET.get('district_ref')
         type_ref = self.request.GET.get('office_type_ref')
-        print('XXXXXXXXXXX')
-        print(county_ref)
+
         district = CountyCouncilDistrict.objects.get(id=district_ref)
         data['state_ref'] = state_ref
         data['county_ref'] = county_ref

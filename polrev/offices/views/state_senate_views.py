@@ -21,8 +21,7 @@ class StateSenateOfficeChooserCreateTabMixin(ModelChooserCreateTabMixin):
         data = self.initial.copy()
         state_ref = self.request.GET.get('state_ref')
         district_ref = self.request.GET.get('district_ref')
-        print('XXXXXXXXXXX')
-        print(district_ref)
+
         district = StateSenateDistrict.objects.get(id=district_ref)
         data['type_ref'] = OfficeType.TYPE_STATE_SENATE
         data['state_ref'] = state_ref

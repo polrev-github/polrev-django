@@ -25,8 +25,7 @@ class OfficeTypeChooserCreateTabMixin(ModelChooserCreateTabMixin):
         state_ref = self.request.GET.get('state_ref')
         place_ref = self.request.GET.get('place_ref')
         type_ref = self.request.GET.get('office_type_ref')
-        print('XXXXXXXXXXX')
-        print(place_ref)
+
         place = Place.objects.get(id=place_ref)
         data['state_ref'] = state_ref
         data['place_ref'] = place_ref
