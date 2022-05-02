@@ -9,8 +9,7 @@ from .local_council_district_hooks import *
 from .county_council_district_hooks import *
 from .school_district_hooks import *
 
-#from .state_judicial_district_hooks import *
-#from .county_judicial_precinct_hooks import *
+from .state_judicial_district_hooks import *
 
 class AreaGroup(ModelAdminGroup):
     menu_label = 'Areas'
@@ -27,8 +26,7 @@ class AreaGroup(ModelAdminGroup):
         CountyCouncilDistrictAdmin,
         SchoolDistrictAdmin,
 
-        #StateJudicialDistrictAdmin,
-        #CountyJudicialPrecinctAdmin
+        StateJudicialDistrictAdmin,
     )
 
 modeladmin_register(AreaGroup)

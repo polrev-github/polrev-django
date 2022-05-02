@@ -13,6 +13,8 @@ from .local_hooks import *
 from .local_council_hooks import *
 from .county_council_hooks import *
 
+from .state_judicial_district_hooks import *
+
 class OfficeGroup(ModelAdminGroup):
     menu_label = 'Offices'
     menu_icon = 'folder-open-inverse'  # change as required
@@ -29,6 +31,8 @@ class OfficeGroup(ModelAdminGroup):
         LocalOfficeAdmin,
         LocalCouncilOfficeAdmin,
         CountyCouncilOfficeAdmin,
+
+        StateJudicialDistrictOfficeAdmin,
     )
 
 modeladmin_register(OfficeGroup)

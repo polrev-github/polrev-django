@@ -10,3 +10,5 @@ from .county_widgets import *
 from .local_widgets import *
 from .local_council_widgets import *
 from .county_council_widgets import *
+
+from .state_judicial_district_widgets import *

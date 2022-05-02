@@ -25,3 +25,9 @@
 {% if campaign.ballotpedia %}
 <a class="p-1" title="Ballotpedia" href="{{campaign.ballotpedia}}"><i class="fas fa-info-circle fa-lg"></i></a>
 {% endif %}
+
+{% if campaign.office_ref.website %}
+<a class="p-1" title="Office Website" href="{{campaign.office_ref.website}}">
+    <i class="fas fa-building fa-lg"></i>
+</a>
+{% endif %}

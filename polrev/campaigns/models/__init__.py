@@ -13,3 +13,5 @@ from .county import *
 from .county_council import *
 from .local import *
 from .local_council import *
+
+from .state_judicial_district import *

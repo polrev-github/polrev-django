@@ -10,3 +10,5 @@ from .county_views import *
 from .county_council_views import *
 from .local_views import *
 from .local_council_views import *
+
+from .state_judicial_district_views import *

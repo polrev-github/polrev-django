@@ -7,5 +7,4 @@ from .county_council_district_admin import *
 from .local_council_district_admin import *
 from .school_district_admin import *
 
-#from .state_judicial_district_admin import *
-#from .county_judicial_precinct_admin import *
+from .state_judicial_district_admin import *

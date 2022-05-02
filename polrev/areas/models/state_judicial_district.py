@@ -9,7 +9,7 @@ from areas.models import Area
 
 class StateJudicialDistrict(Area):
     class Meta:
-        ordering = ['number']
+        ordering = ['district_num']
 
     def __init__(self, *args, **kwargs):        
         super().__init__(*args, **kwargs)
@@ -22,11 +22,11 @@ class StateJudicialDistrict(Area):
         related_name='state_judicial_districts'
     )
 
-    number = models.PositiveSmallIntegerField()
+    district_num = models.PositiveSmallIntegerField()
     
     panels = Area.panels + [
         FieldPanel('state_ref'),
-        FieldPanel('number'),
+        FieldPanel('district_num'),
     ]
 
     search_fields = Area.search_fields + [

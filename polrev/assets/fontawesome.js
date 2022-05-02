@@ -23,6 +23,7 @@ import {
   faCalendarPlus,
   faInfo,
   faInfoCircle,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -55,6 +56,7 @@ library.add(
   faCalendarPlus,
   faInfo,
   faInfoCircle,
+  faBuilding,
 
   faGithub,
   faFacebook, 

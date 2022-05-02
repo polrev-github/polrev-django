@@ -53,6 +53,8 @@ class YearPage(CampaignsPageBase):
         'campaigns.LocalCampaignPage',
         'campaigns.LocalCouncilCampaignPage',
         'campaigns.CountyCouncilCampaignPage',
+
+        'campaigns.StateJudicialDistrictCampaignPage',
         ]
 
     def get_campaigns(self):
