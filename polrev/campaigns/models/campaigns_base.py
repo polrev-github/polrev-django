@@ -11,11 +11,12 @@ class CampaignsPageBase(RoutablePageMixin, Page):
 
     @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
     def state_view(self, request, state_slug):
+        page = request.GET.get("page")
         name = state_slug.replace('-', ' ')
         name = ' '.join(i.capitalize() for i in name.split())
         state = us.states.lookup(name, field='name')
         state_fips = state.fips
-        campaigns = self.get_state_campaigns(state_fips)
+        campaigns = self.paginate(self.get_state_campaigns(state_fips), page)
 
         return self.render(request, context_overrides={
             'title': "State campaigns",
@@ -25,27 +26,31 @@ class CampaignsPageBase(RoutablePageMixin, Page):
     @route(r"^search/$")
     def post_search(self, request, *args, **kwargs):
         search_query = request.GET.get("q", None)
-        campaigns = self.get_campaigns()
+        page = request.GET.get("page")
         if search_query:
-            campaigns = campaigns.search(search_query)
+            campaigns = self.paginate(self.get_campaigns().search(search_query), page)
+        else:
+            campaigns = self.paginate(self.get_campaigns(), page)
+
         return self.render(request, context_overrides={
             'title': "Current campaigns",
             'campaigns': campaigns,
         })
 
+    def paginate(self, items, page):
+        paginator = Paginator(items, 10)
+        try:
+            result = paginator.page(page)
+        except PageNotAnInteger:
+            result = paginator.page(1)
+        except EmptyPage:
+            result = paginator.object_list.none()
+        return result
+
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        context['states'] = us.states.STATES
-
-        paginator = Paginator(self.get_campaigns(), 10)
         page = request.GET.get("page")
-        try:
-            campaigns = paginator.page(page)
-        except PageNotAnInteger:
-            campaigns = paginator.page(1)
-        except EmptyPage:
-            campaigns = paginator.object_list.none()
-
-        context["campaigns"] = campaigns
+        context['states'] = us.states.STATES
+        context["campaigns"] = self.paginate(self.get_campaigns(), page)
 
         return context
