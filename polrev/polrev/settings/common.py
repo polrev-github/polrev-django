@@ -46,16 +46,17 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
+    'wagtail.contrib.modeladmin',
+
     'django_social_share',
     'puput',
-    'colorful',
+    #'colorful', # something else must be importing this
     'wagtailmarkdown',
     'modelcluster',
     'taggit',
     'wagtailautocomplete',
 
     'ls.joyous',
-    'wagtail.contrib.modeladmin',
     'tz_detect',
     
     #'mjml',
@@ -225,7 +226,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
+    #os.path.join(PROJECT_DIR, 'static'),
 ]
 
 # Wagtail settings
@@ -342,3 +343,6 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"

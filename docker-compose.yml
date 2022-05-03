@@ -1,11 +1,21 @@
-services:
+version: '2'
 
+volumes:
+  db:
+  redis:
+
+networks:
+  polrev:
+    driver: bridge
+
+services:
   # Django
   web:
     build:
       context: ./polrev
     links:
       - db
+      - redis
     env_file: ./config/.dev.env
     environment:
       - IN_DOCKER=true
@@ -24,6 +34,38 @@ services:
     volumes:
       - "./polrev:/app"
 
+  celery:
+    build:
+      context: ./polrev
+    command: celery -A polrev worker -l info
+    entrypoint: ./celery-entrypoint.sh
+    volumes:
+      - "./polrev:/app"
+    env_file: ./config/.dev.env
+    environment:
+      - IN_DOCKER=true
+    links:
+      - db
+      - redis
+    networks:
+      - polrev
+
+  celery-beat:
+    build:
+      context: ./polrev
+    command: celery -A polrev beat -l info
+    entrypoint: ./celery-entrypoint.sh
+    volumes:
+      - "./polrev:/app"
+    env_file: ./config/.dev.env
+    environment:
+      - IN_DOCKER=true
+    links:
+      - db
+      - redis
+    networks:
+      - polrev
+
   # Database
   db:
     image: postgres:13.5-bullseye
@@ -34,6 +76,16 @@ services:
       - 5432:5432
     volumes:
       - db:/pg-data
+    networks:
+      - polrev
+
+  # Redis
+  redis:
+    image: 'bitnami/redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - redis:/bitnami/redis/data
     networks:
       - polrev
 
@@ -79,9 +131,3 @@ services:
       - "./letsencrypt:/letsencrypt"
     networks:
       - polrev
-
-volumes:
-  db:
-
-networks:
-  polrev:

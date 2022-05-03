@@ -13,6 +13,23 @@ services:
     labels:
       - "traefik.http.routers.web.rule=Host(`django.${POLREV_DOMAIN}`)"
 
+  celery:
+    build:
+      target: development
+    links:
+      - s3
+    env_file: ./config/.dev.env
+    environment:
+      AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+
+  celery-beat:
+    build:
+      target: development
+    links:
+      - s3
+    env_file: ./config/.dev.env
+    environment:
+      AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
 
   # Traffic
   traefik:
