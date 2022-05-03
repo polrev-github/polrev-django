@@ -45,6 +45,7 @@ django-colorfield = "^0.6.3"
 praw = "^7.5.0"
 celery = "^5.2.6"
 redis = "^4.2.2"
+django-redis = "^5.2.0"
 
 [tool.poetry.dev-dependencies]
 pyppeteer = "^0.2.6"

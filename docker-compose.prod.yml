@@ -22,6 +22,22 @@ services:
     env_file: ./config/.prod.env
     restart: always
 
+  redis:
+    env_file: ./config/.prod.env
+    restart: always
+
+  celery:
+    build:
+      target: production
+    env_file: ./config/.prod.env
+    restart: always
+
+  celery-beat:
+    build:
+      target: production
+    env_file: ./config/.prod.env
+    restart: always
+
   dbbackup:
     env_file: ./config/.prod.env
     restart: always

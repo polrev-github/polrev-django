@@ -1,0 +1,44 @@
+{% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags social_share %}
+
+<div class="py-3">
+    <h2>Featured Articles</h2>
+    {% for entry in featured_articles %}
+    {% entry_url entry blog_page as post_url %}
+    <article class="page-content blog_grid py-4">
+        {% include 'puput/entry_page_header.html' %}
+        <div>
+            {% if entry.header_image %}
+                <span class="img-responsive">
+                    {% image entry.header_image fill-800x240 as header_image %}
+                    <img alt="{{ entry.header_image.title }}" src="{{ header_image.url }}">
+                </span>
+            {% endif %}
+            {% include 'puput/entry_links.html' %}
+            </div>
+        <section class="article">
+            {% if entry.excerpt %}
+                {{ entry.excerpt|richtext }}
+            {% else %}
+                {{ entry.body|richtext|truncatewords_html:70 }}
+            {% endif %}
+            <div class="row">
+                <ul class="social-share col-md-9">
+                    <li class="social-item">
+                       {% post_to_facebook post_url '<span><i class="fab fa-facebook fa-lg"></i></span>' %}
+                    </li>
+                    <li class="social-item">
+                        {% post_to_twitter entry.title post_url '<span><i class="fab fa-twitter fa-lg"></i></span>' %}
+                    </li>
+                    <li class="social-item">
+                        {% post_to_linkendin post_url '<span><i class="fab fa-linkedin fa-lg"></i></span>' %}
+                    </li>
+                </ul>
+                <div class="col-md-3">
+                    <a class="blog_btn continue" href="{{ post_url }}">{% trans 'Continue reading' %} &raquo;</a>
+                </div>
+            </div>
+        </section>
+    </article>
+    {% endfor %}
+    </div>
+    

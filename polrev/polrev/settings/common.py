@@ -2,8 +2,11 @@ from .base import *
 
 from django.contrib.messages import constants as messages
 
-if not os.environ.get("IN_DOCKER"):
+IN_DOCKER = os.environ.get("IN_DOCKER")
+
+if not IN_DOCKER:
     os.environ['POSTGRES_HOST'] = 'localhost'
+    os.environ['REDIS_HOST'] = 'localhost'
 
 # Application definition
 
@@ -92,6 +95,9 @@ INSTALLED_APPS = [
     # Portals
     'portals.volunteer',
     'portals.run',
+
+    # Reddit
+    'reddit',
 ]
 
 MIDDLEWARE = [
@@ -344,5 +350,34 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://redis:6379"
+# Redis
+REDIS_HOST = os.environ.get("REDIS_HOST", "")
+REDIS_PORT = os.environ.get("REDIS_PORT", "")
+REDIS_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}"
+REDIS_LOCATION = f"{REDIS_URL}/polrev"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": REDIS_LOCATION,
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "default"
+
+# Celery
+CELERY_BROKER_URL = REDIS_URL
+CELERY_RESULT_BACKEND = REDIS_URL
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# Reddit
+PRAW_CLIENT_ID = os.environ.get("PRAW_CLIENT_ID", "")
+PRAW_CLIENT_SECRET = os.environ.get("PRAW_CLIENT_SECRET", "")
+PRAW_USERNAME = os.environ.get("PRAW_USERNAME", "")
+PRAW_PASSWORD = os.environ.get("PRAW_PASSWORD", "")

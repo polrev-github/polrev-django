@@ -1,0 +1,76 @@
+{% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags reddit_tags %}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}
+            {{ page.title }}{% if page.description %} | {{ page.description }}{% endif %}
+        {% endblock title %}
+    </title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="title"
+          content="{% block meta_title %}
+                        {% if blog_page.seo_title %}
+                            {{ page.seo_title }}
+                        {% else %}
+                            {{ page.title }}
+                        {% endif %}
+                   {% endblock meta_title %}"/>
+    <meta name="description"
+          content="{% block meta_description %}
+                        {{ page.search_description }}
+                   {% endblock meta_description %}"/>
+    {% block social_share %}{% endblock social_share %}
+    <link rel="canonical" href="{% block canonical %}{% canonical_url %}{% endblock canonical %}"/>
+
+    {% block styles %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png '%}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+      
+    <link href="{% static 'dist/main.css' %}" rel="stylesheet" type="text/css">
+    {% endblock %}
+  
+    {% block css %}
+        <style>
+            body {
+                --main-color: {{blog_page.main_color}};
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+{% include '_navbar.html' %}
+
+
+{% wagtailuserbar %}
+<div class="container" style="padding: 0px;">
+    <div class="row no-gutters">
+        <div class="col-md-1">
+            {% include '_ribbon.html' %}
+          </div>
+    
+        <div class="col-md-8">
+            <main class="site-main">
+                {% block content %}{% endblock content %}
+                {% block extra_content %}{% endblock extra_content %}
+            </main>
+        </div>
+
+        <div class="col-md-3">
+            {% hot_reddits %}
+        </div>
+    </div>
+</div>
+
+{% include '_footer.html' %}
+
+{% block scripts %}
+<script src="{% static 'dist/main.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>

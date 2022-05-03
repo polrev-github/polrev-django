@@ -1,6 +1,7 @@
 import os
 
 from celery import Celery
+from celery.schedules import crontab
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'polrev.settings.dev')
@@ -13,6 +14,14 @@ app = Celery('polrev')
 #   should have a `CELERY_` prefix.
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+app.conf.update(
+    CELERY_BEAT_SCHEDULE = {
+        "reddit_hot_task": {
+            "task": "reddit.tasks.hot_task",
+            "schedule": crontab(minute="*/10"),
+        },
+    }
+)
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
 

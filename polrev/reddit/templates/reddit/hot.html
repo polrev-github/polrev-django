@@ -1,0 +1,20 @@
+{% if hot_reddits %}
+<div class="row">
+<a class="link-danger" href="https://www.reddit.com/r/Political_Revolution/">
+  <span><span class="px-3">Hot on Reddit</span><i class="fab fa-reddit fa-lg"></i></span>
+</a>
+</div>
+  <ul class = "sidebar">
+  {% for reddit in hot_reddits %}
+    <div class="row">
+    <article class="box post-summary">
+        <h5>
+        <a href="https://reddit.com{{reddit.permalink}}">
+            {{reddit.title}}
+        </a>
+    </h5>
+    </article>
+  </div>
+  {% endfor %}
+  </ul>
+{% endif %}
