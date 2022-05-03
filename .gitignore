@@ -1,5 +1,6 @@
 .env
 .prod.env
+.dev.env
 
 .idea
 .vscode
