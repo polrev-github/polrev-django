@@ -16,7 +16,6 @@ services:
     links:
       - db
       - redis
-    env_file: ./config/.dev.env
     environment:
       - IN_DOCKER=true
     hostname: django.${POLREV_DOMAIN}
@@ -41,7 +40,6 @@ services:
     entrypoint: ./celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
-    env_file: ./config/.dev.env
     environment:
       - IN_DOCKER=true
     links:
@@ -57,7 +55,6 @@ services:
     entrypoint: ./celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
-    env_file: ./config/.dev.env
     environment:
       - IN_DOCKER=true
     links:
@@ -69,7 +66,6 @@ services:
   # Database
   db:
     image: postgres:13.5-bullseye
-    env_file: ./config/.dev.env
     environment:
       - PGDATA=/pg-data
     ports:
@@ -94,7 +90,6 @@ services:
   dbbackup:
       image: prodrigestivill/postgres-backup-local
       user: postgres:postgres
-      env_file: ./config/.dev.env
       environment:
         - SCHEDULE=@daily
         - BACKUP_KEEP_DAYS=7
