@@ -26,7 +26,29 @@ import us
 
 class CampaignPage(Page):
 
-    STATE_CHOICES = list = [(k, v) for k, v in us.states.mapping('fips', 'name').items()]
+    STATUS_RUNNING = 0
+    STATUS_DROPPED_OUT = 1
+    STATUS_WON_PRIMARY = 2
+    STATUS_LOST_PRIMARY = 3
+    STATUS_WON_RACE = 4
+    STATUS_LOST_RACE = 5
+
+    STATUS_MAP = {
+        STATUS_RUNNING: 'Running',
+        STATUS_DROPPED_OUT: 'Dropped Out',
+        STATUS_WON_PRIMARY: 'Won Primary',
+        STATUS_LOST_PRIMARY: 'Lost Primary',
+        STATUS_WON_RACE: 'Won Race',
+        STATUS_LOST_RACE: 'Lost Race'
+    }
+
+    STATUS_CHOICES = [(k, v) for k, v in STATUS_MAP.items()]
+    IMPOTENT_LIST = [STATUS_DROPPED_OUT, STATUS_LOST_PRIMARY]
+
+    status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=STATUS_RUNNING)
+    potent = models.BooleanField(default=True)
+
+    STATE_CHOICES = [(k, v) for k, v in us.states.mapping('fips', 'name').items()]
 
     state_fips = models.CharField(
         choices=STATE_CHOICES,
@@ -113,6 +135,7 @@ class CampaignPage(Page):
     office_panels = []
 
     content_panels = Page.content_panels + [
+        FieldPanel('status'),
         ImageChooserPanel('image'),
         #AutocompletePanel('parties', target_model='parties.Party'),
         AutocompletePanel('endorsements', target_model='parties.Party'),
@@ -152,19 +175,20 @@ class CampaignPage(Page):
 
     '''
     search_fields = Page.search_fields + [
-        index.SearchField('title'),
         index.SearchField('body'),
     ]
     '''
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
-        #context['campaigns'] = CampaignPage.objects.all()
-        #context['campaigns'] = CampaignPage.objects.all().order_by('state_fips', 'office_type_ref__priority')
         context['campaign'] = self
 
         return context
 
+    def save(self, *args, **kwargs):
+        self.potent = False if self.status in self.IMPOTENT_LIST else True
+
+        super().save(*args, **kwargs)
 
 class FederalCampaignPage(CampaignPage):
     pass
