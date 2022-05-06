@@ -1,0 +1,95 @@
+# Copy to docker-compose.override.yml
+
+services:
+  # Django
+  web:
+    build:
+      target: development
+
+    links:
+      - s3
+    env_file: ./config/.dev.env
+    environment:
+      AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+    labels:
+      - "traefik.http.routers.web.rule=Host(`django.${POLREV_DOMAIN}`)"
+
+  celery:
+    build:
+      target: development
+    links:
+      - s3
+    env_file: ./config/.dev.env
+    environment:
+      AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+
+  celery-beat:
+    build:
+      target: development
+    links:
+      - s3
+    env_file: ./config/.dev.env
+    environment:
+      AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+
+  # Traffic
+  traefik:
+    ports:
+      - "8888:80"
+      - "8080:8080"
+
+  # Storage
+  s3:
+    image: bitnami/minio:latest
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - s3:/data
+    env_file: ./config/.dev.env
+    hostname: s3.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.s3.rule=Host(`s3.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.s3.entrypoints=web"
+
+  # Database Admin
+  dbadmin:
+    image: dpage/pgadmin4:latest
+    links:
+      - db
+    ports:
+        - "4444:80"
+    env_file: ./config/.dev.env
+    hostname: dbadmin.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dbadmin.rule=Host(`dbadmin.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.dbadmin.entrypoints=web"
+
+    volumes:
+        - dbadmin:/var/lib/pgadmin4/storage
+    networks:
+      - polrev
+
+  # Mail
+  maildev:
+    image: maildev/maildev:latest
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    env_file: ./config/.dev.env
+    hostname: maildev.${POLREV_DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maildev.rule=Host(`maildev.${POLREV_DOMAIN}`)"
+      - "traefik.http.routers.maildev.entrypoints=web"
+    volumes:
+      - maildev:/var/lib/maildev
+    networks:
+      - polrev
+
+volumes:
+  s3:
+  dbadmin:
+  maildev:

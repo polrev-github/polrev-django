@@ -23,3 +23,5 @@ letsencrypt
 
 # celery beat schedule file
 celerybeat-schedule
+
+docker-compose.override.yml

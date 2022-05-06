@@ -1,5 +1,6 @@
-services:
+# Copy to docker-compose.override.yml
 
+services:
   # Django
   web:
     build:
