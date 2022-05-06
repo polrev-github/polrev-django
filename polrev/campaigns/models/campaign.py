@@ -173,11 +173,11 @@ class CampaignPage(Page):
 
     parent_page_types = ['campaigns.YearPage']
 
-    '''
+
     search_fields = Page.search_fields + [
-        index.SearchField('body'),
+        #index.SearchField('body'),
+        index.FilterField('potent')
     ]
-    '''
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
