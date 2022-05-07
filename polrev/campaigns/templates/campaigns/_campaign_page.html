@@ -1,5 +1,13 @@
 {% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
 
+<p class="card-text">
+    {% for endorsement in campaign.endorsements.all %}
+      <a title="{{endorsement.title}}" href="{{endorsement.website}}">
+        <span class="badge" style="background-color:{{endorsement.color}};">{{endorsement.abbrev}}</span>
+      </a>
+    {% endfor %}
+  </p>
+
 <div class="card">
     <div class="row g-0">
       <div class="col-12 col-sm-12 col-lg-4 col-xl-4" style="max-width: 300px">
@@ -21,13 +29,6 @@
           <div class="card-text">
             {{ campaign.excerpt|richtext }}
           </div>
-          <p class="card-text">
-            {% for endorsement in campaign.endorsements.all %}
-              <a title="{{endorsement.title}}" href="{{endorsement.website}}">
-                <span class="badge" style="background-color:{{endorsement.color}};">{{endorsement.abbrev}}</span>
-              </a>
-            {% endfor %}
-          </p>
         </div>
       </div>
     </div>

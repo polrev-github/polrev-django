@@ -1,0 +1,58 @@
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+
+{% entry_url entry blog_page as post_url %}
+<article class="page-content blog_grid">
+  {% include 'puput/entry_page_header.html' %}
+  <div class="row">
+    {% if entry.header_image %}
+    <div class="col-12 col-sm-12 col-lg-4 col-xl-4">
+              {% image entry.header_image original as header_image %}
+              <img
+                  src="{{header_image.url}}"
+                  alt="{{entry.header_image.title}}"
+                  style="width: 100%; height: 200px; object-fit: cover;"
+                  {% if image.focal_point %}
+                  data-focus-x="{{ image.focal_point.centroid.x }}"
+                  data-focus-y="{{ image.focal_point.centroid.y }}"
+                  data-focus-width="{{ image.focal_point.width }}"
+                  data-focus-height="{{ image.focal_point.height }}"
+                  {% endif %}
+              />
+    </div>
+    {% endif %}
+    {% if entry.header_image %}
+    <div class="col-12 col-sm-12 col-lg-8 col-xl-8">
+    {% else %}
+    <div>
+    {% endif %}
+    <section class="article">
+      {% if entry.excerpt %}
+          {{ entry.excerpt|richtext }}
+      {% else %}
+          {{ entry.body|richtext|truncatewords_html:70 }}
+      {% endif %}
+      <nav class="navbar navbar-expand justify-content-end">
+        <ul class="navbar-nav">
+            <li class="nav-item px-2">
+                {% post_to_facebook post_url '<span><i class="fab fa-facebook fa-lg"></i></span>' %}
+            </li>
+            <li class="nav-item px-2">
+                {% post_to_twitter entry.title post_url '<span><i class="fab fa-twitter fa-lg"></i></span>' %}
+            </li>
+            <li class="nav-item px-2">
+                {% post_to_linkendin post_url '<span><i class="fab fa-linkedin fa-lg"></i></span>' %}
+            </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="blog_btn continue" href="{{ post_url }}">{% trans 'Continue reading' %} &raquo;</a>
+          </li>
+        </ul>
+      </nav>
+      </div>
+    </section>
+  </div>
+  <div class="row g-0">
+    {% include 'puput/entry_links.html' %}
+  </div>
+</article>

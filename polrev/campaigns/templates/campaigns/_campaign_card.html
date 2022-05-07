@@ -1,11 +1,19 @@
 {% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
 
+<style>
+  @media (max-width: 576px) {
+  .img-responsive {
+    height: 400px
+  }
+  }
+</style>
+
 <div class="card">
     <div class="row g-0">
-      <div class="col-12 col-sm-12 col-lg-4 col-xl-4" style="max-width: 300px">
+      <div class="col-12 col-sm-12 col-lg-3 col-xl-3" style="max-width: 300px;">
         {% image campaign.image original as image %}
         <a href="{{campaign.url}}">
-            <img class="p-2"
+          <img class="img-fluid p-2"
             src="{{image.url}}"
             alt="{{campaign.title}}"
             style="width: 100%; height: 300px; object-fit: cover;"
@@ -14,11 +22,11 @@
             data-focus-y="{{ image.focal_point.centroid.y }}"
             data-focus-width="{{ image.focal_point.width }}"
             data-focus-height="{{ image.focal_point.height }}"
-            {% endif %}
-            />
+          {% endif %}
+          />
         </a>
       </div>
-      <div class="col-12 col-sm-12 col-lg-8 col-xl-8">
+      <div class="col-12 col-sm-12 col-lg-9 col-xl-9">
         <div class="card-body card-block px-2">
           <a href="{{campaign.url}}">
           <h4 class="card-title">{{campaign.title}}</h4>
@@ -26,19 +34,22 @@
           <h5 class="card-subtitle mb-2 text-muted">
             {{campaign.office_ref.title}}
           </h5>
-          <div class="card-text">
-            {{ campaign.excerpt|richtext }}
-          </div>
-          <p class="card-text">
-            <a class="button" href="{{campaign.url}}">continue reading&raquo;</a>
-          </p>
           <p class="card-text">
             {% for endorsement in campaign.endorsements.all %}
               <a title="{{endorsement.title}}" href="{{endorsement.website}}">
                 <span class="badge" style="background-color:{{endorsement.color}};">{{endorsement.abbrev}}</span>
               </a>
             {% endfor %}
-          </p>
+          </p>  
+          <button class="accordion-button collapsed d-md-none px-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{campaign.id}}" aria-expanded="false" aria-controls="collapseExample">
+            + LEARN MORE
+          </button>
+          <div class="card-text collapse dont-collapse-sm" id="collapse-{{campaign.id}}">
+            {{ campaign.excerpt|richtext }}
+            <p class="card-text">
+              <a class="button" href="{{campaign.url}}">continue reading&raquo;</a>
+            </p>  
+          </div>
         </div>
       </div>
     </div>

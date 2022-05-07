@@ -2,7 +2,7 @@
 
 ## Development Setup
 
-### Linux
+### Linux / WSL
 > .bashrc
 ```bash
 export DOCKER_GATEWAY_HOST="`hostname -I` |awk '{print $1}'  `"
@@ -36,13 +36,15 @@ Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Ch
 ### Development
 
 ```bash
+cp docker-compose.dev.yml docker-compose.override.yml
 docker-compose up
 ```
 
 ### Production
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+cp docker-compose.prod.yml docker-compose.override.yml
+docker-compose up -d
 ```
 
 ## Dump Data

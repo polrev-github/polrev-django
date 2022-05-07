@@ -1,0 +1,46 @@
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+
+{% entry_url entry blog_page as post_url %}
+<article class="page-content blog_grid">
+    {% include 'puput/entry_page_header.html' %}
+    <div>
+        {% if entry.header_image %}
+            <span class="img-responsive">
+                <img
+                src="{{ header_image.url }}"
+                alt="{{ entry.header_image.title }}"
+                {% if header_image.focal_point %}
+                    data-focus-x="{{ header_image.focal_point.centroid.x }}"
+                    data-focus-y="{{ header_image.focal_point.centroid.y }}"
+                    data-focus-width="{{ header_image.focal_point.width }}"
+                    data-focus-height="{{ header_image.focal_point.height }}"
+                {% endif %}
+                />
+            </span>
+        {% endif %}
+        {% include 'puput/entry_links.html' %}
+        </div>
+    <section class="article">
+        {% if entry.excerpt %}
+            {{ entry.excerpt|richtext }}
+        {% else %}
+            {{ entry.body|richtext|truncatewords_html:70 }}
+        {% endif %}
+        <div class="row">
+            <ul class="social-share col-md-9">
+                <li class="social-item">
+                   {% post_to_facebook post_url '<span><i class="fab fa-facebook fa-lg"></i></span>' %}
+                </li>
+                <li class="social-item">
+                    {% post_to_twitter entry.title post_url '<span><i class="fab fa-twitter fa-lg"></i></span>' %}
+                </li>
+                <li class="social-item">
+                    {% post_to_linkendin post_url '<span><i class="fab fa-linkedin fa-lg"></i></span>' %}
+                </li>
+            </ul>
+            <div class="col-md-3">
+                <a class="blog_btn continue" href="{{ post_url }}">{% trans 'Continue reading' %} &raquo;</a>
+            </div>
+        </div>
+    </section>
+</article>
