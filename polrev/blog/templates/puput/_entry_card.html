@@ -5,19 +5,19 @@
   {% include 'puput/entry_page_header.html' %}
   <div class="row">
     {% if entry.header_image %}
-    <div class="col-12 col-sm-12 col-lg-4 col-xl-4">
-              {% image entry.header_image original as header_image %}
-              <img
-                  src="{{header_image.url}}"
-                  alt="{{entry.header_image.title}}"
-                  style="width: 100%; height: 200px; object-fit: cover;"
-                  {% if image.focal_point %}
-                  data-focus-x="{{ image.focal_point.centroid.x }}"
-                  data-focus-y="{{ image.focal_point.centroid.y }}"
-                  data-focus-width="{{ image.focal_point.width }}"
-                  data-focus-height="{{ image.focal_point.height }}"
-                  {% endif %}
-              />
+    <div class="py-2 col-12 col-sm-12 col-lg-4 col-xl-4">
+      {% image entry.header_image original as header_image %}
+      <img
+          src="{{header_image.url}}"
+          alt="{{entry.header_image.title}}"
+          style="width: 100%; height: 200px; object-fit: cover;"
+          {% if image.focal_point %}
+          data-focus-x="{{ image.focal_point.centroid.x }}"
+          data-focus-y="{{ image.focal_point.centroid.y }}"
+          data-focus-width="{{ image.focal_point.width }}"
+          data-focus-height="{{ image.focal_point.height }}"
+          {% endif %}
+      />
     </div>
     {% endif %}
     {% if entry.header_image %}
