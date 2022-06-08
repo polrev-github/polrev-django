@@ -1,4 +1,5 @@
-import us
+#import us
+import usa
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
@@ -14,7 +15,10 @@ class CampaignsPageBase(RoutablePageMixin, Page):
         page = request.GET.get("page")
         name = state_slug.replace('-', ' ')
         name = ' '.join(i.capitalize() for i in name.split())
-        state = us.states.lookup(name, field='name')
+        if name == 'District Of Columbia':
+            name = 'District of Columbia'
+        #state = us.states.lookup(name, field='name')
+        state = usa.states.lookup(name, field='name')
         state_fips = state.fips
         campaigns = self.paginate(self.get_state_campaigns(state_fips), page)
 
@@ -50,7 +54,8 @@ class CampaignsPageBase(RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         page = request.GET.get("page")
-        context['states'] = us.states.STATES
+        #context['states'] = us.states.STATES
+        context['states'] = usa.states.STATES_AND_TERRITORIES
         context["campaigns"] = self.paginate(self.get_campaigns(), page)
 
         return context
