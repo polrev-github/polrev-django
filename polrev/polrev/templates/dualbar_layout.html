@@ -1,0 +1,69 @@
+{% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags %}
+
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  {% block head %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+
+  {% block styles %}
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png '%}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}">
+  
+  <link href="{% static 'dist/main.css' %}" rel="stylesheet" type="text/css">
+  {% endblock %}
+
+  {% block extra_css %}{% endblock %}
+
+  <title>
+    {% block title %}
+    {{ page.title }}
+    {% endblock title %}
+  </title>
+
+  {% endblock %}
+
+</head>
+
+<body>
+  {% include '_navbar.html' %}
+
+  <div class="container-fluid g-0">
+    <div class="row">
+
+      <div class="col-12 col-md-2">
+        {% block leftbar %}{% endblock %}
+      </div>
+  
+      <div class="col-12 col-md-8">
+        <main class="site-main">
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+
+      <div class="col-12 col-md-2">
+        {% block rightbar %}{% endblock %}
+      </div>
+
+    </div>
+  </div>
+
+  {% include '_footer.html' %}
+
+  {% block scripts %}
+  <script src="{% static 'dist/main.js' %}" async></script>
+  {% endblock %}
+
+  {% block extra_js %}{% endblock %}
+  {% load tz_detect %}
+  {% tz_detect %}
+</body>
+
+</html>

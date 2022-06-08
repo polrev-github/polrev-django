@@ -1,11 +1,15 @@
-{% extends "leftbar_layout.html" %}
+{% extends "dualbar_layout.html" %}
 {% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
 {% load shuffle %}
 {% load custom_tags %}
 
 {% block leftbar %}
-{% include 'campaigns/_sidebar.html' %}
+{% include 'campaigns/_leftbar.html' %}
 {% endblock leftbar %}
+
+{% block rightbar %}
+{% include 'campaigns/_rightbar.html' %}
+{% endblock rightbar %}
 
 {% block content %}
 <div>
