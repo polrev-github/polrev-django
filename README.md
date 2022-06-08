@@ -170,13 +170,14 @@ polrev_dev=# delete from wagtailimages_rendition;
 
 https://github.com/rclone/rclone/issues/2658
 
+### From Production to Development
 ```
 rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
 ./manage.py dbrestore -z
-#rclone sync polrev:polrev minio:polrev --no-gzip-encoding
 rclone sync polrev:polrev/media minio:polrev/media
 ```
-### To Production
+
+### From Development to Production
 ```
 rclone sync minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
 ```

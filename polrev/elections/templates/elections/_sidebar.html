@@ -1,0 +1,29 @@
+{% load wagtailcore_tags wagtailroutablepage_tags %}
+
+<nav class="leftbar" style="height: 100%">
+
+  <div class="d-flex flex-column flex-shrink-0 p-2">
+
+    <form role="search" method="get" class="form-search" action="{% routablepageurl page "post_search" %}">
+      <div class="input-group">
+        <input type="text"  name="q" placeholder="Search&hellip;" title="Search for:"
+          class="form-control search-query"/>
+        <span class="input-group-append">
+          <button class="btn btn-secondary" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </form>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/forms/endorse-a-candidate/">
+          Endorse a Candidate
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</nav>

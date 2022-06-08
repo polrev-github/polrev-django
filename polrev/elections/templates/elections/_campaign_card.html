@@ -1,0 +1,59 @@
+{% load static i18n wagtailcore_tags wagtailimages_tags puput_tags social_share %}
+
+<style>
+  @media (max-width: 576px) {
+  .img-responsive {
+    height: 400px
+  }
+  }
+</style>
+
+<div class="card">
+    <div class="row g-0">
+      <div class="col-12 col-sm-12 col-lg-3 col-xl-3" style="max-width: 300px;">
+        {% image election.image original as image %}
+        <a href="{{election.url}}">
+          <img class="img-fluid p-2"
+            src="{{image.url}}"
+            alt="{{election.title}}"
+            style="width: 100%; height: 300px; object-fit: cover;"
+            {% if image.focal_point %}
+            data-focus-x="{{ image.focal_point.centroid.x }}"
+            data-focus-y="{{ image.focal_point.centroid.y }}"
+            data-focus-width="{{ image.focal_point.width }}"
+            data-focus-height="{{ image.focal_point.height }}"
+          {% endif %}
+          />
+        </a>
+      </div>
+      <div class="col-12 col-sm-12 col-lg-9 col-xl-9">
+        <div class="card-body card-block px-2">
+          <a href="{{election.url}}">
+          <h4 class="card-title">{{election.title}}</h4>
+          </a>
+          <h5 class="card-subtitle mb-2 text-muted">
+            {{election.office_ref.title}}
+          </h5>
+          <p class="card-text">
+            {% for endorsement in election.endorsements.all %}
+              <a title="{{endorsement.title}}" href="{{endorsement.website}}">
+                <span class="badge" style="background-color:{{endorsement.color}};">{{endorsement.abbrev}}</span>
+              </a>
+            {% endfor %}
+          </p>  
+          <button class="accordion-button collapsed d-md-none px-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{election.id}}" aria-expanded="false" aria-controls="collapseExample">
+            + LEARN MORE
+          </button>
+          <div class="card-text collapse dont-collapse-sm" id="collapse-{{election.id}}">
+            {{ election.excerpt|richtext }}
+            <p class="card-text">
+              <a class="button" href="{{election.url}}">continue reading&raquo;</a>
+            </p>  
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer w-100 text-muted">
+        {% include 'elections/_election_links.html' %}
+    </div>
+  </div>
