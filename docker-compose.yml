@@ -113,7 +113,7 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesResolvers.le.acme.email=kurtis@political-revolution.com"
+      - "--certificatesResolvers.le.acme.email=kurtis@pol-rev.com"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
       - "--certificatesResolvers.le.acme.tlsChallenge=true"
       - "--certificatesResolvers.le.acme.httpChallenge=true"

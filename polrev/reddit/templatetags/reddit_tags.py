@@ -10,5 +10,8 @@ register = template.Library()
 @register.inclusion_tag("reddit/hot.html")
 def hot_reddits():
     client = get_redis_connection("default")
-    hot = json.loads(client.get('reddit:hot'))
+    data = client.get('reddit:hot')
+    if data is None:
+        return {'hot_reddits': []}
+    hot = json.loads(data)
     return {'hot_reddits': hot }

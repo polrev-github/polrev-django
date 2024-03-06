@@ -5,7 +5,7 @@
 ### Linux / WSL
 > .bashrc
 ```bash
-export DOCKER_GATEWAY_HOST="`hostname -I` |awk '{print $1}'  `"
+export DOCKER_GATEWAY_HOST="`hostname -I | awk '{print $1}'`"
 ```
 
 ## Django Setup
@@ -17,7 +17,7 @@ python manage.py migrate
 python manage.py collectstatic
 python manage.py createsuperuser
 
-python manage.py wp2puput polrev.xml --site=https://political-revolution.com
+python manage.py wp2puput polrev.xml --site=https://pol-rev.com
 
 python manage.py runserver
 
@@ -36,6 +36,8 @@ Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Ch
 ### Development
 
 ```bash
+cp .env.example .env
+cp ./config/.dev.env.example ./config/.dev.env
 cp docker-compose.dev.yml docker-compose.override.yml
 docker-compose up
 ```
@@ -126,8 +128,14 @@ psql -U polrev polrev_dev
 This is set up to dump to an s3 bucket
 Run from inside the django container
 
+### Backup
 ```
 ./manage.py dbbackup -z
+```
+
+### Restore
+```
+./manage.py dbrestore -z
 ```
 
 ## [prodrigestivill/postgres-backup-local](https://hub.docker.com/r/prodrigestivill/postgres-backup-local)
@@ -150,7 +158,7 @@ docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev_dev | gzip -9 > 202
 
 ### SCP
 ```
-scp 20220418.sql.gz me@political-revolution.com:Dev
+scp 20220418.sql.gz me@pol-rev.com:Dev
 ```
 
 ### Restore

@@ -253,7 +253,7 @@ WAGTAILMARKDOWN = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'https://political-revolution.com'
+BASE_URL = 'https://pol-rev.com'
 
 PUPUT_AS_PLUGIN = True
 PUPUT_COMMENTS_PROVIDER = "puput.comments.DjangoCommentsProvider"
