@@ -7,6 +7,11 @@ IN_DOCKER = os.environ.get("IN_DOCKER")
 if not IN_DOCKER:
     os.environ['POSTGRES_HOST'] = 'localhost'
     os.environ['REDIS_HOST'] = 'localhost'
+    #AWS_S3_ENDPOINT_URL=http://localhost:9000
+    os.environ['AWS_S3_ENDPOINT_URL'] = 'http://localhost:9000'
+    #AWS_BACKUP_S3_ENDPOINT_URL=http://localhost:9000
+    os.environ['AWS_BACKUP_S3_ENDPOINT_URL'] = 'http://localhost:9000'
+
 
 # Application definition
 

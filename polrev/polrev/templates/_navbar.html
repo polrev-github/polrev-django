@@ -13,6 +13,10 @@
         <ul class="navbar-nav  mx-auto mb-2 mb-md-0">
 
           <li class="nav-item px-2">
+            <a class="nav-link" href="{% url 'mission' %}">Mission</a>
+          </li>
+
+          <li class="nav-item px-2">
             <a class="nav-link" href="https://secure.actblue.com/donate/the-politicalrevolution" target="blank">Donate</a>
           </li>
 
@@ -37,7 +41,7 @@
           </li>
 
           <li class="nav-item px-2">
-            <a class="nav-link" href="https://secure.actblue.com/donate/revolutionbuttons" target="blank">Merch</a>
+            <a class="nav-link" href="https://shop.pol-rev.com/" target="blank">Merch</a>
           </li>
 
           <li class="nav-item dropdown px-2">
@@ -47,7 +51,6 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="moreDropdown">
               <a class="dropdown-item" href="{% url 'about' %}">About Us</a>
-              <a class="dropdown-item" href="{% url 'mission' %}">Our Mission</a>
               <a class="dropdown-item" href="{% url 'by_laws' %}">By-Laws</a>
               <a class="dropdown-item" href="{% url 'issues' %}">Issues</a>
               <a class="dropdown-item" href="{% url 'transparency' %}">Transparency</a>

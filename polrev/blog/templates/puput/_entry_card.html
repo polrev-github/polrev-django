@@ -26,11 +26,7 @@
     <div>
     {% endif %}
     <section class="article">
-      {% if entry.excerpt %}
-          {{ entry.excerpt|richtext }}
-      {% else %}
-          {{ entry.body|richtext|truncatewords_html:70 }}
-      {% endif %}
+      {{ entry.get_excerpt }}
       <nav class="navbar navbar-expand justify-content-end">
         <ul class="navbar-nav">
             <li class="nav-item px-2">
