@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static i18n wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags wagtailuserbar puput_tags social_share %}
+
+{% block content %}
+<div class="container py-3">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>{{ page.title }}</h1>
+                {% include_block page.body %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

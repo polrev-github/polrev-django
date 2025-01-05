@@ -85,6 +85,7 @@ INSTALLED_APPS = [
 
     'polrev',
     'home',
+    'info',
     'blog',
     'forms',
     'search',
@@ -126,6 +127,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'info', 'templates'),
             os.path.join(BASE_DIR, 'accounts', 'templates'),
             os.path.join(BASE_DIR, 'blog', 'templates'),
             os.path.join(BASE_DIR, 'events', 'templates'),
