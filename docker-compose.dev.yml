@@ -8,40 +8,43 @@ services:
 
     links:
       - s3
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
     environment:
       AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+      #AWS_S3_ENDPOINT_URL: http://s3.${POLREV_DOMAIN}:9000
     labels:
       - "traefik.http.routers.web.rule=Host(`django.${POLREV_DOMAIN}`)"
 
   # Database
   db:
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
 
   redis:
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
 
   celery:
     build:
       target: development
     links:
       - s3
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
     environment:
       AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+      #AWS_S3_ENDPOINT_URL: http://s3.${POLREV_DOMAIN}:9000
 
   celery-beat:
     build:
       target: development
     links:
       - s3
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
     environment:
       AWS_S3_ENDPOINT_URL: http://${DOCKER_GATEWAY_HOST:-host.docker.internal}:9000
+      #AWS_S3_ENDPOINT_URL: http://s3.${POLREV_DOMAIN}:9000
 
   # Traffic
   traefik:
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
     ports:
       - "8888:80"
       - "8080:8080"
@@ -54,12 +57,17 @@ services:
       - 9001:9001
     volumes:
       - s3:/data
-    env_file: ./config/.dev.env
+      - ./init-folders.sh:/init-folders.sh
+    env_file: ./config/.env
     hostname: s3.${POLREV_DOMAIN}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.s3.rule=Host(`s3.${POLREV_DOMAIN}`)"
       - "traefik.http.routers.s3.entrypoints=web"
+    command: |
+      sh -c "
+      /init-folders.sh && 
+      /opt/bitnami/scripts/minio/run.sh"
 
   # Database Admin
   dbadmin:
@@ -68,7 +76,7 @@ services:
       - db
     ports:
         - "4444:80"
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
     hostname: dbadmin.${POLREV_DOMAIN}
     labels:
       - "traefik.enable=true"
@@ -86,7 +94,7 @@ services:
     ports:
       - "1080:1080"
       - "1025:1025"
-    env_file: ./config/.dev.env
+    env_file: ./config/.env
     hostname: maildev.${POLREV_DOMAIN}
     labels:
       - "traefik.enable=true"
@@ -96,6 +104,9 @@ services:
       - maildev:/var/lib/maildev
     networks:
       - polrev
+
+  dbbackup:
+    env_file: ./config/.env
 
 volumes:
   s3:

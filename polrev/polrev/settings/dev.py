@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from .base import *
 
 if not os.environ.get("IN_DOCKER"):
-    dotenv_path = os.path.join(BASE_DIR, '../config/.dev.env')
+    dotenv_path = os.path.join(BASE_DIR, '../config/.env')
     load_dotenv(dotenv_path)
 
 from .common import *

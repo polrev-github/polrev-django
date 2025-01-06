@@ -5,7 +5,7 @@ services:
   web:
     build:
       target: production
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
     labels:
       - "traefik.http.routers.web.rule=Host(`${POLREV_DOMAIN}`, `www.${POLREV_DOMAIN}`)"
@@ -20,29 +20,29 @@ services:
 
   # Database
   db:
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
 
   redis:
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
 
   celery:
     build:
       target: production
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
 
   celery-beat:
     build:
       target: production
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
 
   dbbackup:
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
 
   traefik:
-    env_file: ./config/.prod.env
+    env_file: ./config/.env
     restart: always
