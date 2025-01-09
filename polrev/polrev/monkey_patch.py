@@ -2,7 +2,7 @@ from puput.models import EntryPage
 
 def get_sitemap_urls(self, request=None):
     from puput.urls import get_entry_url
-    from wagtail.core.models import Site
+    from wagtail.models import Site
     root_page = Site.find_for_request(request).root_page
     root_url = self.get_url_parts()[1]
     #entry_url = get_entry_url(self, self.blog_page.page_ptr, root_url)

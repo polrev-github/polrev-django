@@ -1,7 +1,7 @@
 from django.db import models
 
-from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.models import Page
+from wagtail.admin.panels import FieldPanel
 
 class FormsPage(Page):
 

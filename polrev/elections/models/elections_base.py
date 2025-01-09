@@ -2,7 +2,7 @@ import us
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 class ElectionsPageBase(RoutablePageMixin, Page):

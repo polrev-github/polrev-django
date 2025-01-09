@@ -1,8 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import UserManager as UserManagerBase
 
-from allauth.exceptions import ImmediateHttpResponse
-from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+#from allauth.exceptions import ImmediateHttpResponse
+#from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 class UserManager(UserManagerBase):
     pass

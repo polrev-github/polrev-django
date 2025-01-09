@@ -1,6 +1,6 @@
-from wagtail.core import hooks
+from wagtail import hooks
 
-from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
+from wagtail_modeladmin.options import ModelAdmin, modeladmin_register
 from offices.models import StateSenateOffice
 
 from offices.views import StateSenateOfficeChooserViewSet

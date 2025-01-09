@@ -1,10 +1,11 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-from wagtail.core.models import Page
-from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.models import Page
+from wagtail.fields import StreamField
+#from wagtail.admin.panels import StreamFieldPanel
+from wagtail.admin.panels import FieldPanel
 
-from wagtail.core.blocks import RichTextBlock
+from wagtail.blocks import RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
@@ -21,7 +22,8 @@ class HomePage(Page):
     ], blank=True)
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body', classname="full"),
+        #StreamFieldPanel('body', classname="full"),
+        FieldPanel('body', classname="full"),
     ]
     '''
     def get_context(self, request, *args, **kwargs):

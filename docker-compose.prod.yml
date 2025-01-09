@@ -39,10 +39,6 @@ services:
     env_file: ./config/.env
     restart: always
 
-  dbbackup:
-    env_file: ./config/.env
-    restart: always
-
   traefik:
     env_file: ./config/.env
     restart: always

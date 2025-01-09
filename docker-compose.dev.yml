@@ -88,26 +88,6 @@ services:
     networks:
       - polrev
 
-  # Mail
-  maildev:
-    image: maildev/maildev:latest
-    ports:
-      - "1080:1080"
-      - "1025:1025"
-    env_file: ./config/.env
-    hostname: maildev.${POLREV_DOMAIN}
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.maildev.rule=Host(`maildev.${POLREV_DOMAIN}`)"
-      - "traefik.http.routers.maildev.entrypoints=web"
-    volumes:
-      - maildev:/var/lib/maildev
-    networks:
-      - polrev
-
-  dbbackup:
-    env_file: ./config/.env
-
 volumes:
   s3:
   dbadmin:

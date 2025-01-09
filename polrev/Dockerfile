@@ -22,7 +22,8 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   PIP_DEFAULT_TIMEOUT=100 \
   # poetry:
-  POETRY_VERSION=1.1.12 \
+  #POETRY_VERSION=1.1.12 \
+  POETRY_VERSION=1.8.2 \
   POETRY_NO_INTERACTION=1 \
   POETRY_VIRTUALENVS_CREATE=false \
   POETRY_CACHE_DIR='/var/cache/pypoetry' \
@@ -116,7 +117,7 @@ RUN set -ex \
   # smoke test
   && yarn --version
   
-FROM python-node-base as django-base
+FROM python-node-base AS django-base
 
 # Install system packages required by Wagtail and Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \

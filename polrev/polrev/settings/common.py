@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
+    'wagtail',
     'generic_chooser',
 
     # AllAuth
@@ -54,7 +54,8 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
-    'wagtail.contrib.modeladmin',
+    #'wagtail.contrib.modeladmin',
+    'wagtail_modeladmin',
 
     'django_social_share',
     'puput',
@@ -82,6 +83,8 @@ INSTALLED_APPS = [
     'storages',
     'dbbackup',  # django-dbbackup
     'corsheaders',
+
+    'django_celery_beat',
 
     'polrev',
     'home',
@@ -118,6 +121,8 @@ MIDDLEWARE = [
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'tz_detect.middleware.TimezoneMiddleware',
+
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'polrev.urls'
@@ -305,12 +310,27 @@ MEDIA_URL = '/media/'
 STATICFILES_LOCATION = 'static'
 STATIC_ROOT = os.path.join(BASE_DIR, STATICFILES_LOCATION)
 STATIC_URL = f'/{STATICFILES_LOCATION}/'
-STATICFILES_STORAGE = 'polrev.storages.StaticStorage'
+#STATICFILES_STORAGE = 'polrev.storages.StaticStorage'
 
 MEDIAFILES_LOCATION = 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIAFILES_LOCATION)
 MEDIA_URL = f'/{MEDIAFILES_LOCATION}/'
-DEFAULT_FILE_STORAGE = 'polrev.storages.MediaStorage'
+#DEFAULT_FILE_STORAGE = 'polrev.storages.MediaStorage'
+
+STORAGES = {
+    "default": {
+        "BACKEND": "polrev.storages.MediaStorage",
+        "OPTIONS": {
+          #...your_options_here
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "polrev.storages.StaticStorage",
+        "OPTIONS": {
+          #...your_options_here
+        },
+    },
+}
 
 AWS_S3_ENDPOINT_URL = os.environ.get("AWS_S3_ENDPOINT_URL", "")
 #print(AWS_S3_ENDPOINT_URL)
@@ -377,6 +397,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 # Celery
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = REDIS_URL
 CELERY_ACCEPT_CONTENT = ['application/json']

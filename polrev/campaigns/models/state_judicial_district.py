@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
+from wagtail.admin.panels import FieldPanel, TabbedInterface, ObjectList
 
 from .state import StateCampaignPageBase
 from areas.widgets.state_judicial_district_widgets import StateJudicialDistrictChooser

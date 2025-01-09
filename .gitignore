@@ -22,4 +22,7 @@ letsencrypt
 # celery beat schedule file
 celerybeat-schedule
 
+# docker-postgres-backup-local
+backups/*
+
 docker-compose.override.yml
