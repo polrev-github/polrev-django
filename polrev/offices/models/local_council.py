@@ -1,6 +1,6 @@
 from django.db import models
 
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 
 from .local import LocalOfficeBase
 from areas.widgets.local_council_district_widgets import LocalCouncilDistrictChooser

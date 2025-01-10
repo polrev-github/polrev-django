@@ -1,6 +1,6 @@
-from wagtail.core import hooks
+from wagtail import hooks
 
-from wagtail.contrib.modeladmin.options import ModelAdmin
+from wagtail_modeladmin.options import ModelAdmin
 from offices.models import StateJudicialDistrictOffice
 from offices.views import StateJudicialDistrictOfficeChooserViewSet
 

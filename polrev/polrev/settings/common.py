@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
+    'wagtail',
     'generic_chooser',
 
     # AllAuth
@@ -54,7 +54,8 @@ INSTALLED_APPS = [
 
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.routable_page',
-    'wagtail.contrib.modeladmin',
+    #'wagtail_modeladmin',
+    'wagtail_modeladmin',
 
     'django_social_share',
     'puput',
@@ -118,6 +119,8 @@ MIDDLEWARE = [
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'tz_detect.middleware.TimezoneMiddleware',
+    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'polrev.urls'

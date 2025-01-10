@@ -44,14 +44,14 @@ from puput.models import TagEntryPage as PuputTagEntryPage
 
 
 try:
-    from wagtail.core.models import Page
+    from wagtail.models import Page
 except ImportError:
-    from wagtail.wagtailcore.models import Page
+    from wagtail.models import Page
 
 try:
     from wagtail.images.models import Image as WagtailImage
 except ImportError:
-    from wagtail.wagtailimages.models import Image as WagtailImage
+    from wagtail.images.models import Image as WagtailImage
 
 pyppeteer.DEBUG = True
 

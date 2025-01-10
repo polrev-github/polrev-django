@@ -6,7 +6,7 @@ from pygments.formatters import get_formatter_by_name
 from pygments.lexers import get_lexer_by_name
 from django.utils.safestring import mark_safe
 from markdown import markdown
-from wagtail.core.blocks import (
+from wagtail.blocks import (
     StreamBlock, 
     RichTextBlock,
     TextBlock,

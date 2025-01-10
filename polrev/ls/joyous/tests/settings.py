@@ -47,7 +47,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'wagtail.tests.context_processors.do_not_use_static_url',
+                'wagtail.test.context_processors.do_not_use_static_url',
             ],
             'debug': True,  # required in order to catch template errors
         },
@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    'allauth.account.middleware.AccountMiddleware'
 ]
 
 __INSTALLED_APPS = [
@@ -81,7 +82,7 @@ __INSTALLED_APPS = [
     'wagtail.images',
     'wagtail.search',
     'wagtail.admin',
-    'wagtail.core',
+    'wagtail',
 
     'modelcluster',
     'taggit',
@@ -92,6 +93,10 @@ __INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount'
 ]
 INSTALLED_APPS = [app for app in __INSTALLED_APPS if app]
 

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from wagtail.admin.edit_handlers import FieldPanel, TabbedInterface, ObjectList
+from wagtail.admin.panels import FieldPanel, TabbedInterface, ObjectList
 
 from .local import LocalCampaignPageBase
 from areas.widgets.place_widgets import PlaceChooser

@@ -1,4 +1,4 @@
-from wagtail.contrib.modeladmin.options import ModelAdminGroup, modeladmin_register
+from wagtail_modeladmin.options import ModelAdminGroup, modeladmin_register
 
 from .office_hooks import *
 from .state_hooks import *

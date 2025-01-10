@@ -3,19 +3,19 @@ from django.utils import timezone
 import us
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from modelcluster.fields import ParentalManyToManyField
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from wagtail.core.fields import StreamField
+from wagtail.fields import StreamField
 from wagtail.search import index
-from wagtail.admin.edit_handlers import StreamFieldPanel, RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
+from wagtail.admin.panels import FieldPanel
 from wagtailautocomplete.edit_handlers import AutocompletePanel
 
-from wagtail.core.blocks import RichTextBlock
+from wagtail.blocks import RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock

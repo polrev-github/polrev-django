@@ -8,8 +8,8 @@ import django.db.models.manager
 import modelcluster.contrib.taggit
 import modelcluster.fields
 import puput.routes
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.embeds.blocks
 import wagtail.images.blocks
 import wagtailmarkdown.blocks
@@ -52,9 +52,9 @@ class Migration(migrations.Migration):
             name='EntryPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('body', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))])),
+                ('body', wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))])),
                 ('date', models.DateTimeField(default=datetime.datetime.today, verbose_name='Post date')),
-                ('excerpt', wagtail.core.fields.RichTextField(blank=True, help_text='Entry excerpt to be displayed on entries list. If this field is not filled, a truncated version of body text will be used.', verbose_name='excerpt')),
+                ('excerpt', wagtail.fields.RichTextField(blank=True, help_text='Entry excerpt to be displayed on entries list. If this field is not filled, a truncated version of body text will be used.', verbose_name='excerpt')),
                 ('num_comments', models.IntegerField(default=0, editable=False)),
                 ('featured', models.BooleanField(default=False)),
                 ('categories', models.ManyToManyField(blank=True, through='puput.CategoryEntryPage', to='puput.Category')),
