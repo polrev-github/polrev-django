@@ -134,17 +134,6 @@ sudo apt install postgresql-client
 ./manage.py dbrestore -z
 ```
 
-## [prodrigestivill/postgres-backup-local](https://hub.docker.com/r/prodrigestivill/postgres-backup-local)
-### Backup
-```bash
-docker run --rm -v "$PWD:/backups" -u "$(id -u):$(id -g)" -e POSTGRES_HOST=db -e POSTGRES_DB=polrev_dev -e POSTGRES_USER=polrev -e POSTGRES_PASSWORD=polrev  prodrigestivill/postgres-backup-local /backup.sh
-```
-
-### Restore
-```bash
-docker exec --tty --interactive polrev-dbbackup-1 /bin/sh -c "zcat ./backups/daily/polrev_dev-20220317-041422.sql.gz | psql --host db --username=polrev --dbname=polrev_dev -W"
-```
-
 ## Docker
 
 ### Backup
@@ -172,6 +161,10 @@ polrev_dev=# delete from wagtailimages_rendition;
 
 ## S3 Synchronization
 
+```bash
+rclone rcd --rc-web-gui
+```
+
 https://github.com/rclone/rclone/issues/2658
 
 ### From Production to Development
@@ -184,7 +177,7 @@ rclone sync polrev:polrev/media minio:polrev/media
 
 ### From Development to Production
 ```bash
-rclone sync minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
+rclone copy minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
 ```
 
 ## Time Synchronization
