@@ -28,9 +28,3 @@ dependencies = []
 Documentation = "https://github.com/polrev-github/polrev-django#readme"
 Issues = "https://github.com/polrev-github/polrev-django/issues"
 Source = "https://github.com/polrev-github/polrev-django"
-
-[tool.hatch.envs.default]
-dependencies = [
-    "dockeroid @ {root:uri}/dockeroid",
-]
-
