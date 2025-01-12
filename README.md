@@ -34,7 +34,7 @@ Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Ch
 
 ```bash
 cp .env.dev.example .env
-cp ./config/.env.dev.example ./config/.env
+cp ./shared/.env.dev.example ./shared/.env
 cp docker-compose.dev.yml docker-compose.override.yml
 docker-compose up
 ```
