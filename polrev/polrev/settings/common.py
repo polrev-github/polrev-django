@@ -4,6 +4,8 @@ from django.contrib.messages import constants as messages
 
 IN_DOCKER = os.environ.get("IN_DOCKER")
 
+POLREV_DOMAIN = os.environ.get('POLREV_DOMAIN', 'localhost')
+
 if not IN_DOCKER:
     os.environ['POSTGRES_HOST'] = 'localhost'
     os.environ['REDIS_HOST'] = 'localhost'
@@ -250,7 +252,8 @@ STATICFILES_DIRS = [
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "The Political Revolution"
-WAGTAILADMIN_BASE_URL = f"https://{os.environ.get('POLREV_DOMAIN', 'localhost')}"
+#WAGTAILADMIN_BASE_URL = f"https://{os.environ.get('POLREV_DOMAIN', 'localhost')}"
+WAGTAILADMIN_BASE_URL = f"https://{POLREV_DOMAIN}/admin"
 # Search
 # https://docs.wagtail.io/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
@@ -265,7 +268,8 @@ WAGTAILMARKDOWN = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'https://pol-rev.com'
+#BASE_URL = 'https://pol-rev.com'
+BASE_URL = f"https://{POLREV_DOMAIN}"
 
 PUPUT_AS_PLUGIN = True
 PUPUT_COMMENTS_PROVIDER = "puput.comments.DjangoCommentsProvider"
