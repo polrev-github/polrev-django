@@ -82,22 +82,13 @@ DJANGO_SETTINGS_MODULE=polrev.settings.production ./manage.py check --deploy
 sudo chmod 600 acme.json
 ```
 
-## Backup
-[https://github.com/prodrigestivill/docker-postgres-backup-local](https://github.com/prodrigestivill/docker-postgres-backup-local)
-
-On the host:
-
-```bash
-sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/backups
-```
-
 ## Generic Production Update Procedure
 
 ### Development
 
 ```bash
 cd polrev
-poetry update
+hatch shell
 ./manage.py makemigrations
 git push
 ```
@@ -109,9 +100,8 @@ docker-compose down
 git pull
 docker-compose build web
 docker-compose up db
-poetry shell
 cd polrev
-poetry update
+hatch shell
 ./manage.py migrate
 ./manage.py flush --noinput
 ./manage.py loaddata ./dump/db.json.gz

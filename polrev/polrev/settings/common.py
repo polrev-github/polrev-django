@@ -250,7 +250,7 @@ STATICFILES_DIRS = [
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "The Political Revolution"
-
+WAGTAILADMIN_BASE_URL = f"https://{os.environ.get('POLREV_DOMAIN', 'localhost')}"
 # Search
 # https://docs.wagtail.io/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
