@@ -1,5 +1,4 @@
 import datetime
-import imp
 from django.utils import timezone
 import us
 
