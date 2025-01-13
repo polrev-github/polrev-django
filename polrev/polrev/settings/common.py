@@ -365,6 +365,7 @@ DBBACKUP_STORAGE_OPTIONS = {
     'bucket_name': AWS_BACKUP_STORAGE_BUCKET_NAME,
     'default_acl': 'private',
 }
+DBBACKUP_CLEAN = False
 
 SLACK_URL = os.environ.get("SLACK_URL", "")
 SLACK_TEAM = os.environ.get("SLACK_TEAM", "")
