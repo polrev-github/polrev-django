@@ -36,14 +36,14 @@ Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Ch
 cp .env.dev.example .env
 cp ./shared/.env.dev.example ./shared/.env
 cp docker-compose.dev.yml docker-compose.override.yml
-docker-compose up
+docker compose up
 ```
 
 ### Production
 
 ```bash
 cp docker-compose.prod.yml docker-compose.override.yml
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Dump Data
@@ -53,6 +53,7 @@ docker-compose up -d
     -e contenttypes -e auth.permission  \
     -e wagtailcore.groupcollectionpermission \
     -e wagtailcore.grouppagepermission -e wagtailimages.rendition \
+    -e wagtailsearch.indexentry \
     -e sessions -o ./dump/db.json.gz
 ```
 
@@ -96,17 +97,17 @@ git push
 ### Production
 
 ```bash
-docker-compose down
+docker compose down
 git pull
-docker-compose build web
-docker-compose up db
+docker compose build
+docker compose up db redis
 cd polrev
 hatch shell
 ./manage.py migrate
 ./manage.py flush --noinput
-./manage.py loaddata ./dump/db.json.gz
+./manage.py loaddata ./dump/db.json.gz --verbosity 3
 cd ..
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose up -d
 ```
 
 ## Postgres
