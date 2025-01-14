@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from .models import Event
+from .utils.heatmap import generate_heatmap
 
 def calendar(request):
     return render(request, 'events/calendar.html')
@@ -42,3 +44,8 @@ def api_events(request):
     ]
 
     return JsonResponse(data, safe=False)
+
+def event_heatmap(request):
+    events = Event.objects.all()
+    heatmap_path = generate_heatmap(events)
+    return render(request, 'events/heatmap.html', {'heatmap_path': heatmap_path})
