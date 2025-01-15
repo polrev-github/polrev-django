@@ -98,6 +98,7 @@ dependencies = [
     "redis ~= 5.2.1",
     #"django-redis ~= 5.2.0",
     "django-redis ~= 5.4.0",
+    "django-user-agents ~= 0.4.0",
 ]
 
 [project.urls]
