@@ -2,6 +2,7 @@
 import os
 from dotenv import load_dotenv
 
+from loguru import logger
 from django.contrib.messages import constants as messages
 
 
@@ -24,17 +25,10 @@ if not IN_DOCKER:
 DEBUG = os.getenv("DEBUG")
 STATIC_DEV = os.getenv("STATIC_DEV")
 
-POLREV_DOMAIN = os.environ.get("POLREV_DOMAIN", "localhost")
+logger.debug(f"DEBUG: {DEBUG}")
+logger.debug(f"STATIC_DEV: {STATIC_DEV}")
 
-"""
-if not IN_DOCKER:
-    os.environ["POSTGRES_HOST"] = "localhost"
-    os.environ["REDIS_HOST"] = "localhost"
-    # AWS_S3_ENDPOINT_URL=http://localhost:9000
-    os.environ["AWS_S3_ENDPOINT_URL"] = "http://localhost:9000"
-    # AWS_BACKUP_S3_ENDPOINT_URL=http://localhost:9000
-    os.environ["AWS_BACKUP_S3_ENDPOINT_URL"] = "http://localhost:9000"
-"""
+POLREV_DOMAIN = os.environ.get("POLREV_DOMAIN", "localhost")
 
 # Application definition
 
@@ -302,6 +296,9 @@ if STATIC_DEV:
     STATIC_URL = "/static/"  # Local static file serving
 else:
     STATIC_URL = f"/{STATICFILES_LOCATION}/"
+
+logger.debug(f"STATIC_URL: {STATIC_URL}")
+
 # STATICFILES_STORAGE = 'polrev.storages.StaticStorage'
 
 MEDIAFILES_LOCATION = "media"
