@@ -9,28 +9,28 @@ from areas.models import Area
 
 class LegislativeDistrict(Area):
     class Meta:
-        ordering = ['district_num']
+        ordering = ["district_num"]
 
     district_num = models.PositiveSmallIntegerField()
     seats = models.PositiveSmallIntegerField()
-    
+
     panels = Area.panels + [
-        FieldPanel('state_ref'),
-        FieldPanel('district_num'),
-        FieldPanel('seats'),
+        FieldPanel("state_ref"),
+        FieldPanel("district_num"),
+        FieldPanel("seats"),
     ]
 
 
 class StateSenateDistrict(LegislativeDistrict):
     state_ref = models.ForeignKey(
-        'areas.State',
-        verbose_name=_('State'),
+        "areas.State",
+        verbose_name=_("State"),
         on_delete=models.PROTECT,
-        related_name='state_senate_districts'
+        related_name="state_senate_districts",
     )
 
     search_fields = Area.search_fields + [
-        index.FilterField('state_ref_id'),
+        index.FilterField("state_ref_id"),
     ]
 
     def save(self, *args, **kwargs):
@@ -43,14 +43,14 @@ class StateSenateDistrict(LegislativeDistrict):
 
 class StateHouseDistrict(LegislativeDistrict):
     state_ref = models.ForeignKey(
-        'areas.State',
-        verbose_name=_('State'),
+        "areas.State",
+        verbose_name=_("State"),
         on_delete=models.PROTECT,
-        related_name='state_house_districts'
+        related_name="state_house_districts",
     )
 
     search_fields = Area.search_fields + [
-        index.FilterField('state_ref_id'),
+        index.FilterField("state_ref_id"),
     ]
 
     def save(self, *args, **kwargs):

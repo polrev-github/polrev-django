@@ -1,5 +1,3 @@
-from wagtailautocomplete.edit_handlers import AutocompletePanel
-
 from .state import StateOfficeBase
 
 

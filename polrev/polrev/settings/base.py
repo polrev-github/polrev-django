@@ -97,7 +97,6 @@ INSTALLED_APPS = [
     "search",
     "accounts",
     "events",
-    #'mailer',
     "campaigns",
     "slack_invite",
     "areas",
@@ -136,7 +135,6 @@ TEMPLATES = [
             os.path.join(BASE_DIR, "accounts", "templates"),
             os.path.join(BASE_DIR, "blog", "templates"),
             os.path.join(BASE_DIR, "events", "templates"),
-            os.path.join(BASE_DIR, "mailer", "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -146,7 +144,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "blog.context_processors.blog",
-                "blog.context_processors.header_image",
+                "polrev.context_processors.header_image",
             ],
         },
     },
@@ -172,7 +170,6 @@ MIGRATION_MODULES = {
     "puput": "polrev.migrations.puput",
     "avatar": "polrev.migrations.avatar",
     "joyous": "polrev.migrations.joyous",
-    "birdsong": "polrev.migrations.birdsong",
 }
 
 AUTH_USER_MODEL = "accounts.User"

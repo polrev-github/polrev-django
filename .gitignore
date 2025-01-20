@@ -1,4 +1,6 @@
+# Environment
 *.env
+.envrc
 
 .idea
 .vscode

@@ -2,7 +2,6 @@ import json
 
 from django.conf import settings
 
-#import redis
 from django_redis import get_redis_connection
 
 import praw
@@ -12,6 +11,7 @@ from celery.utils.log import get_task_logger
 
 
 logger = get_task_logger(__name__)
+
 
 @shared_task
 def hot_task():
@@ -33,11 +33,13 @@ def hot_task():
         submission = reddit.submission(id=id)
         title = submission.title
         permalink = submission.permalink
-        hot.append({
-            'title': title,
-            'permalink': permalink,
-        })
+        hot.append(
+            {
+                "title": title,
+                "permalink": permalink,
+            }
+        )
 
     client = get_redis_connection("default")
 
-    client.set('reddit:hot', json.dumps(hot))
+    client.set("reddit:hot", json.dumps(hot))

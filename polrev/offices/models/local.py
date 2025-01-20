@@ -5,20 +5,23 @@ from wagtail.admin.panels import FieldPanel
 from .state import StateOfficeBase
 from areas.widgets.place_widgets import PlaceChooser
 
+
 class LocalOfficeBase(StateOfficeBase):
 
     place_ref = models.ForeignKey(
-        'areas.Place',
-        verbose_name='place',
+        "areas.Place",
+        verbose_name="place",
         on_delete=models.PROTECT,
-        related_name='local_offices',
+        related_name="local_offices",
     )
 
     area_panels = StateOfficeBase.area_panels + [
-        FieldPanel('place_ref', widget=PlaceChooser(linked_fields={
-            'state_ref': {'id': 'id_state_ref'}
-        })),
+        FieldPanel(
+            "place_ref",
+            widget=PlaceChooser(linked_fields={"state_ref": {"id": "id_state_ref"}}),
+        ),
     ]
+
 
 class LocalOffice(LocalOfficeBase):
 

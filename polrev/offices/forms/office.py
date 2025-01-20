@@ -2,20 +2,25 @@ from django import forms
 
 from offices.models import OfficeType, Office, StateOfficeBase
 
+
 class OfficeTypeForm(forms.ModelForm):
     class Meta:
         model = OfficeType
-        fields = ['title']
+        fields = ["title"]
+
 
 class OfficeForm(forms.ModelForm):
     class Meta:
         model = Office
-        fields = ['type_ref', 'title', 'website']
+        fields = ["type_ref", "title", "website"]
 
+
+#TODO: Why isn't this being used?
 class FederalOfficeForm(OfficeForm):
     pass
+
 
 class StateOfficeBaseForm(OfficeForm):
     class Meta:
         model = StateOfficeBase
-        fields = OfficeForm.Meta.fields + ['state_ref']
+        fields = OfficeForm.Meta.fields + ["state_ref"]

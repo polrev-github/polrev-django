@@ -7,16 +7,16 @@ from .base import *
 DEBUG = True
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static', 'dist'),
+    os.path.join(PROJECT_DIR, "static", "dist"),
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mqmsq70)870^-0&+#^8u@5(dbj@o-yj9=@!f90)7s$ei##n_z7'
+SECRET_KEY = "django-insecure-mqmsq70)870^-0&+#^8u@5(dbj@o-yj9=@!f90)7s$ei##n_z7"
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ["*"]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # DO NOT use on production, test key is available in the URL below
 # https://developers.google.com/recaptcha/docs/faq

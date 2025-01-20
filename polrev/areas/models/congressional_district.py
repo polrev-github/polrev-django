@@ -9,30 +9,28 @@ from areas.models import Area
 
 class CongressionalDistrict(Area):
     class Meta:
-        ordering = ['cd_num']
+        ordering = ["cd_num"]
 
     state_ref = models.ForeignKey(
-        'areas.State',
-        verbose_name=_('State'),
+        "areas.State",
+        verbose_name=_("State"),
         on_delete=models.PROTECT,
-        related_name='congressional_districts'
+        related_name="congressional_districts",
     )
 
     cd_fips = models.CharField(
-        verbose_name=_('Congressional District Code'),
+        verbose_name=_("Congressional District Code"),
         max_length=2,
         help_text=_("Example: 01 ... 99"),
     )
     cd_num = models.PositiveSmallIntegerField()
-    
+
     panels = Area.panels + [
-        FieldPanel('state_ref'),
-        FieldPanel('cd_fips'),
+        FieldPanel("state_ref"),
+        FieldPanel("cd_fips"),
     ]
 
-    search_fields = Area.search_fields + [
-        index.FilterField('state_ref_id')
-    ]
+    search_fields = Area.search_fields + [index.FilterField("state_ref_id")]
 
     def save(self, *args, **kwargs):
         self.kind = self.KIND_CONGRESSIONAL_DISTRICT
