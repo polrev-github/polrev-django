@@ -12,7 +12,7 @@ services:
     build:
       context: ./polrev
     user: "${UID}:${GID}"
-    links:
+    depends_on:
       - db
       - redis
     environment:
@@ -42,7 +42,7 @@ services:
       - "./polrev:/app"
     environment:
       - IN_DOCKER=true
-    links:
+    depends_on:
       - db
       - redis
     networks:
@@ -58,7 +58,7 @@ services:
       - "./polrev:/app"
     environment:
       - IN_DOCKER=true
-    links:
+    depends_on:
       - db
       - redis
     networks:
@@ -67,7 +67,6 @@ services:
   # Database
   db:
     image: postgres:13.5-bullseye
-    #user: "${UID}:${GID}"
     environment:
       - PGDATA=/pg-data
     ports:
@@ -80,7 +79,6 @@ services:
   # Redis
   redis:
     image: 'bitnami/redis:latest'
-    #user: "${UID}:${GID}"
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
@@ -93,7 +91,6 @@ services:
   # Traffic
   traefik:
     image: "traefik:v2.5.4"
-    #user: "${UID}:${GID}"
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
