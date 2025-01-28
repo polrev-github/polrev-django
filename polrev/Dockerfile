@@ -1,5 +1,4 @@
-# Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.10.2-slim-bullseye AS python-base
+FROM python:3.10.16-slim-bookworm AS python-base
 
 # Port used by this container to serve HTTP.
 EXPOSE 8000

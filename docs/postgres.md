@@ -1,6 +1,6 @@
 # Postgres
 
-## Upgrade 13.5 to 17.2
+## Upgrade 13.5 to 15.10
 
 ### Spin up existing db container only
 
@@ -43,4 +43,9 @@ docker cp db_dump.sql polrev-db-1:/tmp/db_dump.sql
 
 ```bash
 docker exec -i polrev-db-1 psql -U polrev -f /tmp/db_dump.sql
+```
+
+### Test from web container
+```bash
+psql -h db -U polrev
 ```

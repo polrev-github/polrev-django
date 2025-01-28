@@ -66,7 +66,7 @@ services:
 
   # Database
   db:
-    image: postgres:17.2
+    image: postgres:15.10
     environment:
       - PGDATA=/pg-data
     ports:
