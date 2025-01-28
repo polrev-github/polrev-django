@@ -112,7 +112,7 @@ docker compose up -d
 
 ## Postgres
 ```bash
-psql -U polrev polrev_dev
+psql -U polrev polrev
 ```
 
 ## [django-dbbackup](https://github.com/jazzband/django-dbbackup)
@@ -141,7 +141,7 @@ sudo apt install postgresql-client
 
 ### Backup
 ```bash
-docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev_dev | gzip -9 > 20220418.sql.gz 
+docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev | gzip -9 > 20220418.sql.gz 
 ```
 
 ### SCP
@@ -153,13 +153,13 @@ scp 20220418.sql.gz me@pol-rev.com:Dev
 ```bash
 docker cp 20220418.sql.gz polrev_dbbackup_1:/backups
 
-docker exec --tty --interactive polrev_dbbackup_1 /bin/sh -c "zcat ./backups/20220418.sql.gz | psql --host db --username=polrev --dbname=polrev_dev -W"
+docker exec --tty --interactive polrev_dbbackup_1 /bin/sh -c "zcat ./backups/20220418.sql.gz | psql --host db --username=polrev --dbname=polrev -W"
  ```
 
 ## Delete Wagtail Renditions
 ```bash
 ./manage.py dbshell
-polrev_dev=# delete from wagtailimages_rendition;
+polrev=# delete from wagtailimages_rendition;
 ```
 
 ## S3 Synchronization
