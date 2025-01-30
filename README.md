@@ -64,11 +64,12 @@ cd polrev
 ./manage.py loaddata ./dump/db.json.gz
 ```
 
-## Nuke Database
+## Make Migrations
 ```bash
 cd polrev
 ./manage.py makemigrations puput
 ./manage.py makemigrations avatar
+./manage.py makemigrations joyous
 ./manage.py makemigrations
 ```
 
