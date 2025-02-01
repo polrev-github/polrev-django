@@ -4,7 +4,6 @@
 
 ```bash
 cp .env.dev.example .env
-cp shared/.env.dev.example shared/.env
 cp docker-compose.dev.yml docker-compose.override.yml
 docker compose up
 ```

@@ -90,7 +90,7 @@ services:
 
   # Traffic
   traefik:
-    image: "traefik:v2.5.4"
+    image: "traefik:v3.3.3"
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -101,8 +101,6 @@ services:
       - "--certificatesResolvers.le.acme.email=kurtis@pol-rev.com"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
       - "--certificatesResolvers.le.acme.tlsChallenge=true"
-      - "--certificatesResolvers.le.acme.httpChallenge=true"
-      - "--certificatesResolvers.le.acme.httpChallenge.entryPoint=web"
 
     ports:
       - "80:80"

@@ -34,7 +34,6 @@ Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Ch
 
 ```bash
 cp .env.dev.example .env
-cp ./shared/.env.dev.example ./shared/.env
 cp docker-compose.dev.yml docker-compose.override.yml
 docker compose up
 ```
@@ -174,9 +173,9 @@ https://github.com/rclone/rclone/issues/2658
 ### From Production to Development
 ```bash
 cd polrev
-rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
+rclone copy polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
 ./manage.py dbrestore -z
-rclone sync polrev:polrev/media minio:polrev/media
+rclone copy polrev:polrev/media minio:polrev/media
 ```
 
 ### From Development to Production

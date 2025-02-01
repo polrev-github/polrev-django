@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 IN_DOCKER = os.environ.get("IN_DOCKER")
 
 if not IN_DOCKER:
-    dotenv_path = os.path.join(BASE_DIR, "../shared/.env")
+    dotenv_path = os.path.join(BASE_DIR, "../.env")
     load_dotenv(dotenv_path)
 
     os.environ["POSTGRES_HOST"] = "localhost"
