@@ -1,25 +1,22 @@
 import datetime
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.template.defaultfilters import truncatechars
+from django.utils.translation import gettext_lazy as _
 from django.utils.text import Truncator
 from django.utils.safestring import mark_safe
 from django.utils.html import strip_tags
 
-from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import StreamFieldPanel
-from wagtail.admin.edit_handlers import (
+from wagtail.fields import StreamField
+from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
     InlinePanel,
     PageChooserPanel,
 )
-from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 
-from wagtail.core.blocks import StreamBlock, RichTextBlock, TextBlock, CharBlock
+from wagtail.blocks import RichTextBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
@@ -67,8 +64,8 @@ class EntryAbstract(models.Model):
             [
                 FieldPanel("title", classname="title"),
                 FieldPanel("featured"),
-                ImageChooserPanel("header_image"),
-                StreamFieldPanel("body", classname="full"),
+                FieldPanel("header_image"),
+                FieldPanel("body", classname="full"),
                 FieldPanel("excerpt", classname="full"),
             ],
             heading=_("Content"),

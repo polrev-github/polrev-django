@@ -1,15 +1,22 @@
 from django.utils.translation import gettext_lazy as _
 
-from generic_chooser.views import ModelChooserMixin, ModelChooserCreateTabMixin, ModelChooserViewSet
+from generic_chooser.views import (
+    ModelChooserMixin,
+    ModelChooserCreateTabMixin,
+    ModelChooserViewSet,
+)
 
 from areas.models import StateJudicialDistrict
 
+
 class StateJudicialDistrictChooserMixin(ModelChooserMixin):
-    preserve_url_parameters = ['state_ref',]  # preserve this URL parameter on pagination / search
+    preserve_url_parameters = [
+        "state_ref",
+    ]  # preserve this URL parameter on pagination / search
 
     def get_unfiltered_object_list(self):
         objects = super().get_unfiltered_object_list()
-        state_ref = self.request.GET.get('state_ref')
+        state_ref = self.request.GET.get("state_ref")
         if state_ref:
             objects = objects.filter(state_ref=state_ref)
         return objects
@@ -18,18 +25,17 @@ class StateJudicialDistrictChooserMixin(ModelChooserMixin):
 class StateJudicialDistrictChooserCreateTabMixin(ModelChooserCreateTabMixin):
     def get_initial(self):
         data = self.initial.copy()
-        state_ref = self.request.GET.get('state_ref')
-        data['state_ref'] = state_ref
+        state_ref = self.request.GET.get("state_ref")
+        data["state_ref"] = state_ref
         return data
 
 
 class StateJudicialDistrictChooserViewSet(ModelChooserViewSet):
     chooser_mixin_class = StateJudicialDistrictChooserMixin
     create_tab_mixin_class = StateJudicialDistrictChooserCreateTabMixin
-    #icon = 'user'
+    # icon = 'user'
     model = StateJudicialDistrict
     page_title = _("Choose a district")
     per_page = 10
-    #order_by = 'title'
-    fields = ['state_ref', 'district_num']
-
+    # order_by = 'title'
+    fields = ["state_ref", "district_num"]

@@ -11,7 +11,7 @@ import modelcluster.fields
 import timezone_field.fields
 import uuid
 import wagtail.contrib.routable_page.models
-import wagtail.core.fields
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
             name='CalendarPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('intro', wagtail.core.fields.RichTextField(blank=True, help_text='Introductory text.', verbose_name='intro')),
+                ('intro', wagtail.fields.RichTextField(blank=True, help_text='Introductory text.', verbose_name='intro')),
                 ('view_choices', ls.joyous.fields.MultipleSelectField(blank=True, choices=[('L', 'List View'), ('W', 'Weekly View'), ('M', 'Monthly View')], default=['L', 'W', 'M'], verbose_name='view choices')),
                 ('default_view', models.CharField(choices=[('L', 'List View'), ('W', 'Weekly View'), ('M', 'Monthly View')], default='M', max_length=15, verbose_name='default view')),
             ],
@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
             name='GroupPage',
             fields=[
                 ('page_ptr', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, related_name='joyous_grouppage', serialize=False, to='wagtailcore.page')),
-                ('content', wagtail.core.fields.RichTextField(blank=True, default='', help_text='An area of text for whatever you like', verbose_name='content')),
+                ('content', wagtail.fields.RichTextField(blank=True, default='', help_text='An area of text for whatever you like', verbose_name='content')),
             ],
             options={
                 'verbose_name': 'group page',
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 ('time_from', models.TimeField(blank=True, null=True, verbose_name='start time')),
                 ('time_to', models.TimeField(blank=True, null=True, verbose_name='end time')),
                 ('tz', timezone_field.fields.TimeZoneField(default=ls.joyous.models.event_base._get_default_timezone, verbose_name='time zone')),
-                ('details', wagtail.core.fields.RichTextField(blank=True, verbose_name='details')),
+                ('details', wagtail.fields.RichTextField(blank=True, verbose_name='details')),
                 ('location', models.CharField(blank=True, max_length=255, verbose_name='location')),
                 ('website', models.URLField(blank=True, verbose_name='website')),
                 ('date', models.DateField(default=datetime.date.today, verbose_name='date')),
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
                 ('time_from', models.TimeField(blank=True, null=True, verbose_name='start time')),
                 ('time_to', models.TimeField(blank=True, null=True, verbose_name='end time')),
                 ('tz', timezone_field.fields.TimeZoneField(default=ls.joyous.models.event_base._get_default_timezone, verbose_name='time zone')),
-                ('details', wagtail.core.fields.RichTextField(blank=True, verbose_name='details')),
+                ('details', wagtail.fields.RichTextField(blank=True, verbose_name='details')),
                 ('location', models.CharField(blank=True, max_length=255, verbose_name='location')),
                 ('website', models.URLField(blank=True, verbose_name='website')),
                 ('repeat', ls.joyous.fields.RecurrenceField(verbose_name='repeat')),
@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
                 ('time_from', models.TimeField(blank=True, null=True, verbose_name='start time')),
                 ('time_to', models.TimeField(blank=True, null=True, verbose_name='end time')),
                 ('tz', timezone_field.fields.TimeZoneField(default=ls.joyous.models.event_base._get_default_timezone, verbose_name='time zone')),
-                ('details', wagtail.core.fields.RichTextField(blank=True, verbose_name='details')),
+                ('details', wagtail.fields.RichTextField(blank=True, verbose_name='details')),
                 ('location', models.CharField(blank=True, max_length=255, verbose_name='location')),
                 ('website', models.URLField(blank=True, verbose_name='website')),
                 ('date_from', models.DateField(default=datetime.date.today, verbose_name='start date')),
@@ -140,7 +140,7 @@ class Migration(migrations.Migration):
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
                 ('except_date', models.DateField(help_text='For this date', verbose_name='For Date')),
                 ('extra_title', models.CharField(blank=True, help_text='A more specific title for this occurence (optional)', max_length=255, verbose_name='title')),
-                ('extra_information', wagtail.core.fields.RichTextField(blank=True, help_text='Information just for this date', verbose_name='extra information')),
+                ('extra_information', wagtail.fields.RichTextField(blank=True, help_text='Information just for this date', verbose_name='extra information')),
                 ('overrides', models.ForeignKey(help_text='The recurring event that we are updating.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='joyous.recurringeventpage', verbose_name='overrides')),
             ],
             options={
@@ -155,7 +155,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
                 ('cancellation_title', models.CharField(blank=True, help_text='Show in place of cancelled event (Leave empty to show nothing)', max_length=255, verbose_name='title')),
-                ('cancellation_details', wagtail.core.fields.RichTextField(blank=True, help_text='Why was the event cancelled?', verbose_name='details')),
+                ('cancellation_details', wagtail.fields.RichTextField(blank=True, help_text='Why was the event cancelled?', verbose_name='details')),
                 ('cancelled_from_date', models.DateField(help_text='Cancelled from this date', verbose_name='From Date')),
                 ('cancelled_to_date', models.DateField(blank=True, help_text='Cancelled to this date (Leave empty for "until further notice")', null=True, verbose_name='To Date')),
                 ('overrides', models.ForeignKey(help_text='The recurring event that we are updating.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='joyous.recurringeventpage', verbose_name='overrides')),
@@ -172,7 +172,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
                 ('cancellation_title', models.CharField(blank=True, help_text='Show in place of cancelled event (Leave empty to show nothing)', max_length=255, verbose_name='title')),
-                ('cancellation_details', wagtail.core.fields.RichTextField(blank=True, help_text='Why was the event cancelled?', verbose_name='details')),
+                ('cancellation_details', wagtail.fields.RichTextField(blank=True, help_text='Why was the event cancelled?', verbose_name='details')),
                 ('all_holidays', models.BooleanField(default=True, help_text='Cancel any occurence of this event on a public holiday')),
                 ('overrides', models.ForeignKey(help_text='The recurring event that we are updating.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='joyous.recurringeventpage', verbose_name='overrides')),
             ],
@@ -189,7 +189,7 @@ class Migration(migrations.Migration):
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
                 ('except_date', models.DateField(help_text='For this date', verbose_name='For Date')),
                 ('cancellation_title', models.CharField(blank=True, help_text='Show in place of cancelled event (Leave empty to show nothing)', max_length=255, verbose_name='title')),
-                ('cancellation_details', wagtail.core.fields.RichTextField(blank=True, help_text='Why was the event cancelled?', verbose_name='details')),
+                ('cancellation_details', wagtail.fields.RichTextField(blank=True, help_text='Why was the event cancelled?', verbose_name='details')),
                 ('overrides', models.ForeignKey(help_text='The recurring event that we are updating.', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='+', to='joyous.recurringeventpage', verbose_name='overrides')),
             ],
             options={
@@ -244,7 +244,7 @@ class Migration(migrations.Migration):
                 ('cancellationpage_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='joyous.cancellationpage')),
                 ('time_from', models.TimeField(blank=True, null=True, verbose_name='start time')),
                 ('time_to', models.TimeField(blank=True, null=True, verbose_name='end time')),
-                ('details', wagtail.core.fields.RichTextField(blank=True, verbose_name='details')),
+                ('details', wagtail.fields.RichTextField(blank=True, verbose_name='details')),
                 ('location', models.CharField(blank=True, max_length=255, verbose_name='location')),
                 ('website', models.URLField(blank=True, verbose_name='website')),
                 ('num_days', models.IntegerField(default=1, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(99)], verbose_name='number of days')),

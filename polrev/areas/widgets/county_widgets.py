@@ -4,8 +4,9 @@ from generic_chooser.widgets import AdminChooser, LinkedFieldMixin
 
 from areas.models import County
 
+
 class CountyChooser(LinkedFieldMixin, AdminChooser):
-    #icon = 'user'
+    # icon = 'user'
     model = County
     page_title = _("Choose a county")
-    choose_modal_url_name = 'county_chooser:choose'
+    choose_modal_url_name = "county_chooser:choose"

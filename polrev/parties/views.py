@@ -1,41 +1,26 @@
 from django.utils.translation import gettext_lazy as _
 
-from generic_chooser.views import ModelChooserMixin, ModelChooserCreateTabMixin, ModelChooserViewSet
+from generic_chooser.views import ModelChooserMixin, ModelChooserViewSet
 
 from parties.models import Party
 
+#TODO: This isn't being used anywhere?
+
 class PartyChooserMixin(ModelChooserMixin):
-    preserve_url_parameters = ['state_ref', 'office_type_ref']
+    preserve_url_parameters = ["state_ref", "office_type_ref"]
 
     def get_unfiltered_object_list(self):
         objects = super().get_unfiltered_object_list()
-        state_ref = self.request.GET.get('state_ref')
+        state_ref = self.request.GET.get("state_ref")
         if state_ref:
             objects = objects.filter(state_ref=state_ref)
         return objects
 
-'''
-class PartyChooserCreateTabMixin(ModelChooserCreateTabMixin):
-    def get_initial(self):
-        data = self.initial.copy()
-        state_ref = self.request.GET.get('state_ref')
-        type_ref = self.request.GET.get('office_type_ref')
-
-        state = State.objects.get(id=state_ref)
-        data['state_ref'] = state_ref
-        data['type_ref'] = type_ref
-        office_type = OfficeType.objects.get(id=type_ref)
-        data['title'] = f"{office_type.title}, {state.title}"
-        return data
-'''
 
 class PartyChooserViewSet(ModelChooserViewSet):
     chooser_mixin_class = PartyChooserMixin
-    #create_tab_mixin_class = PartyChooserCreateTabMixin
-    icon = 'user'
+    icon = "user"
     model = Party
     page_title = _("Choose a Party")
     per_page = 10
-    #order_by = 'title'
-    fields = ['type_ref', 'state_ref', 'title', 'website']
-
+    fields = ["type_ref", "state_ref", "title", "website"]

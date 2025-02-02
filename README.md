@@ -34,16 +34,15 @@ Navigate to Settings/Sites.  Change the site name to 'Political Revolution'.  Ch
 
 ```bash
 cp .env.dev.example .env
-cp ./config/.env.dev.example ./config/.env
 cp docker-compose.dev.yml docker-compose.override.yml
-docker-compose up
+docker compose up
 ```
 
 ### Production
 
 ```bash
 cp docker-compose.prod.yml docker-compose.override.yml
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Dump Data
@@ -53,6 +52,7 @@ docker-compose up -d
     -e contenttypes -e auth.permission  \
     -e wagtailcore.groupcollectionpermission \
     -e wagtailcore.grouppagepermission -e wagtailimages.rendition \
+    -e wagtailsearch.indexentry \
     -e sessions -o ./dump/db.json.gz
 ```
 
@@ -63,11 +63,12 @@ cd polrev
 ./manage.py loaddata ./dump/db.json.gz
 ```
 
-## Nuke Database
+## Make Migrations
 ```bash
 cd polrev
 ./manage.py makemigrations puput
 ./manage.py makemigrations avatar
+./manage.py makemigrations joyous
 ./manage.py makemigrations
 ```
 
@@ -82,22 +83,13 @@ DJANGO_SETTINGS_MODULE=polrev.settings.production ./manage.py check --deploy
 sudo chmod 600 acme.json
 ```
 
-## Backup
-[https://github.com/prodrigestivill/docker-postgres-backup-local](https://github.com/prodrigestivill/docker-postgres-backup-local)
-
-On the host:
-
-```bash
-sudo mkdir -p /var/opt/polrev/backups && sudo chown -R 999:999 /var/opt/polrev/backups
-```
-
 ## Generic Production Update Procedure
 
 ### Development
 
 ```bash
 cd polrev
-poetry update
+hatch shell
 ./manage.py makemigrations
 git push
 ```
@@ -105,23 +97,22 @@ git push
 ### Production
 
 ```bash
-docker-compose down
+docker compose down
 git pull
-docker-compose build web
-docker-compose up db
-poetry shell
+docker compose build
+docker compose up db redis
 cd polrev
-poetry update
+hatch shell
 ./manage.py migrate
 ./manage.py flush --noinput
-./manage.py loaddata ./dump/db.json.gz
+./manage.py loaddata ./dump/db.json.gz --verbosity 3
 cd ..
-docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+docker compose up -d
 ```
 
 ## Postgres
 ```bash
-psql -U polrev polrev_dev
+psql -U polrev polrev
 ```
 
 ## [django-dbbackup](https://github.com/jazzband/django-dbbackup)
@@ -136,30 +127,21 @@ sudo apt install postgresql-client
 
 ### Backup
 ```bash
-./manage.py dbbackup -z
+#./manage.py dbbackup -z
+./manage.py dbbackup -x 'public.wagtailsearch_indexentry'
 ```
 
 ### Restore
 ```bash
-./manage.py dbrestore -z
-```
-
-## [prodrigestivill/postgres-backup-local](https://hub.docker.com/r/prodrigestivill/postgres-backup-local)
-### Backup
-```bash
-docker run --rm -v "$PWD:/backups" -u "$(id -u):$(id -g)" -e POSTGRES_HOST=db -e POSTGRES_DB=polrev_dev -e POSTGRES_USER=polrev -e POSTGRES_PASSWORD=polrev  prodrigestivill/postgres-backup-local /backup.sh
-```
-
-### Restore
-```bash
-docker exec --tty --interactive polrev-dbbackup-1 /bin/sh -c "zcat ./backups/daily/polrev_dev-20220317-041422.sql.gz | psql --host db --username=polrev --dbname=polrev_dev -W"
+#./manage.py dbrestore -z
+./manage.py dbrestore
 ```
 
 ## Docker
 
 ### Backup
 ```bash
-docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev_dev | gzip -9 > 20220418.sql.gz 
+docker exec -i polrev-db-1 /usr/bin/pg_dump -U polrev polrev | gzip -9 > 20220418.sql.gz 
 ```
 
 ### SCP
@@ -171,30 +153,34 @@ scp 20220418.sql.gz me@pol-rev.com:Dev
 ```bash
 docker cp 20220418.sql.gz polrev_dbbackup_1:/backups
 
-docker exec --tty --interactive polrev_dbbackup_1 /bin/sh -c "zcat ./backups/20220418.sql.gz | psql --host db --username=polrev --dbname=polrev_dev -W"
+docker exec --tty --interactive polrev_dbbackup_1 /bin/sh -c "zcat ./backups/20220418.sql.gz | psql --host db --username=polrev --dbname=polrev -W"
  ```
 
 ## Delete Wagtail Renditions
 ```bash
 ./manage.py dbshell
-polrev_dev=# delete from wagtailimages_rendition;
+polrev=# delete from wagtailimages_rendition;
 ```
 
 ## S3 Synchronization
+
+```bash
+rclone rcd --rc-web-gui
+```
 
 https://github.com/rclone/rclone/issues/2658
 
 ### From Production to Development
 ```bash
 cd polrev
-rclone sync polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
+rclone copy polrev-backup:polrev-backup minio:polrev-backup --no-gzip-encoding
 ./manage.py dbrestore -z
-rclone sync polrev:polrev/media minio:polrev/media
+rclone copy polrev:polrev/media minio:polrev/media
 ```
 
 ### From Development to Production
 ```bash
-rclone sync minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
+rclone copy minio:polrev-backup polrev-backup:polrev-backup --no-gzip-encoding
 ```
 
 ## Time Synchronization

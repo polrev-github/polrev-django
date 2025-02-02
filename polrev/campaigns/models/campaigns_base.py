@@ -1,10 +1,10 @@
-#import us
 import usa
 
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+
 
 class CampaignsPageBase(RoutablePageMixin, Page):
     class Meta:
@@ -13,19 +13,21 @@ class CampaignsPageBase(RoutablePageMixin, Page):
     @route(r"^state/(?P<state_slug>[-\w]*)", name="state_view")
     def state_view(self, request, state_slug):
         page = request.GET.get("page")
-        name = state_slug.replace('-', ' ')
-        name = ' '.join(i.capitalize() for i in name.split())
-        if name == 'District Of Columbia':
-            name = 'District of Columbia'
-        #state = us.states.lookup(name, field='name')
-        state = usa.states.lookup(name, field='name')
+        name = state_slug.replace("-", " ")
+        name = " ".join(i.capitalize() for i in name.split())
+        if name == "District Of Columbia":
+            name = "District of Columbia"
+        state = usa.states.lookup(name, field="name")
         state_fips = state.fips
         campaigns = self.paginate(self.get_state_campaigns(state_fips), page)
 
-        return self.render(request, context_overrides={
-            'title': "State campaigns",
-            'campaigns': campaigns,
-        })
+        return self.render(
+            request,
+            context_overrides={
+                "title": "State campaigns",
+                "campaigns": campaigns,
+            },
+        )
 
     @route(r"^search/$")
     def post_search(self, request, *args, **kwargs):
@@ -36,10 +38,13 @@ class CampaignsPageBase(RoutablePageMixin, Page):
         else:
             campaigns = self.paginate(self.get_campaigns(), page)
 
-        return self.render(request, context_overrides={
-            'title': "Current campaigns",
-            'campaigns': campaigns,
-        })
+        return self.render(
+            request,
+            context_overrides={
+                "title": "Current campaigns",
+                "campaigns": campaigns,
+            },
+        )
 
     def paginate(self, items, page):
         paginator = Paginator(items, 10)
@@ -54,8 +59,7 @@ class CampaignsPageBase(RoutablePageMixin, Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
         page = request.GET.get("page")
-        #context['states'] = us.states.STATES
-        context['states'] = usa.states.STATES_AND_TERRITORIES
+        context["states"] = usa.states.STATES_AND_TERRITORIES
         context["campaigns"] = self.paginate(self.get_campaigns(), page)
 
         return context

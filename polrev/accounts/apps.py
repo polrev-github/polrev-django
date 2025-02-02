@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class MyaccountConfig(AppConfig):
-    name = 'accounts'
+class AccountsConfig(AppConfig):
+    name = "accounts"

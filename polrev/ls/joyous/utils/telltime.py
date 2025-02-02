@@ -94,7 +94,8 @@ def getAwareDatetime(date, time, tz, timeDefault=dt.time.max):
     datetime = dt.datetime.combine(date, time)
     # arbitary rule to handle DST transitions:
     # if daylight savings causes an error then use standard time
-    datetime = timezone.make_aware(datetime, tz, is_dst=False)
+    #datetime = timezone.make_aware(datetime, tz, is_dst=False)
+    datetime = timezone.make_aware(datetime, tz)
     return datetime
 
 def todayUtc():

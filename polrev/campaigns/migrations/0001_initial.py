@@ -5,8 +5,8 @@ import django.db.models.deletion
 import django.utils.timezone
 import modelcluster.fields
 import wagtail.contrib.routable_page.models
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.embeds.blocks
 import wagtail.images.blocks
 import wagtailmarkdown.blocks
@@ -31,8 +31,8 @@ class Migration(migrations.Migration):
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
                 ('state_fips', models.CharField(choices=[('01', 'Alabama'), ('02', 'Alaska'), ('04', 'Arizona'), ('05', 'Arkansas'), ('06', 'California'), ('08', 'Colorado'), ('09', 'Connecticut'), ('10', 'Delaware'), ('12', 'Florida'), ('13', 'Georgia'), ('15', 'Hawaii'), ('16', 'Idaho'), ('17', 'Illinois'), ('18', 'Indiana'), ('19', 'Iowa'), ('20', 'Kansas'), ('21', 'Kentucky'), ('22', 'Louisiana'), ('23', 'Maine'), ('24', 'Maryland'), ('25', 'Massachusetts'), ('26', 'Michigan'), ('27', 'Minnesota'), ('28', 'Mississippi'), ('29', 'Missouri'), ('30', 'Montana'), ('31', 'Nebraska'), ('32', 'Nevada'), ('33', 'New Hampshire'), ('34', 'New Jersey'), ('35', 'New Mexico'), ('36', 'New York'), ('37', 'North Carolina'), ('38', 'North Dakota'), ('39', 'Ohio'), ('40', 'Oklahoma'), ('41', 'Oregon'), ('42', 'Pennsylvania'), ('44', 'Rhode Island'), ('45', 'South Carolina'), ('46', 'South Dakota'), ('47', 'Tennessee'), ('48', 'Texas'), ('49', 'Utah'), ('50', 'Vermont'), ('51', 'Virginia'), ('53', 'Washington'), ('54', 'West Virginia'), ('55', 'Wisconsin'), ('56', 'Wyoming'), ('60', 'American Samoa'), ('66', 'Guam'), ('69', 'Northern Mariana Islands'), ('72', 'Puerto Rico'), ('78', 'Virgin Islands'), ('11', 'District of Columbia'), (None, 'Philippine Islands')], default='00', help_text='Example: 01, 02 ... 50', max_length=2, verbose_name='State FIPS')),
                 ('date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Election date')),
-                ('body', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))], blank=True)),
-                ('excerpt', wagtail.core.fields.RichTextField(blank=True, help_text='Entry excerpt to be displayed on entries list. If this field is not filled, a truncated version of body text will be used.', verbose_name='excerpt')),
+                ('body', wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))], blank=True)),
+                ('excerpt', wagtail.fields.RichTextField(blank=True, help_text='Entry excerpt to be displayed on entries list. If this field is not filled, a truncated version of body text will be used.', verbose_name='excerpt')),
                 ('incumbent', models.BooleanField(default=False)),
                 ('featured', models.BooleanField(default=False)),
                 ('facebook', models.URLField(blank=True, verbose_name='facebook')),
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
             name='CampaignsPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('body', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))], blank=True)),
+                ('body', wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))], blank=True)),
             ],
             options={
                 'abstract': False,
@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
             name='YearPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('body', wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))], blank=True)),
+                ('body', wagtail.fields.StreamField([('paragraph', wagtail.blocks.RichTextBlock()), ('image', wagtail.images.blocks.ImageChooserBlock()), ('markdown', wagtailmarkdown.blocks.MarkdownBlock(icon='code')), ('embed', wagtail.embeds.blocks.EmbedBlock(max_height=400, max_width=800))], blank=True)),
             ],
             options={
                 'abstract': False,

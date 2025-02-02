@@ -11,7 +11,8 @@ services:
   web:
     build:
       context: ./polrev
-    links:
+    user: "${UID}:${GID}"
+    depends_on:
       - db
       - redis
     environment:
@@ -34,13 +35,14 @@ services:
   celery:
     build:
       context: ./polrev
+    user: "${UID}:${GID}"
     command: celery -A polrev worker -l info
     entrypoint: ./celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
     environment:
       - IN_DOCKER=true
-    links:
+    depends_on:
       - db
       - redis
     networks:
@@ -49,13 +51,14 @@ services:
   celery-beat:
     build:
       context: ./polrev
+    user: "${UID}:${GID}"
     command: celery -A polrev beat -l info
     entrypoint: ./celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
     environment:
       - IN_DOCKER=true
-    links:
+    depends_on:
       - db
       - redis
     networks:
@@ -63,7 +66,7 @@ services:
 
   # Database
   db:
-    image: postgres:13.5-bullseye
+    image: postgres:15.10
     environment:
       - PGDATA=/pg-data
     ports:
@@ -85,25 +88,9 @@ services:
     networks:
       - polrev
 
-  dbbackup:
-      image: prodrigestivill/postgres-backup-local
-      user: postgres:postgres
-      environment:
-        - SCHEDULE=@daily
-        - BACKUP_KEEP_DAYS=7
-        - BACKUP_KEEP_WEEKS=4
-        - BACKUP_KEEP_MONTHS=6
-        - HEALTHCHECK_PORT=9090
-      volumes:
-          - /var/opt/polrev/backups:/backups
-      links:
-          - db
-      networks:
-        - polrev
-
   # Traffic
   traefik:
-    image: "traefik:v2.5.4"
+    image: "traefik:v3.3.3"
     command:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -114,8 +101,6 @@ services:
       - "--certificatesResolvers.le.acme.email=kurtis@pol-rev.com"
       - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
       - "--certificatesResolvers.le.acme.tlsChallenge=true"
-      - "--certificatesResolvers.le.acme.httpChallenge=true"
-      - "--certificatesResolvers.le.acme.httpChallenge.entryPoint=web"
 
     ports:
       - "80:80"

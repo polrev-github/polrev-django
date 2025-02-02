@@ -1,22 +1,21 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-import us
-
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel
+from wagtail.admin.panels import FieldPanel
 
 from .office import Office
 
+
 class StateOfficeBase(Office):
     state_ref = models.ForeignKey(
-        'areas.State',
-        verbose_name=_('state'),
+        "areas.State",
+        verbose_name=_("state"),
         on_delete=models.PROTECT,
-        related_name='state_offices',
+        related_name="state_offices",
     )
 
-    area_panels =  Office.area_panels + [
-        FieldPanel('state_ref'),
+    area_panels = Office.area_panels + [
+        FieldPanel("state_ref"),
     ]
 
     def save(self, *args, **kwargs):

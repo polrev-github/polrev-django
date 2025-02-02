@@ -6,11 +6,13 @@ from areas.models import SchoolDistrict
 
 
 class SchoolDistrictChooserMixin(ModelChooserMixin):
-    preserve_url_parameters = ['state_ref',]  # preserve this URL parameter on pagination / search
+    preserve_url_parameters = [
+        "state_ref",
+    ]  # preserve this URL parameter on pagination / search
 
     def get_unfiltered_object_list(self):
         objects = super().get_unfiltered_object_list()
-        state_ref = self.request.GET.get('state_ref')
+        state_ref = self.request.GET.get("state_ref")
         if state_ref:
             objects = objects.filter(state_ref=state_ref)
         return objects
@@ -18,10 +20,9 @@ class SchoolDistrictChooserMixin(ModelChooserMixin):
 
 class SchoolDistrictChooserViewSet(ModelChooserViewSet):
     chooser_mixin_class = SchoolDistrictChooserMixin
-    #icon = 'user'
+    # icon = 'user'
     model = SchoolDistrict
     page_title = _("Choose a district")
     per_page = 10
-    #order_by = 'title'
-    fields = ['title']
-
+    # order_by = 'title'
+    fields = ["title"]
