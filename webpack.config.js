@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, './polrev/static/dist'),
+    path: path.resolve(__dirname, './polrev/polrev/static/dist'),
   },
   plugins: [
     new MiniCssExtractPlugin({

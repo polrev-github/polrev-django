@@ -12521,11 +12521,6 @@ p {
     padding: 5px 10px 0 10px;
   }
 }
-.object-layout .object-layout_big-part {
-  max-width: 100%;
-  margin-top: 54px;
-}
-
 @font-face {
   font-family: "Big John";
   font-style: normal;

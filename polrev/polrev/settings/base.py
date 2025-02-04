@@ -17,9 +17,7 @@ if not IN_DOCKER:
 
     os.environ["POSTGRES_HOST"] = "localhost"
     os.environ["REDIS_HOST"] = "localhost"
-    # AWS_S3_ENDPOINT_URL=http://localhost:9000
     os.environ["AWS_S3_ENDPOINT_URL"] = "http://localhost:9000"
-    # AWS_BACKUP_S3_ENDPOINT_URL=http://localhost:9000
     os.environ["AWS_BACKUP_S3_ENDPOINT_URL"] = "http://localhost:9000"
 
 DEBUG = os.getenv("DEBUG")
@@ -63,19 +61,15 @@ INSTALLED_APPS = [
     # "wagtailcaptcha",
     "wagtail.contrib.sitemaps",
     "wagtail.contrib.routable_page",
-    #'wagtail.contrib.modeladmin',
     "wagtail_modeladmin",
     "django_social_share",
     "puput",
-    #'colorful', # something else must be importing this
     "wagtailmarkdown",
     "modelcluster",
     "taggit",
     "wagtailautocomplete",
     "ls.joyous",
     "tz_detect",
-    #'mjml',
-    #'birdsong',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -154,7 +148,7 @@ WSGI_APPLICATION = "polrev.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# https://docs.djangoproject.com/en/stable/ref/settings/#databases
 
 DATABASES = {
     "default": {
@@ -177,7 +171,7 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+# https://docs.djangoproject.com/en/stable/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -218,7 +212,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Internationalization
-# https://docs.djangoproject.com/en/3.2/topics/i18n/
+# https://docs.djangoproject.com/en/stable/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
 
@@ -234,7 +228,7 @@ USE_TZ = True
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
+# https://docs.djangoproject.com/en/stable/howto/static-files/
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -244,7 +238,6 @@ STATICFILES_FINDERS = [
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "The Political Revolution"
-# WAGTAILADMIN_BASE_URL = f"https://{os.environ.get('POLREV_DOMAIN', 'localhost')}"
 WAGTAILADMIN_BASE_URL = f"https://{POLREV_DOMAIN}/admin"
 # Search
 # https://docs.wagtail.io/en/stable/topics/search/backends.html
@@ -313,6 +306,7 @@ STORAGES = {
 }
 
 if STATIC_DEV:
+    logger.debug("Using local static file serving")
     STORAGES.update(
         {
             "staticfiles": {
@@ -362,17 +356,6 @@ DBBACKUP_CONNECTORS = {
 SLACK_URL = os.environ.get("SLACK_URL", "")
 SLACK_TEAM = os.environ.get("SLACK_TEAM", "")
 SLACK_TOKEN = os.environ.get("SLACK_TOKEN", "")
-
-# Wagtail Birdsong
-MJML_EXEC_CMD = "./node_modules/.bin/mjml"
-
-MESSAGE_TAGS = {
-    messages.DEBUG: "alert-info",
-    messages.INFO: "alert-info",
-    messages.SUCCESS: "alert-success",
-    messages.WARNING: "alert-warning",
-    messages.ERROR: "alert-danger",
-}
 
 # Redis
 REDIS_HOST = os.environ.get("REDIS_HOST", "")
