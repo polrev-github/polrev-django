@@ -75,13 +75,20 @@ USER polrev
 # Development Stage
 FROM django-base AS development
 
+# Django Settings
+ENV DJANGO_SETTINGS_MODULE polrev.settings.development
+
 # Use the entrypoint script from /entrypoints
 ENTRYPOINT ["/entrypoints/web-entrypoint.sh"]
-CMD ["uvicorn", "--reload", "--host=0.0.0.0", "--port=8000", "polrev.wsgi:application"]
+CMD python ./manage.py runserver 0.0.0.0:8000
 
 # Production Stage
 FROM django-base AS production
 
+# Django Settings
+ENV DJANGO_SETTINGS_MODULE polrev.settings.production
+
 # Use the entrypoint script from /entrypoints
 ENTRYPOINT ["/entrypoints/web-entrypoint.sh"]
-CMD ["gunicorn", "--worker-class", "uvicorn.workers.UvicornWorker", "--config", "./gunicorn.conf.py", "polrev.wsgi:application"]
+CMD gunicorn -c ./gunicorn.conf.py polrev.wsgi:application
+

@@ -253,7 +253,6 @@ WAGTAILMARKDOWN = {
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-# BASE_URL = 'https://pol-rev.com'
 BASE_URL = f"https://{POLREV_DOMAIN}"
 
 PUPUT_AS_PLUGIN = True
@@ -281,11 +280,7 @@ DEFAULT_FROM_EMAIL = "Helpdesk <helpdesk@yourdomain>"
 
 STATICFILES_LOCATION = "static"
 STATIC_ROOT = os.path.join(BASE_DIR, STATICFILES_LOCATION)
-
-if STATIC_DEV:
-    STATIC_URL = "/static/"  # Local static file serving
-else:
-    STATIC_URL = f"/{STATICFILES_LOCATION}/"
+STATIC_URL = f"/{STATICFILES_LOCATION}/"
 
 logger.debug(f"STATIC_URL: {STATIC_URL}")
 
@@ -377,6 +372,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "default"
 
 # Celery
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_BROKER_URL = REDIS_URL
 CELERY_RESULT_BACKEND = REDIS_URL

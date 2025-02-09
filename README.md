@@ -101,8 +101,8 @@ docker compose down
 git pull
 docker compose build
 docker compose up db redis
-cd polrev
 hatch shell
+cd polrev
 ./manage.py migrate
 ./manage.py flush --noinput
 ./manage.py loaddata ./dump/db.json.gz --verbosity 3
