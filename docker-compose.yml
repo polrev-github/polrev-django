@@ -10,7 +10,7 @@ services:
   # Django
   web:
     build:
-      context: ./polrev
+      context: ./
     user: "${UID}:${GID}"
     depends_on:
       - db
@@ -34,10 +34,10 @@ services:
 
   celery:
     build:
-      context: ./polrev
+      context: ./
     user: "${UID}:${GID}"
     command: celery -A polrev worker -l info
-    entrypoint: ./celery-entrypoint.sh
+    entrypoint: /entrypoints/celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
     environment:
@@ -50,10 +50,10 @@ services:
 
   celery-beat:
     build:
-      context: ./polrev
+      context: ./
     user: "${UID}:${GID}"
     command: celery -A polrev beat -l info
-    entrypoint: ./celery-entrypoint.sh
+    entrypoint: /entrypoints/celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
     environment:

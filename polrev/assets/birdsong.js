@@ -1,1 +1,0 @@
-import './scss/birdsong.scss'

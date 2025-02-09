@@ -5,6 +5,8 @@ services:
   web:
     build:
       target: production
+    environment:
+      DJANGO_ENV: production
     env_file: ./.env
     restart: always
     labels:
