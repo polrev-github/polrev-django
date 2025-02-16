@@ -1,5 +1,7 @@
 import datetime
 
+import html2text
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import Truncator
@@ -87,6 +89,28 @@ class EntryAbstract(models.Model):
     class Meta:
         abstract = True
 
+
+    def get_excerpt(self, length=300):
+        if self.excerpt:
+            # Use the manually provided excerpt
+            return mark_safe(self.excerpt)
+        else:
+            # Extract text content from the StreamField
+            text_maker = html2text.HTML2Text()
+            text_maker.ignore_links = True
+
+            text_content = text_maker.handle(
+                "".join(
+                    block.render(block)
+                    for block in self.body
+                    if block.block_type == "paragraph"
+                )
+            )
+            # Truncate the text content to the specified length
+            truncated_content = Truncator(text_content).chars(length, truncate="…")
+            return mark_safe(truncated_content)
+
+    '''
     def get_excerpt(self, length=300):
         if self.excerpt:
             # Use the manually provided excerpt
@@ -94,7 +118,7 @@ class EntryAbstract(models.Model):
         else:
             # Extract text content from the StreamField
             text_content = strip_tags(
-                "".join(
+                "<br/>".join(
                     block.render(block)
                     for block in self.body
                     if block.block_type == "paragraph"
@@ -104,3 +128,4 @@ class EntryAbstract(models.Model):
             # Truncate the text content to the specified length
             truncated_content = Truncator(text_content).chars(length, truncate="…")
             return mark_safe(truncated_content)
+    '''

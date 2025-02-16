@@ -23,3 +23,6 @@ def get_sitemap_urls(self, request=None):
 
 
 setattr(EntryPage, "get_sitemap_urls", get_sitemap_urls)
+
+# TODO: Causes preview error
+setattr(EntryPage, "markdown_body", None)
