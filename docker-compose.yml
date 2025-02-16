@@ -37,7 +37,7 @@ services:
       context: ./
     user: "${UID}:${GID}"
     command: celery -A polrev worker -l info
-    entrypoint: /entrypoints/celery-entrypoint.sh
+    entrypoint: /celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
     environment:
@@ -53,7 +53,7 @@ services:
       context: ./
     user: "${UID}:${GID}"
     command: celery -A polrev beat -l info
-    entrypoint: /entrypoints/celery-entrypoint.sh
+    entrypoint: /celery-entrypoint.sh
     volumes:
       - "./polrev:/app"
     environment:

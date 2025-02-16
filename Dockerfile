@@ -50,12 +50,12 @@ RUN useradd --create-home --shell /bin/bash --uid 1000 polrev
 RUN mkdir -p /app && chown -R polrev:polrev /app
 
 # Copy entrypoint scripts before mounting /app
-COPY ./entrypoints/web-entrypoint.sh /entrypoints/web-entrypoint.sh
-COPY ./entrypoints/celery-entrypoint.sh /entrypoints/celery-entrypoint.sh
+COPY ./web-entrypoint.sh /web-entrypoint.sh
+COPY ./celery-entrypoint.sh /celery-entrypoint.sh
 
 # Set correct permissions for scripts
-RUN chmod +x /entrypoints/web-entrypoint.sh
-RUN chmod +x /entrypoints/celery-entrypoint.sh
+RUN chmod +x /web-entrypoint.sh
+RUN chmod +x /celery-entrypoint.sh
 
 # Copy project files for dependency installation
 COPY --chown=polrev:polrev ./pyproject.toml /tmp/
@@ -78,8 +78,7 @@ FROM django-base AS development
 # Django Settings
 ENV DJANGO_SETTINGS_MODULE polrev.settings.development
 
-# Use the entrypoint script from /entrypoints
-ENTRYPOINT ["/entrypoints/web-entrypoint.sh"]
+ENTRYPOINT ["/web-entrypoint.sh"]
 CMD python ./manage.py runserver 0.0.0.0:8000
 
 # Production Stage
@@ -88,7 +87,6 @@ FROM django-base AS production
 # Django Settings
 ENV DJANGO_SETTINGS_MODULE polrev.settings.production
 
-# Use the entrypoint script from /entrypoints
-ENTRYPOINT ["/entrypoints/web-entrypoint.sh"]
+ENTRYPOINT ["/web-entrypoint.sh"]
 CMD gunicorn -c ./gunicorn.conf.py polrev.wsgi:application
 
