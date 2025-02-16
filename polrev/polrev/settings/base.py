@@ -97,8 +97,8 @@ INSTALLED_APPS = [
     "offices",
     "parties",
     # Portals
-    "portals.volunteer",
-    "portals.run",
+    #"portals.volunteer",
+    #"portals.run",
     # Reddit
     "reddit",
 ]

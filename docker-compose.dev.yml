@@ -58,7 +58,7 @@ services:
       - 9001:9001
     volumes:
       - s3:/data
-      - ./services/s3/init-folders.sh:/init-folders.sh
+      - ./init-folders.sh:/init-folders.sh
     env_file: .env
     hostname: s3.${POLREV_DOMAIN}
     labels:
