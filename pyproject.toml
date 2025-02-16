@@ -28,7 +28,7 @@ dependencies = [
     "loguru ~= 0.7.3",
     "python-dotenv ~= 1.0.1",
     "django ~= 5.1.5",
-    "wagtail ~= 6.3.2",
+    "wagtail ~= 6.4",
 
     #django-el-pagination = "^4.1.2"
     "django-el-pagination ~= 4.0.0",
