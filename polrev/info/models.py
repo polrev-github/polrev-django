@@ -4,10 +4,11 @@ from wagtail.models import Page
 from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 
-from wagtail.blocks import RichTextBlock
+from wagtail.blocks import RichTextBlock, RawHTMLBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 from wagtailmarkdown.blocks import MarkdownBlock
+
 
 
 class InfoPage(Page):
@@ -17,6 +18,7 @@ class InfoPage(Page):
             ("image", ImageChooserBlock()),
             ("markdown", MarkdownBlock(icon="code")),
             ("embed", EmbedBlock(max_width=800, max_height=400)),
+            ("html", RawHTMLBlock()),
         ],
         blank=True,
     )
