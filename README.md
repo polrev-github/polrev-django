@@ -128,7 +128,8 @@ sudo apt install postgresql-client
 ### Backup
 ```bash
 #./manage.py dbbackup -z
-./manage.py dbbackup -x 'public.wagtailsearch_indexentry'
+#./manage.py dbbackup -x 'public.wagtailsearch_indexentry'
+./manage.py dbbackup
 ```
 
 ### Restore
