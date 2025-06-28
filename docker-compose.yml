@@ -10,7 +10,7 @@ services:
   # Django
   web:
     build:
-      context: ./
+      context: .
     user: "${UID}:${GID}"
     depends_on:
       - db
@@ -34,7 +34,7 @@ services:
 
   celery:
     build:
-      context: ./
+      context: .
     user: "${UID}:${GID}"
     command: celery -A polrev worker -l info
     entrypoint: /celery-entrypoint.sh
@@ -50,7 +50,7 @@ services:
 
   celery-beat:
     build:
-      context: ./
+      context: .
     user: "${UID}:${GID}"
     command: celery -A polrev beat -l info
     entrypoint: /celery-entrypoint.sh
