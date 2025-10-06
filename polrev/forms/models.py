@@ -18,7 +18,7 @@ class FormsPage(Page):
 
 class FormPage(Page):
 
-    form_url = models.URLField("form url")
+    form_url = models.URLField("form url", max_length=512)
     height = models.PositiveIntegerField(default=2000)
 
     parent_page_types = ["forms.FormsPage"]

@@ -24,6 +24,7 @@ import {
   faInfo,
   faInfoCircle,
   faBuilding,
+  faEnvelopeOpenText,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -58,6 +59,7 @@ library.add(
   faInfo,
   faInfoCircle,
   faBuilding,
+  faEnvelopeOpenText,
 
   faGithub,
   faFacebook, 
